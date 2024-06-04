@@ -1,29 +1,5 @@
 [
   {
-    "title": "Catering",
-    "shortForm": "catering",
-    "description": "Delicious, customized menus to delight your guests",
-    "imageUrl": "/src/assets/services/catering.jpg"
-  },
-  {
-    "title": "Florist",
-    "shortForm": "florist",
-    "description": "Expertly crafted floral arrangements to make your wedding bloom",
-    "imageUrl": "/src/assets/services/florist.jpg"
-  },
-  {
-    "title": "Photographer",
-    "shortForm": "photographer",
-    "description": "Capture every magical moment with professional wedding photography",
-    "imageUrl": "/src/assets/services/photographer.jpg"
-  },
-  {
-    "title": "Videographer",
-    "shortForm": "videographer",
-    "description": "Relive your special day with stunning wedding videography",
-    "imageUrl": "/src/assets/services/videographer.jpg"
-  },
-  {
     "title": "Decorators",
     "shortForm": "decorator",
     "description": "Transform your venue with beautiful and personalized decor",
@@ -47,6 +23,31 @@
     "description": "Beautifully designed invitations to set the tone for your wedding",
     "imageUrl": "/src/assets/services/invitation_designer.jpg"
   },
+  {
+    "title": "Catering",
+    "shortForm": "catering",
+    "description": "Delicious, customized menus to delight your guests",
+    "imageUrl": "/src/assets/services/catering.jpg"
+  },
+  {
+    "title": "Florist",
+    "shortForm": "florist",
+    "description": "Expertly crafted floral arrangements to make your wedding bloom",
+    "imageUrl": "/src/assets/services/florist.jpg"
+  },
+  {
+    "title": "Photographer",
+    "shortForm": "photographer",
+    "description": "Capture every magical moment with professional wedding photography",
+    "imageUrl": "/src/assets/services/photographer.jpg"
+  },
+  {
+    "title": "Videographer",
+    "shortForm": "videographer",
+    "description": "Relive your special day with stunning wedding videography",
+    "imageUrl": "/src/assets/services/videographer.jpg"
+  },
+
   {
     "title": "Bridal Shop",
     "shortForm": "bridal_shop",
@@ -90,12 +91,6 @@
     "imageUrl": "/src/assets/services/lighting_specialist.jpg"
   },
   {
-    "title": "Officiant",
-    "shortForm": "officiant",
-    "description": "Personalized officiant services to make your ceremony special",
-    "imageUrl": "/src/assets/services/officiant.jpg"
-  },
-  {
     "title": "Rentals",
     "shortForm": "rentals",
     "description": "Everything you need for your wedding, available for rent",
@@ -112,17 +107,5 @@
     "shortForm": "entertainment",
     "description": "Unique entertainment options to delight and surprise your guests",
     "imageUrl": "/src/assets/services/entertainment.jpg"
-  },
-  {
-    "title": "DJ",
-    "shortForm": "dj",
-    "description": "Keep the party going with our energetic wedding DJ services",
-    "imageUrl": "/src/assets/services/dj.jpg"
-  },
-  {
-    "title": "Band",
-    "shortForm": "band",
-    "description": "Live music that creates an unforgettable wedding atmosphere",
-    "imageUrl": "/src/assets/services/band.jpg"
   }
 ]
