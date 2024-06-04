@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Main } from "../../layouts/Main";
 import { Home } from "../../pages/Home";
 import { Services } from "../../pages/Services";
+import { SingleService } from "../../pages/SingleService";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
         path: "services",
         element: <Services />,
       },
+      {
+        path:"services/:shortForm",
+        element: <SingleService/>
+      }
     ],
   },
 ]);

@@ -1,28 +1,10 @@
-import { useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
 import { ServiceCard } from "../components/ServiceCard";
+import useService from "../hooks/useService";
 
 export const Services = () => {
-  const [services, setServices] = useState([]);
-  const getData = () => {
-    fetch("services.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        console.log(response);
-        return response.json();
-      })
-      .then(function (myJson) {
-        console.log(myJson);
-        setServices(myJson);
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const [services, setServices] = useService();
+  
   return (
     <>
       <Parallax
