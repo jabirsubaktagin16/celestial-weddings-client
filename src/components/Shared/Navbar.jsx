@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 export const Navbar = () => {
   return (
@@ -39,8 +40,8 @@ export const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">
-          daisyUI
+        <Link to="/">
+          <img src={logo} className="w-1/6" alt="" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -60,9 +61,12 @@ export const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn btn-primary text-white border-none rounded-none">
+        <Link
+          to="sign-in"
+          className="btn btn-primary text-white border-none rounded-none"
+        >
           Join Now
-        </a>
+        </Link>
       </div>
     </div>
   );
