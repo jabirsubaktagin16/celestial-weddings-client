@@ -10,9 +10,7 @@ export const TopBanner = () => {
             Make your wedding memorable!
           </h1>
           <p className="py-6 text-text">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+          Make your dream wedding a reality with our comprehensive services. From stunning floral arrangements and catering to professional photography and beautiful venues, we handle every detail. Let our expert planners and talented stylists create an unforgettable celebration for your special day.
           </p>
           <button className="btn btn-primary border-none text-white rounded-none">
             Get Started

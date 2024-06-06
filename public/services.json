@@ -17,12 +17,7 @@
     "description": "Stress-free wedding planning for a perfect celebration",
     "imageUrl": "/src/assets/services/planner.jpg"
   },
-  {
-    "title": "Invitation Designer",
-    "shortForm": "invitation_designer",
-    "description": "Beautifully designed invitations to set the tone for your wedding",
-    "imageUrl": "/src/assets/services/invitation_designer.jpg"
-  },
+
   {
     "title": "Catering",
     "shortForm": "catering",
@@ -42,12 +37,23 @@
     "imageUrl": "/src/assets/services/photographer.jpg"
   },
   {
+    "title": "Henna Artist",
+    "shortForm": "henna-artist",
+    "description": "Intricate and beautiful henna designs to adorn you on your special day",
+    "imageUrl": "/src/assets/services/henna-artist.jpg"
+  },
+  {
     "title": "Videographer",
     "shortForm": "videographer",
     "description": "Relive your special day with stunning wedding videography",
     "imageUrl": "/src/assets/services/videographer.jpg"
   },
-
+  {
+    "title": "Invitation Designer",
+    "shortForm": "invitation_designer",
+    "description": "Beautifully designed invitations to set the tone for your wedding",
+    "imageUrl": "/src/assets/services/invitation_designer.jpg"
+  },
   {
     "title": "Bridal Shop",
     "shortForm": "bridal_shop",
