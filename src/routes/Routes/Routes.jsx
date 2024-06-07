@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { NotFound } from "../../components/Shared/NotFound";
 import { Main } from "../../layouts/Main";
+import { AboutUs } from "../../pages/AboutUs";
 import { Home } from "../../pages/Home";
 import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn";
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "services",
         element: <Services />,
+      },
+      {
+        path: "about-us",
+        element: <AboutUs />,
       },
       {
         path: "services/:shortForm",
