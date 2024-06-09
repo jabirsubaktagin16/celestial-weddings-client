@@ -40,13 +40,13 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
             // if user exists then issue a token
             if (currentUser) {
-                axios.post('https://car-doctor-server-topaz-one.vercel.app/jwt', loggedUser, { withCredentials: true })
+                axios.post(`${import.meta.env.VITE_REACT_APP_APIENDPOINT}/jwt`, loggedUser, { withCredentials: true })
                     .then(res => {
                         console.log('token response', res.data);
                     })
             }
             else {
-                axios.post('https://car-doctor-server-topaz-one.vercel.app/logout', loggedUser, {
+                axios.post(`${import.meta.env.VITE_REACT_APP_APIENDPOINT}/logout`, loggedUser, {
                     withCredentials: true
                 })
                     .then(res => {

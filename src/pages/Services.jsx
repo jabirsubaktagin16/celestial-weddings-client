@@ -32,18 +32,21 @@ export const Services = () => {
           crafted to make your wedding unforgettable.
         </p>
       </div>
-      <div className="container mx-auto my-6 md:px-28 px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 pt-6 gap-x-10 gap-y-12">
+      <div className="my-10 flex min-h-screen items-center justify-center">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         {services &&
           services.map((service) => (
             <ServiceCard
               key={service.shortForm}
-              shortForm={service.shortForm}
+              shortForm={`/services/${service.shortForm}`}
               imageUrl={service.imageUrl}
               title={service.title}
               description={service.description}
             />
           ))}
       </div>
+      </div>
+      
     </>
   );
 };

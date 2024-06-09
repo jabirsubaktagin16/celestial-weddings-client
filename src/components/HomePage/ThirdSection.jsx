@@ -8,19 +8,21 @@ export const ThirdSection = () => {
   return (
     <div className="my-20">
       <h2 className="text-center text-accent">Find Trusted Vendor</h2>
-      <div className="container mx-auto mt-6 md:px-28 px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 pt-6 gap-x-10 gap-y-12">
+      <div className="my-10 flex min-h-screen items-center justify-center">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         {services &&
           services
             .slice(0, 8)
             .map((service) => (
               <ServiceCard
                 key={service.shortForm}
-                shortForm={service.shortForm}
+                shortForm={`/services/${service.shortForm}`}
                 imageUrl={service.imageUrl}
                 title={service.title}
                 description={service.description}
               />
             ))}
+      </div>
       </div>
       <div className="flex justify-center mt-10">
         <Link
