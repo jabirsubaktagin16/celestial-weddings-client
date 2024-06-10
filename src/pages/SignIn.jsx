@@ -6,7 +6,6 @@ import { InputComponent } from "../components/InputComponent/InputComponent";
 import { Loading } from "../components/Shared/Loading";
 import { AuthContext } from "../providers/AuthProvider";
 
-
 export const SignIn = () => {
   const {
     register,
@@ -62,9 +61,9 @@ export const SignIn = () => {
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-none">
           <form className="card-body" onSubmit={handleSubmit(handleLogin)}>
             <InputComponent
-            placeholder={"Your E-Mail"}
-            id={"email"}
-            label={"Email"}
+              placeholder={"Your E-Mail"}
+              id={"email"}
+              label={"Email"}
               name={"email"}
               type={"email"}
               {...register("email", {
@@ -79,65 +78,67 @@ export const SignIn = () => {
               })}
             />
             <label className="label">
-                    {errors.email?.type === "required" && (
-                      <span className="label-text-alt text-red-500">
-                        {errors.email.message}
-                      </span>
-                    )}
-                    {errors.email?.type === "pattern" && (
-                      <span className="label-text-alt text-red-500">
-                        {errors.email.message}
-                      </span>
-                    )}
-                  </label>
-            
-              <InputComponent
+              {errors.email?.type === "required" && (
+                <span className="label-text-alt text-red-500">
+                  {errors.email.message}
+                </span>
+              )}
+              {errors.email?.type === "pattern" && (
+                <span className="label-text-alt text-red-500">
+                  {errors.email.message}
+                </span>
+              )}
+            </label>
+
+            <InputComponent
               placeholder={"Your Password"}
               id={"password"}
               label={"Password"}
-                name={"password"}
-                type={"password"}
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "Password is required",
-                  },
-                  minLength: {
-                    value: 6,
-                    message: "Must be 6 characters or longer",
-                  },
-                })}
-              />
+              name={"password"}
+              type={"password"}
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "Password is required",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Must be 6 characters or longer",
+                },
+              })}
+            />
             <label className="label">
-                    {errors.password?.type === "required" && (
-                      <span className="label-text-alt text-red-500">
-                        {errors.password.message}
-                      </span>
-                    )}
-                    {errors.password?.type === "minLength" && (
-                      <span className="label-text-alt text-red-500">
-                        {errors.password.message}
-                      </span>
-                    )}
-                  </label>  
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
-            
+              {errors.password?.type === "required" && (
+                <span className="label-text-alt text-red-500">
+                  {errors.password.message}
+                </span>
+              )}
+              {errors.password?.type === "minLength" && (
+                <span className="label-text-alt text-red-500">
+                  {errors.password.message}
+                </span>
+              )}
+            </label>
+            <label className="label">
+              <a href="#" className="label-text-alt link link-hover">
+                Forgot password?
+              </a>
+            </label>
+
             <div className="form-control">
-              <button className="btn btn-primary rounded-none text-white">Sign In</button>
+              <button className="btn btn-primary rounded-none text-white">
+                Sign In
+              </button>
             </div>
           </form>
           <p className="text-center mb-5">
-                <small>
-                  New to Celestial Weddings?{" "}
-                  <Link className="text-primary" to="/signup">
-                    Create New Account
-                  </Link>
-                </small>
-              </p>
+            <small>
+              New to Celestial Weddings?{" "}
+              <Link className="text-primary" to="/sign-up">
+                Create New Account
+              </Link>
+            </small>
+          </p>
         </div>
       </div>
     </div>

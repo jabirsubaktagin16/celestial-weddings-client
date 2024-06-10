@@ -5,6 +5,7 @@ import { AboutUs } from "../../pages/AboutUs";
 import { Home } from "../../pages/Home";
 import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn";
+import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
 
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
         element: (
           <PublicRoute>
             <SignIn />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: "sign-up",
+        element: (
+          <PublicRoute>
+            <SignUp />
           </PublicRoute>
         ),
       },

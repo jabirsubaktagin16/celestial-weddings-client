@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
   return (
     <div className="navbar">
       <div className="navbar-start">
@@ -61,12 +70,37 @@ export const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to="sign-in"
-          className="btn btn-primary text-white border-none rounded-none"
-        >
-          Join Now
-        </Link>
+        {user?.uid ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src="https://i.ibb.co/S5DKJdp/avatar.png" />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 text-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="/dashboard" className="justify-between">
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <button role="button" className="btn" onClick={handleLogOut}>
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link
+            to="sign-in"
+            className="btn btn-primary text-white border-none rounded-none"
+          >
+            Join Now
+          </Link>
+        )}
       </div>
     </div>
   );
