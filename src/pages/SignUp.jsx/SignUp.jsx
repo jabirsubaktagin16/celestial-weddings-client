@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,7 +32,7 @@ export const SignUp = () => {
             if (res.data.insertedId) {
               console.log("user added to the database");
               reset();
-              toast.success("User created successfully");
+              toast.success("User added successfully");
               navigate("/");
             }
           });
@@ -43,17 +43,23 @@ export const SignUp = () => {
 
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage: "url(./signup-banner.jpg)",
+        }}
+      >
+        <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Sign up now!</h1>
+            <h1 className="text-5xl font-bold">Sign Up now!</h1>
             <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-none">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -61,10 +67,11 @@ export const SignUp = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("name", { required: true })}
                   name="name"
-                  placeholder="Name"
-                  className="input input-bordered"
+                  id="name"
+                  placeholder="Your Name"
+                  className="input input-bordered rounded-none"
+                  {...register("name", { required: true })}
                 />
                 {errors.name && (
                   <span className="text-red-600">Name is required</span>
@@ -72,28 +79,24 @@ export const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Photo URL</span>
-                </label>
-                <input
-                  type="text"
-                  {...register("photoURL", { required: true })}
-                  placeholder="Photo URL"
-                  className="input input-bordered"
-                />
-                {errors.photoURL && (
-                  <span className="text-red-600">Photo URL is required</span>
-                )}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">E-Mail</span>
                 </label>
                 <input
                   type="email"
-                  {...register("email", { required: true })}
                   name="email"
-                  placeholder="email"
-                  className="input input-bordered"
+                  id="email"
+                  placeholder="Your E-Mail"
+                  className="input input-bordered rounded-none"
+                  {...register("email", {
+                    required: {
+                      value: true,
+                      message: "Email is required",
+                    },
+                    pattern: {
+                      value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                      message: "Provide a valid email",
+                    },
+                  })}
                 />
                 {errors.email && (
                   <span className="text-red-600">Email is required</span>
@@ -105,14 +108,16 @@ export const SignUp = () => {
                 </label>
                 <input
                   type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Your Password"
+                  className="input input-bordered rounded-none"
                   {...register("password", {
                     required: true,
                     minLength: 6,
                     maxLength: 20,
                     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                   })}
-                  placeholder="password"
-                  className="input input-bordered"
                 />
                 {errors.password?.type === "required" && (
                   <p className="text-red-600">Password is required</p>
@@ -131,26 +136,24 @@ export const SignUp = () => {
                     and one special character.
                   </p>
                 )}
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
-              <div className="form-control mt-6">
+              <div className="form-control mt-4">
                 <input
-                  className="btn btn-primary"
                   type="submit"
+                  className="btn btn-primary rounded-none text-white"
                   value="Sign Up"
                 />
               </div>
             </form>
-            <p className="px-6">
+            <SocialLogin />
+            <p className="text-center mb-5">
               <small>
-                Already have an account <Link to="/sign-in">Login</Link>
+                Already have an account?{" "}
+                <Link className="text-primary" to="/sign-in">
+                  Sign In
+                </Link>
               </small>
             </p>
-            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

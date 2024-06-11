@@ -23,14 +23,14 @@ const SocialLogin = () => {
   };
 
   return (
-    <div className="p-8">
-      <div className="divider"></div>
-      <div>
-        <button onClick={handleGoogleSignIn} className="btn">
-          <FaGoogle className="mr-2"></FaGoogle>
-          Google
-        </button>
-      </div>
+    <div className="flex justify-center gap-2 flex-col mb-4 lg:flex-row">
+      <button
+        onClick={() => handleGoogleSignIn()}
+        className="btn gap-2 bg-transparent border-2 border-primary rounded-none hover:text-opacity-80 text-primary"
+      >
+        <FaGoogle />
+        Sign In with Google
+      </button>
     </div>
   );
 };

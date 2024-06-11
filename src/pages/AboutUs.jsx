@@ -1,4 +1,3 @@
-import React from "react";
 import { Parallax } from "react-parallax";
 import aboutUs from "../assets/about-us.png";
 

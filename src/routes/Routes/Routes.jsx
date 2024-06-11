@@ -4,7 +4,7 @@ import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
 import { Home } from "../../pages/Home";
 import { Services } from "../../pages/Services";
-import { SignIn } from "../../pages/SignIn";
+import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
