@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { NotFound } from "../../components/Shared/NotFound";
 import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
+import { AddVendor } from "../../pages/AddVendor";
 import { Home } from "../../pages/Home";
 import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn/SignIn";
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
         element: <Services />,
       },
       {
+        path:"addVendor",
+        element: <AddVendor/>
+      },
+      {
         path: "about-us",
         element: <AboutUs />,
       },
@@ -31,6 +36,7 @@ export const router = createBrowserRouter([
         path: "services/:shortForm",
         element: <SingleService />,
       },
+      
       {
         path: "sign-in",
         element: (

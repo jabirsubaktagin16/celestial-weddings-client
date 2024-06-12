@@ -55,9 +55,12 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         // get token and store client
         const userInfo = { email: currentUser.email };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
-          if (res.data.token) {
-            localStorage.setItem("access-token", res.data.token);
+        axiosPublic.post("/users/jwt", userInfo).then((res) => {
+          if (res?.data?.response?.accessToken) {
+            localStorage.setItem(
+              "access-token",
+              res?.data?.response?.accessToken
+            );
             setLoading(false);
           }
         });
