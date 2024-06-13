@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { NotFound } from "../../components/Shared/NotFound";
+import { DashboardLayout } from "../../layouts/DashboardLayout";
 import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
 import { AddVendor } from "../../pages/AddVendor";
@@ -24,10 +25,7 @@ export const router = createBrowserRouter([
         path: "services",
         element: <Services />,
       },
-      {
-        path:"addVendor",
-        element: <AddVendor/>
-      },
+
       {
         path: "about-us",
         element: <AboutUs />,
@@ -36,7 +34,7 @@ export const router = createBrowserRouter([
         path: "services/:shortForm",
         element: <SingleService />,
       },
-      
+
       {
         path: "sign-in",
         element: (
@@ -52,6 +50,17 @@ export const router = createBrowserRouter([
             <SignUp />
           </PublicRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <DashboardLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "addVendor",
+        element: <AddVendor />,
       },
     ],
   },

@@ -4,7 +4,7 @@ import useService from "../hooks/useService";
 
 export const Services = () => {
   const [services, setServices] = useService();
-  
+
   return (
     <>
       <Parallax
@@ -33,20 +33,19 @@ export const Services = () => {
         </p>
       </div>
       <div className="my-10 flex min-h-screen items-center justify-center">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {services &&
-          services.map((service) => (
-            <ServiceCard
-              key={service.shortForm}
-              shortForm={`/services/${service.shortForm}`}
-              imageUrl={service.imageUrl}
-              title={service.title}
-              description={service.description}
-            />
-          ))}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {services &&
+            services.map((service) => (
+              <ServiceCard
+                key={service.shortForm}
+                shortForm={`/services/${service.shortForm}`}
+                imageUrl={service.imageUrl}
+                title={service.title}
+                description={service.description}
+              />
+            ))}
+        </div>
       </div>
-      </div>
-      
     </>
   );
 };
