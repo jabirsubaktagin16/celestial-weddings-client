@@ -1,7 +1,6 @@
-import useService from "../hooks/useService";
+import services from "../../public/services.json";
 
 export const AddVendor = () => {
-  const [services, setServices] = useService();
   return (
     <div className="px-10 py-5">
       <div className="flex flex-col lg:flex-row gap-5">

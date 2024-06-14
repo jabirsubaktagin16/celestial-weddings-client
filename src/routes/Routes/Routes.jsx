@@ -9,6 +9,7 @@ import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
 
 export const router = createBrowserRouter([
@@ -54,13 +55,17 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/",
+    path: "/dashboard",
     element: <DashboardLayout />,
     errorElement: <NotFound />,
     children: [
       {
-        path: "addVendor",
-        element: <AddVendor />,
+        path: "add-vendor",
+        element: (
+          <PrivateRoute>
+            <AddVendor />
+          </PrivateRoute>
+        ),
       },
     ],
   },

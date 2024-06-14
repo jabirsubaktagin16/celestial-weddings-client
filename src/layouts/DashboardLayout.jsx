@@ -1,78 +1,106 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import {
-  FaAd,
-  FaCalendar,
-  FaEnvelope,
-  FaHome,
-  FaList,
-  FaSearch,
-  FaShoppingCart,
-} from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
+  IoMdAddCircleOutline,
+  IoMdHome,
+  IoMdList,
+  IoMdPersonAdd,
+} from "react-icons/io";
+import { VscSignOut } from "react-icons/vsc";
+import { Outlet } from "react-router-dom";
+import { DashboardListComponent } from "../components/DashboardListComponent/DashboardListComponent";
+import { DashboardListHeader } from "../components/DashboardListComponent/DashboardListHeader";
+import useAdmin from "../hooks/useAdmin";
+import { AuthContext } from "../providers/AuthProvider";
 
 export const DashboardLayout = () => {
-  return (
-    <div className="flex">
-      {/* dashboard side bar */}
-      <div className="w-64 min-h-screen bg-primary text-white">
-        <ul className="menu p-4">
-          <>
-            <li>
-              <NavLink to="/dashboard/userHome">
-                <FaHome></FaHome>
-                User Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/history">
-                <FaCalendar></FaCalendar>
-                Not History
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/cart">
-                <FaShoppingCart></FaShoppingCart>
-                My Cart
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/review">
-                <FaAd></FaAd>
-                Add a Review
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/paymentHistory">
-                <FaList></FaList>
-                Real Payment History
-              </NavLink>
-            </li>
-          </>
+  const [isAdmin] = useAdmin();
+  const { user, logOut } = useContext(AuthContext);
 
-          <div className="divider"></div>
-          <li>
-            <NavLink to="/">
-              <FaHome></FaHome>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/salad">
-              <FaSearch></FaSearch>
-              Menu
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/contact">
-              <FaEnvelope></FaEnvelope>
-              Contact
-            </NavLink>
-          </li>
-        </ul>
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
+  return (
+    <div className="drawer lg:drawer-open">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        {/* Page content here */}
+        <label
+          htmlFor="my-drawer-2"
+          className="btn border-none text-primary drawer-button lg:hidden"
+        >
+          <GiHamburgerMenu />
+        </label>
+        <Outlet />
       </div>
-      {/* dashboard content */}
-      <div className="flex-1 p-8">
-        <Outlet></Outlet>
+      <div className="drawer-side">
+        <label
+          htmlFor="my-drawer-2"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <div className="min-h-full bg-primary text-white">
+          <div className="flex items-center justify-center h-14 border-b">
+            <div>Sidebar Navigation By iAmine</div>
+          </div>
+          <div className="border-b py-5">
+            {isAdmin && (
+              <ul className="w-80">
+                <DashboardListHeader title={"Analytics"} />
+                <DashboardListHeader title={"User Management"} />
+                <DashboardListComponent
+                  path={"addVendor"}
+                  icon={<IoMdPersonAdd />}
+                  title={"Assign User Roles"}
+                />
+                <DashboardListHeader title={"Vendor Management"} />
+                <DashboardListComponent
+                  path={"add-vendor"}
+                  icon={<IoMdAddCircleOutline />}
+                  title={"Add New Vendor"}
+                />
+                <DashboardListComponent
+                  path={"addVendor"}
+                  icon={<IoMdList />}
+                  title={"View Vendor List"}
+                />
+                <DashboardListHeader title={"Service Management"} />
+                <DashboardListComponent
+                  path={"addService"}
+                  icon={<IoMdAddCircleOutline />}
+                  title={"Add New Service"}
+                />
+                <DashboardListComponent
+                  path={"serviceList"}
+                  icon={<IoMdList />}
+                  title={"View Service List"}
+                />
+              </ul>
+            )}
+          </div>
+          <ul className="w-80 mt-5">
+            <DashboardListComponent
+              path={"/"}
+              icon={<IoMdHome />}
+              title={"User Home"}
+            />
+            <li>
+              <a
+                role="button"
+                onClick={handleLogOut}
+                className="relative text-sm rounded-none flex flex-row items-center h-11 focus:outline-none hover:bg-secondary text-white hover:text-primary border-l-4 border-transparent hover:border-accent pr-6"
+              >
+                <span className="inline-flex justify-center items-center ml-4">
+                  <VscSignOut />
+                </span>
+                <span className="ml-2 tracking-wide truncate">Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
