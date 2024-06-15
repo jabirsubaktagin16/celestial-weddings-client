@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { CiViewTable } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {
   IoMdAddCircleOutline,
@@ -6,22 +7,33 @@ import {
   IoMdList,
   IoMdPersonAdd,
 } from "react-icons/io";
+import { MdOutlineModeEditOutline } from "react-icons/md";
+import { RiCalendarEventLine } from "react-icons/ri";
+import { TbBrandBooking } from "react-icons/tb";
 import { VscSignOut } from "react-icons/vsc";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { DashboardListComponent } from "../components/DashboardListComponent/DashboardListComponent";
 import { DashboardListHeader } from "../components/DashboardListComponent/DashboardListHeader";
+import { Loading } from "../components/Shared/Loading";
 import useAdmin from "../hooks/useAdmin";
+import usePlanner from "../hooks/usePlanner";
 import { AuthContext } from "../providers/AuthProvider";
 
 export const DashboardLayout = () => {
-  const [isAdmin] = useAdmin();
+  const [isAdmin, isAdminLoading] = useAdmin();
+  const [isPlanner, isPlannerLoading] = usePlanner();
   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        navigate("/");
+      })
       .catch((error) => console.log(error));
   };
+
+  if (isAdminLoading || isPlannerLoading) return <Loading />;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -36,15 +48,36 @@ export const DashboardLayout = () => {
         </label>
         <Outlet />
       </div>
-      <div className="drawer-side">
+      <div className=" bg-primary drawer-side">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="min-h-full bg-primary text-white">
-          <div className="flex items-center justify-center h-14 border-b">
-            <div>Sidebar Navigation By iAmine</div>
+        <div className="min-h-full text-white">
+          <div className="flex items-center justify-center h-48 border-b">
+            <div>
+              <div className="text-center">
+                <div className="avatar">
+                  <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img src="https://i.ibb.co/S5DKJdp/avatar.png" />
+                  </div>
+                </div>
+                <h2 className="text-xl mt-3 barlow-font text-center uppercase font-bold text-white">
+                  {user?.displayName}
+                </h2>
+                <p>
+                  Signed In as:{" "}
+                  {isAdmin ? (
+                    <span className="font-bold">Admin</span>
+                  ) : isPlanner ? (
+                    <span className="font-bold">Planner</span>
+                  ) : (
+                    <span className="font-bold">User</span>
+                  )}
+                </p>
+              </div>
+            </div>
           </div>
           <div className="border-b py-5">
             {isAdmin && (
@@ -80,12 +113,43 @@ export const DashboardLayout = () => {
                 />
               </ul>
             )}
+            {isPlanner && (
+              <ul className="w-80">
+                <DashboardListHeader title={"My Events"} />
+                <DashboardListComponent
+                  path={"view-all-events"}
+                  icon={<RiCalendarEventLine />}
+                  title={"View All Events"}
+                />
+                <DashboardListComponent
+                  path={"add-new-event"}
+                  icon={<IoMdAddCircleOutline />}
+                  title={"Add New Event"}
+                />
+                <DashboardListHeader title={"Vendor Management"} />
+                <DashboardListComponent
+                  path={"add-vendor"}
+                  icon={<CiViewTable />}
+                  title={"View All Vendors"}
+                />
+                <DashboardListComponent
+                  path={"addVendor"}
+                  icon={<TbBrandBooking />}
+                  title={"Book A Vendor"}
+                />
+                <DashboardListComponent
+                  path={"addVendor"}
+                  icon={<MdOutlineModeEditOutline />}
+                  title={"Update Vendor Booking"}
+                />
+              </ul>
+            )}
           </div>
-          <ul className="w-80 mt-5">
+          <ul className="w-80 my-5">
             <DashboardListComponent
               path={"/"}
               icon={<IoMdHome />}
-              title={"User Home"}
+              title={"Celestial Weddings Home"}
             />
             <li>
               <a

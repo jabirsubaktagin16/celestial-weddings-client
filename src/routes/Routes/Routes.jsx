@@ -5,6 +5,8 @@ import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
 import { AddVendor } from "../../pages/AddVendor";
 import { Home } from "../../pages/Home";
+import { AddNewEvent } from "../../pages/Planner/MyEvents/AddNewEvent";
+import { ViewAllEvents } from "../../pages/Planner/MyEvents/ViewAllEvents";
 import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
@@ -64,6 +66,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddVendor />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "view-all-events",
+        element: (
+          <PrivateRoute>
+            <ViewAllEvents />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-new-event",
+        element: (
+          <PrivateRoute>
+            <AddNewEvent />
           </PrivateRoute>
         ),
       },

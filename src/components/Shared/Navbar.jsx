@@ -79,7 +79,7 @@ export const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 text-text rounded-none w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-background text-text rounded-none w-52 z-10"
             >
               <li>
                 <Link to="/dashboard" className="justify-between">
@@ -87,8 +87,12 @@ export const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <button role="button" className="btn" onClick={handleLogOut}>
-                  Logout
+                <button
+                  role="button"
+                  className="btn btn-primary rounded-none text-white"
+                  onClick={handleLogOut}
+                >
+                  Sign Out
                 </button>
               </li>
             </ul>
