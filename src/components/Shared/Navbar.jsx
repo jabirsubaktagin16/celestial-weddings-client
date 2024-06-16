@@ -82,7 +82,7 @@ export const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-background text-text rounded-none w-52 z-10"
             >
               <li>
-                <Link to="/dashboard" className="justify-between">
+                <Link to="/dashboard/my-profile" className="justify-between">
                   Profile
                 </Link>
               </li>

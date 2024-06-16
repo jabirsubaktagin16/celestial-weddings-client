@@ -5,12 +5,13 @@ import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
 import { AddVendor } from "../../pages/AddVendor";
 import { Home } from "../../pages/Home";
-import { AddNewEvent } from "../../pages/Planner/MyEvents/AddNewEvent";
-import { ViewAllEvents } from "../../pages/Planner/MyEvents/ViewAllEvents";
+import { Profile } from "../../pages/Profile/Profile";
 import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
+import { AddNewEvent } from "../../pages/Vendor/MyEvents/AddNewEvent";
+import { ViewAllEvents } from "../../pages/Vendor/MyEvents/ViewAllEvents";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
 
@@ -61,6 +62,14 @@ export const router = createBrowserRouter([
     element: <DashboardLayout />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: "my-profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "add-vendor",
         element: (

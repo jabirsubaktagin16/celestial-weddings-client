@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { CiViewTable } from "react-icons/ci";
+import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {
   IoMdAddCircleOutline,
@@ -7,8 +8,6 @@ import {
   IoMdList,
   IoMdPersonAdd,
 } from "react-icons/io";
-import { MdOutlineModeEditOutline } from "react-icons/md";
-import { RiCalendarEventLine } from "react-icons/ri";
 import { TbBrandBooking } from "react-icons/tb";
 import { VscSignOut } from "react-icons/vsc";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -16,12 +15,12 @@ import { DashboardListComponent } from "../components/DashboardListComponent/Das
 import { DashboardListHeader } from "../components/DashboardListComponent/DashboardListHeader";
 import { Loading } from "../components/Shared/Loading";
 import useAdmin from "../hooks/useAdmin";
-import usePlanner from "../hooks/usePlanner";
+import useVendor from "../hooks/useVendor";
 import { AuthContext } from "../providers/AuthProvider";
 
 export const DashboardLayout = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
-  const [isPlanner, isPlannerLoading] = usePlanner();
+  const [isVendor, isVendorLoading] = useVendor();
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -33,7 +32,7 @@ export const DashboardLayout = () => {
       .catch((error) => console.log(error));
   };
 
-  if (isAdminLoading || isPlannerLoading) return <Loading />;
+  if (isAdminLoading || isVendorLoading) return <Loading />;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -70,8 +69,8 @@ export const DashboardLayout = () => {
                   Signed In as:{" "}
                   {isAdmin ? (
                     <span className="font-bold">Admin</span>
-                  ) : isPlanner ? (
-                    <span className="font-bold">Planner</span>
+                  ) : isVendor ? (
+                    <span className="font-bold">Vendor</span>
                   ) : (
                     <span className="font-bold">User</span>
                   )}
@@ -113,39 +112,34 @@ export const DashboardLayout = () => {
                 />
               </ul>
             )}
-            {isPlanner && (
+            {isVendor && (
               <ul className="w-80">
-                <DashboardListHeader title={"My Events"} />
+                <DashboardListHeader title={"My Packages"} />
                 <DashboardListComponent
                   path={"view-all-events"}
-                  icon={<RiCalendarEventLine />}
-                  title={"View All Events"}
+                  icon={<CiViewTable />}
+                  title={"View All Packages"}
                 />
                 <DashboardListComponent
                   path={"add-new-event"}
                   icon={<IoMdAddCircleOutline />}
-                  title={"Add New Event"}
+                  title={"Add New Package"}
                 />
-                <DashboardListHeader title={"Vendor Management"} />
-                <DashboardListComponent
-                  path={"add-vendor"}
-                  icon={<CiViewTable />}
-                  title={"View All Vendors"}
-                />
+                <DashboardListHeader title={"Bookings"} />
                 <DashboardListComponent
                   path={"addVendor"}
                   icon={<TbBrandBooking />}
-                  title={"Book A Vendor"}
-                />
-                <DashboardListComponent
-                  path={"addVendor"}
-                  icon={<MdOutlineModeEditOutline />}
-                  title={"Update Vendor Booking"}
+                  title={"View All Bookings"}
                 />
               </ul>
             )}
           </div>
           <ul className="w-80 my-5">
+            <DashboardListComponent
+              path={"/dashboard/my-profile"}
+              icon={<FaUserCircle />}
+              title={"My Profile"}
+            />
             <DashboardListComponent
               path={"/"}
               icon={<IoMdHome />}
