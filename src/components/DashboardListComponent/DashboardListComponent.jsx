@@ -6,7 +6,7 @@ export const DashboardListComponent = ({ path, icon, title }) => {
     <li>
       <Link
         to={path}
-        className="relative text-sm rounded-none flex flex-row items-center h-11 focus:outline-none hover:bg-secondary text-white hover:text-primary border-l-4 border-transparent hover:border-accent pr-6"
+        className="text-sm rounded-none flex flex-row items-center h-11 focus:outline-none hover:bg-secondary text-white hover:text-primary border-l-4 border-transparent hover:border-accent pr-6"
       >
         <span className="inline-flex justify-center items-center ml-4">
           {icon}

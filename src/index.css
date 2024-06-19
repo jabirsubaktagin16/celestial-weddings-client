@@ -45,3 +45,11 @@ h5 {
 small {
   font-size: 0.75rem; /* 12px */
 }
+
+.dashboard-bg {
+  background: rgba(194, 76, 86, 0.65);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(194, 76, 86, 0.44);
+}
