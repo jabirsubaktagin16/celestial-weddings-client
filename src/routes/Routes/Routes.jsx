@@ -10,8 +10,8 @@ import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
-import { AddNewEvent } from "../../pages/Vendor/MyEvents/AddNewEvent";
-import { ViewAllEvents } from "../../pages/Vendor/MyEvents/ViewAllEvents";
+import { AddNewPackage } from "../../pages/Vendor/Packages/AddNewPackage";
+import { ViewAllEvents } from "../../pages/Vendor/Packages/ViewAllEvents";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
 
@@ -87,10 +87,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "add-new-event",
+        path: "add-new-package",
         element: (
           <PrivateRoute>
-            <AddNewEvent />
+            <AddNewPackage />
           </PrivateRoute>
         ),
       },

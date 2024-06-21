@@ -174,7 +174,7 @@ export const DashboardLayout = () => {
                   title={"View All Packages"}
                 />
                 <DashboardListComponent
-                  path={"add-new-event"}
+                  path={"add-new-package"}
                   icon={<IoMdAddCircleOutline />}
                   title={"Add New Package"}
                 />
