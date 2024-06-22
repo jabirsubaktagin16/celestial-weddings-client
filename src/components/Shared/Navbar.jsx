@@ -79,7 +79,7 @@ export const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-background text-text rounded-none w-52 z-10"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#ecf8f7] text-text rounded-none w-52 z-10"
             >
               <li>
                 <Link to="/dashboard/my-profile" className="justify-between">

@@ -14,6 +14,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+const initialApp = initializeApp(firebaseConfig);
 
 export const fireBaseStorageURL = import.meta.env.VITE_REACT_APP_STORAGEURL;
+
+const app = {
+  initialApp,
+  fireBaseStorageURL,
+};
+
+export default app;

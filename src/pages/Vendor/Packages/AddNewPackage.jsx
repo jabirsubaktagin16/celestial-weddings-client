@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const AddNewPackage = () => {
+  const [discountChecked, setDiscountChecked] = useState(false);
+  const [discountValue, setDiscountValue] = useState("");
+  const [services, setServices] = useState([]);
+  const [serviceValue, setServiceValue] = useState("");
+
+  const addService = () => {
+    if (serviceValue.trim() !== "") {
+      setServices([...services, serviceValue]);
+      setServiceValue("");
+    }
+  };
+
+  const handleDiscountCheck = () => {
+    setDiscountChecked(!discountChecked);
+    if (!discountChecked) {
+      setDiscountValue("");
+    }
+  };
+
   return (
     <div className="px-4 py-8 ">
-      <div className="bg-white  mx-auto p-4">
+      <div className="bg-white shadow-md mx-auto p-4">
         <div className="flex flex-col  lg:flex-row gap-5">
           <div className="container">
             <form className="border border-primary rounded-none p-6">
@@ -35,9 +54,30 @@ export const AddNewPackage = () => {
               <div className="form-control">
                 <label className="cursor-pointer label">
                   <span className="label-text">Discount</span>
-                  <input type="checkbox" className="toggle toggle-primary" />
+                  <input
+                    type="checkbox"
+                    className="toggle toggle-primary"
+                    checked={discountChecked}
+                    onChange={handleDiscountCheck}
+                  />
                 </label>
               </div>
+              {discountChecked && (
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Discount Percentage</span>
+                  </label>
+                  <input
+                    className="input input-sm input-bordered input-primary rounded-none"
+                    id="discountPercentage"
+                    type="number"
+                    placeholder="Enter Discount Percentage"
+                    value={discountValue}
+                    onChange={(e) => setDiscountValue(e.target.value)}
+                    max={100}
+                  />
+                </div>
+              )}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Cover</span>
@@ -75,6 +115,8 @@ export const AddNewPackage = () => {
                   <textarea
                     className="textarea textarea-primary rounded-none resize-none"
                     id="services"
+                    value={serviceValue}
+                    onChange={(e) => setServiceValue(e.target.value)}
                     placeholder="Enter Services Offered"
                     rows="1"
                   ></textarea>
@@ -83,6 +125,7 @@ export const AddNewPackage = () => {
                   <button
                     className="btn btn-primary text-white px-4 py-2 rounded-none"
                     type="button"
+                    onClick={addService}
                   >
                     Add Service
                   </button>
@@ -91,28 +134,38 @@ export const AddNewPackage = () => {
             </div>
             <div className="mt-2 border border-primary p-6">
               <div className="overflow-x-auto">
-                <table className="table">
-                  {/* head */}
-                  <thead>
-                    <tr>
-                      <th>SI No.</th>
-                      <th>Service</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* row 1 */}
-                    <tr>
-                      <td>1</td>
-                      <td>Purple</td>
-                      <th>
-                        <button className="btn btn-accent btn-xs">
-                          Delete
-                        </button>
-                      </th>
-                    </tr>
-                  </tbody>
-                </table>
+                {services.length > 0 && (
+                  <table className="table">
+                    {/* head */}
+                    <thead>
+                      <tr>
+                        <th>SI No.</th>
+                        <th>Service</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {services.map((item, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item}</td>
+                          <th>
+                            <button
+                              className="btn btn-accent btn-xs"
+                              onClick={() =>
+                                setServices(
+                                  services.filter((_, i) => i !== index)
+                                )
+                              }
+                            >
+                              Delete
+                            </button>
+                          </th>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           </div>
