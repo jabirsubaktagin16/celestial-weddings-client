@@ -136,7 +136,7 @@ export const DashboardLayout = () => {
                 <DashboardListHeader title={"Analytics"} />
                 <DashboardListHeader title={"User Management"} />
                 <DashboardListComponent
-                  path={"addVendor"}
+                  path={"assign-user-role"}
                   icon={<IoMdPersonAdd />}
                   title={"Assign User Roles"}
                 />
@@ -147,20 +147,9 @@ export const DashboardLayout = () => {
                   title={"Add New Vendor"}
                 />
                 <DashboardListComponent
-                  path={"addVendor"}
+                  path={"view-vendors"}
                   icon={<IoMdList />}
                   title={"View Vendor List"}
-                />
-                <DashboardListHeader title={"Service Management"} />
-                <DashboardListComponent
-                  path={"addService"}
-                  icon={<IoMdAddCircleOutline />}
-                  title={"Add New Service"}
-                />
-                <DashboardListComponent
-                  path={"serviceList"}
-                  icon={<IoMdList />}
-                  title={"View Service List"}
                 />
               </ul>
             )}
@@ -169,7 +158,7 @@ export const DashboardLayout = () => {
                 <DashboardListHeader title={"Analytics"} />
                 <DashboardListHeader title={"Packages"} />
                 <DashboardListComponent
-                  path={"view-all-events"}
+                  path={"view-all-packages"}
                   icon={<CiViewTable />}
                   title={"View All Packages"}
                 />
@@ -180,7 +169,7 @@ export const DashboardLayout = () => {
                 />
                 <DashboardListHeader title={"Bookings"} />
                 <DashboardListComponent
-                  path={"addVendor"}
+                  path={"view-all-bookings"}
                   icon={<TbBrandBooking />}
                   title={"View All Bookings"}
                 />

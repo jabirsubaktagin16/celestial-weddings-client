@@ -7,26 +7,23 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 export const SignIn = () => {
   const [disabled, setDisabled] = useState(true);
-    const { signIn } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const location = useLocation();
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const from = location.state?.from?.pathname || "/";
-    console.log('state in the location login page', location.state)
+  const from = location.state?.from?.pathname || "/";
+  console.log("state in the location login page", location.state);
 
   const handleLogin = (data) => {
     event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password);
-        signIn(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                toast.success("User Login Successfull");
-                navigate(from, { replace: true });
-            })
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    signIn(email, password).then((result) => {
+      const user = result.user;
+      toast.success("User Login Successfull");
+      navigate(from, { replace: true });
+    });
   };
 
   return (

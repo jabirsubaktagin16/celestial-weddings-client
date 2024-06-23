@@ -3,17 +3,22 @@ import { NotFound } from "../../components/Shared/NotFound";
 import { DashboardLayout } from "../../layouts/DashboardLayout";
 import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
-import { AddVendor } from "../../pages/AddVendor";
+import { ViewUsers } from "../../pages/Admin/UserRole/ViewUsers";
+import { AddVendor } from "../../pages/Admin/VendorManagement/AddVendor";
+import { ViewVendors } from "../../pages/Admin/VendorManagement/ViewVendors";
 import { Home } from "../../pages/Home";
 import { Profile } from "../../pages/Profile/Profile";
 import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
+import { ViewAllBookings } from "../../pages/Vendor/Bookings/ViewAllBookings";
 import { AddNewPackage } from "../../pages/Vendor/Packages/AddNewPackage";
-import { ViewAllEvents } from "../../pages/Vendor/Packages/ViewAllEvents";
+import { ViewAllPackages } from "../../pages/Vendor/Packages/ViewAllPackages";
+import AdminRoute from "../AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
+import VendorRoute from "../VendorRoute";
 
 export const router = createBrowserRouter([
   {
@@ -71,29 +76,54 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "add-vendor",
+        path: "assign-user-role",
         element: (
-          <PrivateRoute>
-            <AddVendor />
-          </PrivateRoute>
+          <AdminRoute>
+            <ViewUsers />
+          </AdminRoute>
         ),
       },
       {
-        path: "view-all-events",
+        path: "add-vendor",
         element: (
-          <PrivateRoute>
-            <ViewAllEvents />
-          </PrivateRoute>
+          <AdminRoute>
+            <AddVendor />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "view-vendors",
+        element: (
+          <AdminRoute>
+            <ViewVendors />
+          </AdminRoute>
         ),
       },
       {
         path: "add-new-package",
         element: (
-          <PrivateRoute>
+          <VendorRoute>
             <AddNewPackage />
-          </PrivateRoute>
+          </VendorRoute>
         ),
       },
+      {
+        path: "view-all-packages",
+        element: (
+          <VendorRoute>
+            <ViewAllPackages />
+          </VendorRoute>
+        ),
+      },
+      {
+        path: "view-all-bookings",
+        element: (
+          <VendorRoute>
+            <ViewAllBookings />
+          </VendorRoute>
+        ),
+      },
+      
     ],
   },
 ]);
