@@ -1,4 +1,57 @@
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { useState } from "react";
+import app from "../../../firebase/firebase.config";
+import { createUniqueFileName } from "../../../utils/createUniqueFileName";
+
 export const AddVendor = () => {
+  const [cover, setCover] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const { initialApp, fireBaseStorageURL } = app;
+  const storage = getStorage(initialApp, fireBaseStorageURL);
+
+  async function helperForUploadingImageToFirebase(file) {
+    const getFileName = createUniqueFileName(file);
+    const storageReference = ref(storage, `vendorCover/${getFileName}`);
+    const uploadImage = uploadBytesResumable(storageReference, file);
+
+    return new Promise((resolve, reject) => {
+      uploadImage.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {
+          console.log(error);
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadImage.snapshot.ref)
+            .then((downloadUrl) => resolve(downloadUrl))
+            .catch((error) => reject(error));
+        }
+      );
+    });
+  }
+
+  async function handleFileChange(event) {
+    setIsUploading(true);
+    const extractImageUrl = await helperForUploadingImageToFirebase(
+      event.target.files[0]
+    );
+
+    if (extractImageUrl !== "") {
+      setCover(extractImageUrl);
+      setIsUploading(false);
+      /* setFormData({
+        ...formData,
+        imageUrl: extractImageUrl,
+      }); */
+    }
+  }
+
   return (
     <div className="px-10 py-5">
       <div className="card flex-1 rounded-none bg-base-100 shadow-xl">
@@ -24,6 +77,7 @@ export const AddVendor = () => {
             <input
               type="file"
               className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none"
+              onChange={handleFileChange}
             />
           </div>
           <div className="form-control">
