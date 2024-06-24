@@ -1,65 +1,18 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import useUserList from "../../../hooks/useUserList";
+import useVendorList from "../../../hooks/useVendorList";
 import { AssignRoleModal } from "./AssignRoleModal";
 
 export const ViewUsers = () => {
-  const initialUsers = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      role: "User",
-      vendorId: null,
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      role: "Admin",
-      vendorId: null,
-    },
-    {
-      id: 3,
-      name: "Sam Brown",
-      email: "sam@example.com",
-      role: "User",
-      vendorId: null,
-    },
-    {
-      id: 4,
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      role: "Vendor",
-      vendorId: 101,
-    },
-    {
-      id: 5,
-      name: "Robert White",
-      email: "robert@example.com",
-      role: "User",
-      vendorId: null,
-    },
-    {
-      id: 6,
-      name: "Lucy Black",
-      email: "lucy@example.com",
-      role: "Admin",
-      vendorId: null,
-    },
-    // Add more users as needed
-  ];
+  const [users, userRefetch] = useUserList();
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [vendor, , refetch] = useVendorList();
 
-  const vendorOptions = [
-    { id: 101, name: "Vendor 1" },
-    { id: 102, name: "Vendor 2" },
-    { id: 103, name: "Vendor 3" },
-  ];
-
-  const [users, setUsers] = useState(initialUsers);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
   const totalPages = Math.ceil(users.length / rowsPerPage);
-  const [selectedUser, setSelectedUser] = useState(null);
+
   const renderTablePage = (page) => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
@@ -72,13 +25,13 @@ export const ViewUsers = () => {
   };
 
   const saveChanges = (role, vendorId) => {
-    setUsers(
+    /* setUsers(
       users.map((user) =>
         user.id === selectedUser.id
-          ? { ...user, role, vendorId: role === "Vendor" ? vendorId : null }
+          ? { ...user, role, vendorId: role === "vendor" ? vendorId : null }
           : user
       )
-    );
+    ); */
     toast.success("User Role Management Done Successfully");
   };
 
@@ -146,7 +99,7 @@ export const ViewUsers = () => {
       <AssignRoleModal
         user={selectedUser}
         onSave={saveChanges}
-        vendorOptions={vendorOptions}
+        vendorOptions={vendor}
       />
     </div>
   );

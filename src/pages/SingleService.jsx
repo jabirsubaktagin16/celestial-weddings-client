@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
 import { useParams } from "react-router-dom";
-import services from '../../public/services.json';
+import services from "../../public/services.json";
 
 export const SingleService = () => {
-    const {shortForm} = useParams();
-    const [service, setService] = useState(null);
+  const { shortForm } = useParams();
+  const [service, setService] = useState(null);
 
-    useEffect(() => {
-        const serviceData = services.find((item) => item.shortForm === shortForm); 
-        setService(serviceData);
-      }, []);
-   
+  useEffect(() => {
+    const serviceData = services.find((item) => item.shortForm === shortForm);
+    setService(serviceData);
+  }, []);
+
   return (
-    <Parallax
+    <div>
+      <Parallax
         bgImage={service?.imageUrl}
         bgImageAlt="Services Banner"
         strength={300}
@@ -26,5 +27,6 @@ export const SingleService = () => {
           </div>
         </div>
       </Parallax>
-  )
-}
+    </div>
+  );
+};
