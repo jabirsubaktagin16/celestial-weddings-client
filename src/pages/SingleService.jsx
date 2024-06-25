@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
 import { useParams } from "react-router-dom";
 import services from "../../public/services.json";
+import useVendorList from "../hooks/useVendorList";
 
 export const SingleService = () => {
   const { shortForm } = useParams();
   const [service, setService] = useState(null);
+  const [vendor, loading, refetch] = useVendorList();
+  const currentServices = vendor.filter((v) => v.category === shortForm);
 
   useEffect(() => {
     const serviceData = services.find((item) => item.shortForm === shortForm);
@@ -27,6 +30,9 @@ export const SingleService = () => {
           </div>
         </div>
       </Parallax>
+      {currentServices.map((singleVendor) => (
+        <p>Hello From Vendor</p>
+      ))}
     </div>
   );
 };
