@@ -7,6 +7,7 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import services from "../../../../public/services.json";
 import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { createUniqueFileName } from "../../../utils/createUniqueFileName";
@@ -60,6 +61,7 @@ export const AddVendor = () => {
   const onSubmit = async (data) => {
     const vendorInfo = {
       name: data.vendorName,
+      category: data.vendorCategory,
       email: data.contactEmail,
       cover: cover,
       phoneNumber: data.contactPhone,
@@ -93,6 +95,22 @@ export const AddVendor = () => {
                 className="input input-sm input-bordered input-primary rounded-none"
                 {...register("vendorName", { required: true })}
               />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Category</span>
+              </label>
+              <select
+                className="select select-sm select-primary w-full rounded-none"
+                {...register("vendorCategory", { required: true })}
+              >
+                <option disabled selected defaultValue="">
+                  Select Category from the List
+                </option>
+                {services.map((service) => (
+                  <option value={service.shortForm}>{service.title}</option>
+                ))}
+              </select>
             </div>
             <div className="form-control">
               <label className="label">
