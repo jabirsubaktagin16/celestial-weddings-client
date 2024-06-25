@@ -6,7 +6,7 @@ export const AssignRoleModal = ({ user, onSave, vendorOptions }) => {
 
   useEffect(() => {
     if (user) {
-      setSelectedRole(user.role);
+      setSelectedRole(user?.role);
       setSelectedVendorId(user.vendorId || '');
     }
   }, [user]);
@@ -34,9 +34,9 @@ export const AssignRoleModal = ({ user, onSave, vendorOptions }) => {
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value)}
               >
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
-                <option value="Vendor">Vendor</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="vendor">Vendor</option>
               </select>
             </div>
             {selectedRole === "Vendor" && (

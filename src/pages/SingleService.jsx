@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
 import { useParams } from "react-router-dom";
 import services from "../../public/services.json";
+import { VendorCard } from "../components/VendorCard";
 import useVendorList from "../hooks/useVendorList";
 
 export const SingleService = () => {
@@ -30,9 +31,18 @@ export const SingleService = () => {
           </div>
         </div>
       </Parallax>
-      {currentServices.map((singleVendor) => (
-        <p>Hello From Vendor</p>
-      ))}
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {currentServices &&
+            currentServices.map((singleVendor) => (
+              <VendorCard
+                key={singleVendor._id}
+                singleVendor={singleVendor}
+                loading={loading}
+              />
+            ))}
+        </div>
+      </div>
     </div>
   );
 };

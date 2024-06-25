@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUserList from "../../../hooks/useUserList";
 import useVendorList from "../../../hooks/useVendorList";
-import { AssignRoleModal } from "./AssignRoleModal";
+
+const UserSwal = withReactContent(Swal);
 
 export const ViewUsers = () => {
-  const [users, userRefetch] = useUserList();
+  const axiosSecure = useAxiosSecure();
+  const [users, , userRefetch] = useUserList();
   const [selectedUser, setSelectedUser] = useState(null);
   const [vendor, , refetch] = useVendorList();
 
@@ -20,19 +25,86 @@ export const ViewUsers = () => {
   };
 
   const openModal = (user) => {
-    setSelectedUser(user);
-    document.getElementById("assignRoleModal").showModal();
+    UserSwal.fire({
+      title: "Assign A Role",
+      html: (
+        <div>
+          <div className="form-control mb-2">
+            <select
+              id="roleSelect"
+              className="select select-primary rounded-none"
+              onChange={handleSelectChange}
+            >
+              <option value="" disabled>
+                Select an option
+              </option>
+              <option value="user">User</option>
+              <option value="vendor">Vendor</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div className="form-control mb-2">
+            <select
+              id="vendorInput"
+              className="select select-primary rounded-none"
+              style={{ display: "none" }}
+            >
+              <option value="" disabled>
+                Select a Vendor from the List
+              </option>
+              {vendor &&
+                vendor.map((v) => (
+                  <option key={v._id} value={v._id}>
+                    {v.name}
+                  </option>
+                ))}
+            </select>
+          </div>
+        </div>
+      ),
+      confirmButtonText: "Confirm",
+      showCancelButton: true,
+      allowOutsideClick: false,
+      preConfirm: () => {
+        const selectedOption = document.getElementById("roleSelect").value;
+        const vendorInput = document.getElementById("vendorInput").value;
+
+        if (selectedOption === "vendor" && !vendorInput) {
+          Swal.showValidationMessage("Vendor name is required");
+        } else {
+          return {
+            selectedOption,
+            vendorInput: selectedOption === "vendor" ? vendorInput : null,
+          };
+        }
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const userRoleInfo = {
+          role: result.value.selectedOption,
+          vendorCompany: result.value.vendorInput,
+        };
+
+        const userRes = await axiosSecure.patch(
+          `/users/update-role/${user?._id}`,
+          userRoleInfo
+        );
+
+        if (userRes?.data?.response.modifiedCount > 0) {
+          userRefetch();
+          toast.success(`User Role Updated for ${user.name}`);
+        }
+      }
+    });
   };
 
-  const saveChanges = (role, vendorId) => {
-    /* setUsers(
-      users.map((user) =>
-        user.id === selectedUser.id
-          ? { ...user, role, vendorId: role === "vendor" ? vendorId : null }
-          : user
-      )
-    ); */
-    toast.success("User Role Management Done Successfully");
+  const handleSelectChange = (event) => {
+    const vendorInput = document.getElementById("vendorInput");
+    if (event.target.value === "vendor") {
+      vendorInput.style.display = "block";
+    } else {
+      vendorInput.style.display = "none";
+    }
   };
 
   return (
@@ -44,13 +116,13 @@ export const ViewUsers = () => {
             <th className="px-4 py-2 border-b">Name</th>
             <th className="px-4 py-2 border-b">Email</th>
             <th className="px-4 py-2 border-b">Role</th>
-            <th className="px-4 py-2 border-b">Vendor ID</th>
+            <th className="px-4 py-2 border-b">Vendor Company</th>
             <th className="px-4 py-2 border-b">Action</th>
           </tr>
         </thead>
         <tbody>
           {renderTablePage(currentPage).map((user) => (
-            <tr key={user.id}>
+            <tr key={user._id}>
               <td className="border border-accent px-4 text-center py-2">
                 {user.name}
               </td>
@@ -61,7 +133,7 @@ export const ViewUsers = () => {
                 {user.role}
               </td>
               <td className="border border-accent px-4 text-center py-2">
-                {user.vendorId ? user.vendorId : "N/A"}
+                {user.vendorCompany ? user.vendorCompany : "N/A"}
               </td>
               <td className="border border-accent px-4 py-2 text-center">
                 <button
@@ -96,11 +168,6 @@ export const ViewUsers = () => {
           </button>
         </div>
       </div>
-      <AssignRoleModal
-        user={selectedUser}
-        onSave={saveChanges}
-        vendorOptions={vendor}
-      />
     </div>
   );
 };
