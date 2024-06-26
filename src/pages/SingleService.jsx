@@ -32,14 +32,10 @@ export const SingleService = () => {
         </div>
       </Parallax>
       <div className="flex min-h-screen items-center justify-center">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mx-10 md:mx-20">
           {currentServices &&
             currentServices.map((singleVendor) => (
-              <VendorCard
-                key={singleVendor._id}
-                singleVendor={singleVendor}
-                loading={loading}
-              />
+              <VendorCard key={singleVendor._id} singleVendor={singleVendor} />
             ))}
         </div>
       </div>

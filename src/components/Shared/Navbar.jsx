@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import userIcon from "../../assets/user.png";
 import { AuthContext } from "../../providers/AuthProvider";
 
 export const Navbar = () => {
@@ -73,8 +74,8 @@ export const Navbar = () => {
         {user?.uid ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://i.ibb.co/S5DKJdp/avatar.png" />
+              <div className="w-16">
+                <img src={userIcon} />
               </div>
             </label>
             <ul

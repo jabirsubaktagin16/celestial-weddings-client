@@ -8,7 +8,7 @@ export const ViewVendors = () => {
   const axiosSecure = useAxiosSecure();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10;
+  const rowsPerPage = 5;
   const totalPages = Math.ceil(vendor.length / rowsPerPage);
 
   const renderTablePage = (page) => {
@@ -93,7 +93,7 @@ export const ViewVendors = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex mx-auto mt-4">
+      <div className="flex mx-auto justify-center items-center mt-4">
         <div className="join border border-accent">
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
