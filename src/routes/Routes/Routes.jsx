@@ -12,6 +12,7 @@ import { Services } from "../../pages/Services";
 import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
+import { SingleVendor } from "../../pages/SingleVendor";
 import { ViewAllBookings } from "../../pages/Vendor/Bookings/ViewAllBookings";
 import { AddNewPackage } from "../../pages/Vendor/Packages/AddNewPackage";
 import { ViewAllPackages } from "../../pages/Vendor/Packages/ViewAllPackages";
@@ -43,7 +44,10 @@ export const router = createBrowserRouter([
         path: "services/:shortForm",
         element: <SingleService />,
       },
-
+      {
+        path: "vendor/:id",
+        element: <SingleVendor />,
+      },
       {
         path: "sign-in",
         element: (
@@ -123,7 +127,6 @@ export const router = createBrowserRouter([
           </VendorRoute>
         ),
       },
-      
     ],
   },
 ]);

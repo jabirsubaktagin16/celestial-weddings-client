@@ -133,7 +133,7 @@ export const ViewUsers = () => {
                 {user.role}
               </td>
               <td className="border border-accent px-4 text-center py-2">
-                {user.vendorCompany ? user.vendorCompany : "N/A"}
+                {user.vendorCompany?._id ? user.vendorCompany.name : "N/A"}
               </td>
               <td className="border border-accent px-4 py-2 text-center">
                 <button
@@ -147,7 +147,7 @@ export const ViewUsers = () => {
           ))}
         </tbody>
       </table>
-      <div className="flex mx-auto mt-4">
+      <div className="flex justify-center items-center mx-auto mt-4">
         <div className="join border border-accent">
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
