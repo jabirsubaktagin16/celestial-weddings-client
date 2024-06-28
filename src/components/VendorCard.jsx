@@ -22,7 +22,7 @@ export const VendorCard = ({ singleVendor }) => {
       </div>
       <div className="px-6 py-4 mb-auto">
         <Link
-          to={`/vendor/${singleVendor?._id}`}
+          to={`/vendors/${singleVendor?._id}`}
           className="font-medium text-lg hover:text-primary transition duration-500 ease-in-out inline-block mb-2"
         >
           <h5>{singleVendor?.name}</h5>

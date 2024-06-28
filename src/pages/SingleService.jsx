@@ -31,14 +31,24 @@ export const SingleService = () => {
           </div>
         </div>
       </Parallax>
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mx-10 md:mx-20">
-          {currentServices &&
-            currentServices.map((singleVendor) => (
+      {currentServices && currentServices.length === 0 && (
+        <div className="flex items-center justify-center">
+          <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl">
+            No Vendor Found
+          </p>
+        </div>
+      )}
+      {currentServices && currentServices.length > 0 && (
+        <div className="flex min-h-screen items-center justify-center">
+          (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mx-10 md:mx-20">
+            {currentServices.map((singleVendor) => (
               <VendorCard key={singleVendor._id} singleVendor={singleVendor} />
             ))}
+          </div>
+          )
         </div>
-      </div>
+      )}
     </div>
   );
 };

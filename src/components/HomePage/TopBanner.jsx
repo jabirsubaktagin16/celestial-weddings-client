@@ -9,10 +9,14 @@ export const TopBanner = () => {
           <h1 className="text-text text-6xl font-bold">
             Make your wedding memorable!
           </h1>
-          <p className="py-6 text-text">
-          Make your dream wedding a reality with our comprehensive services. From stunning floral arrangements and catering to professional photography and beautiful venues, we handle every detail. Let our expert planners and talented stylists create an unforgettable celebration for your special day.
+          <p className="py-6 text-lg text-text text-gray-500 lg:text-xl xl:text-xl">
+            Make your dream wedding a reality with our comprehensive services.
+            From stunning floral arrangements and catering to professional
+            photography and beautiful venues, we handle every detail. Let our
+            expert planners and talented stylists create an unforgettable
+            celebration for your special day.
           </p>
-          <button className="btn btn-primary border-none text-white rounded-none">
+          <button className="btn btn-primary border-none text-white rounded-none w-36">
             Get Started
           </button>
         </div>

@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         element: <SingleService />,
       },
       {
-        path: "vendor/:id",
+        path: "vendors/:id",
         element: <SingleVendor />,
       },
       {
