@@ -70,7 +70,7 @@ export const SignIn = () => {
               </button>
             </div>
           </form>
-          <SocialLogin></SocialLogin>
+          <SocialLogin />
           <p className="text-center mb-5">
             <small>
               New to Celestial Weddings?{" "}

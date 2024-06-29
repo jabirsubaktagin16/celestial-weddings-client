@@ -4,12 +4,14 @@ import { ContactUs } from "../components/Vendor/ContactUs";
 import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
 import { VendorRatings } from "../components/Vendor/VendorRatings";
+import usePackages from "../hooks/usePackages";
 import useVendorDetails from "../hooks/useVendorDetails";
 
 export const SingleVendor = () => {
   const { id } = useParams();
 
   const [vendor, loading, refetch] = useVendorDetails({ id });
+  const [packageList, packageLoading, packageRefetch] = usePackages(id);
 
   return (
     <>
@@ -40,8 +42,13 @@ export const SingleVendor = () => {
             unforgettable
           </p>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            <PackageCard />
-            <PackageCard />
+            {packageList &&
+              packageList.map((singlePackage) => (
+                <PackageCard
+                  key={singlePackage?._id}
+                  availablePackage={singlePackage}
+                />
+              ))}
           </div>
         </div>
       </div>
