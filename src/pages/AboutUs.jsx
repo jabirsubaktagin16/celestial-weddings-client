@@ -1,9 +1,11 @@
 import { Parallax } from "react-parallax";
 import aboutUs from "../assets/about-us.png";
+import { PageTitle } from "../components/Shared/PageTitle";
 
 export const AboutUs = () => {
   return (
     <>
+      <PageTitle title={"About Us"} />
       <Parallax
         bgImage="./about-us-banner.jpg"
         bgImageAlt="Services Banner"
@@ -29,15 +31,28 @@ export const AboutUs = () => {
             <div className="divider lg:divider-horizontal "></div>
           </div>
           <p className="my-5">
-          Welcome to Celestial Weddings, where we turn your dream wedding into a breathtaking reality. With a passion for perfection and an eye for detail, our team of experts is dedicated to crafting unforgettable experiences. From elegant floral arrangements and gourmet catering to professional photography and exquisite venues, we provide a comprehensive range of services tailored to your unique vision.
+            Welcome to Celestial Weddings, where we turn your dream wedding into
+            a breathtaking reality. With a passion for perfection and an eye for
+            detail, our team of experts is dedicated to crafting unforgettable
+            experiences. From elegant floral arrangements and gourmet catering
+            to professional photography and exquisite venues, we provide a
+            comprehensive range of services tailored to your unique vision.
           </p>
           <p className="my-5">
-          At Celestial Weddings, we believe that every couple deserves a celebration as unique as their love story. Our seasoned planners, talented decorators, and skilled stylists work tirelessly to ensure every aspect of your special day is flawlessly executed. Whether you&lsquo;re envisioning an intimate gathering or a grand affair, we are committed to making your wedding day truly celestial.
+            At Celestial Weddings, we believe that every couple deserves a
+            celebration as unique as their love story. Our seasoned planners,
+            talented decorators, and skilled stylists work tirelessly to ensure
+            every aspect of your special day is flawlessly executed. Whether
+            you&lsquo;re envisioning an intimate gathering or a grand affair, we
+            are committed to making your wedding day truly celestial.
           </p>
-          <p>Join us in creating a magical celebration that you and your guests will cherish forever. With Celestial Weddings, your perfect day is just a step away.</p>
+          <p>
+            Join us in creating a magical celebration that you and your guests
+            will cherish forever. With Celestial Weddings, your perfect day is
+            just a step away.
+          </p>
         </div>
       </div>
-      
     </>
   );
 };

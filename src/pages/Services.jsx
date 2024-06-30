@@ -1,5 +1,6 @@
 import { Parallax } from "react-parallax";
 import { ServiceCard } from "../components/ServiceCard";
+import { PageTitle } from "../components/Shared/PageTitle";
 import useService from "../hooks/useService";
 
 export const Services = () => {
@@ -7,6 +8,7 @@ export const Services = () => {
 
   return (
     <>
+      <PageTitle title={"Services"} />
       <Parallax
         bgImage="./services-banner.jpg"
         bgImageAlt="Services Banner"

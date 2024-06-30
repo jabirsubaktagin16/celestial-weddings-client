@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { PageTitle } from "../../components/Shared/PageTitle";
 import SocialLogin from "../../components/SocialLogin";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -43,6 +44,7 @@ export const SignUp = () => {
 
   return (
     <>
+      <PageTitle title={"Sign Up"} />
       <div
         className="hero min-h-screen"
         style={{
