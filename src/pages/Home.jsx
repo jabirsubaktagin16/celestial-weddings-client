@@ -1,3 +1,4 @@
+import { FourthSection } from "../components/HomePage/FourthSection";
 import { SecondSection } from "../components/HomePage/SecondSection";
 import { ThirdSection } from "../components/HomePage/ThirdSection";
 import { TopBanner } from "../components/HomePage/TopBanner";
@@ -10,6 +11,7 @@ export const Home = () => {
       <TopBanner />
       <SecondSection />
       <ThirdSection />
+      <FourthSection />
     </>
   );
 };

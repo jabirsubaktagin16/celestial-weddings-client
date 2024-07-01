@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { PageTitle } from "../components/Shared/PageTitle";
 import { ContactUs } from "../components/Vendor/ContactUs";
 import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
@@ -15,8 +16,9 @@ export const SingleVendor = () => {
 
   return (
     <>
+      <PageTitle title={vendor?.name ? vendor.name : ""} />
       <div
-        className="hero h-[200px] md:h-[350px]"
+        className="hero h-[250px] md:h-[350px]"
         style={{
           backgroundImage: `url(${vendor?.cover})`,
         }}
