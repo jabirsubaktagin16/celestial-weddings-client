@@ -175,9 +175,37 @@ export const DashboardLayout = () => {
                 />
                 <DashboardListHeader title={"Vendor Profile"} />
                 <DashboardListComponent
-                  path={"/dashboard/vendor-profile"}
+                  path={"vendor-profile"}
                   icon={<ImProfile />}
                   title={"View Profile"}
+                />
+              </ul>
+            )}
+            {!isVendor && !isAdmin && (
+              <ul>
+                <DashboardListHeader title={"Order History"} />
+                <DashboardListComponent
+                  path={"previous-orders"}
+                  icon={<CiViewTable />}
+                  title={"Previous Orders"}
+                />
+
+                <DashboardListHeader title={"Reviews"} />
+                <DashboardListComponent
+                  path={"my-reviews"}
+                  icon={<TbBrandBooking />}
+                  title={"My Reviews"}
+                />
+                <DashboardListHeader title={"Blogs"} />
+                <DashboardListComponent
+                  path={"add-blog"}
+                  icon={<ImProfile />}
+                  title={"Add Blog"}
+                />
+                <DashboardListComponent
+                  path={"my-blogs"}
+                  icon={<ImProfile />}
+                  title={"My Blogs"}
                 />
               </ul>
             )}

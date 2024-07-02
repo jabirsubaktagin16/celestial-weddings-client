@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
+import "swiper/css";
 import App from "./App.jsx";
 import "./index.css";
 import AuthProvider from "./providers/AuthProvider.jsx";

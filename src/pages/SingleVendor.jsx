@@ -1,5 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { PageTitle } from "../components/Shared/PageTitle";
 import { ContactUs } from "../components/Vendor/ContactUs";
 import { PackageCard } from "../components/Vendor/PackageCard";
@@ -70,11 +75,63 @@ export const SingleVendor = () => {
         </div>
         <VendorRatings vendor={vendor} />
         <div className="container p-6 mx-auto mb-10 xl:px-0">
-          <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3 mx-20">
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-          </div>
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+              },
+            }}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <ReviewCard />
+            </SwiperSlide>
+          </Swiper>
         </div>
       </div>
       <div className="py-5">
