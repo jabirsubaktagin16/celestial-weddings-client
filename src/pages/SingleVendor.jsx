@@ -16,7 +16,7 @@ import useVendorDetails from "../hooks/useVendorDetails";
 export const SingleVendor = () => {
   const { id } = useParams();
 
-  const [vendor, loading, refetch] = useVendorDetails({ id });
+  const [vendor, loading, refetch] = useVendorDetails(id);
   const [packageList, packageLoading, packageRefetch] = usePackages(id);
 
   return (

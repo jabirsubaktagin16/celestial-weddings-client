@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
-const useVendorDetails = ({ id }) => {
+const useVendorDetails = (id) => {
   const axiosPublic = useAxiosPublic();
   const {
     data: vendor,

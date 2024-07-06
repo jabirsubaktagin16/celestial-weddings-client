@@ -16,6 +16,7 @@ import { SingleVendor } from "../../pages/SingleVendor";
 import { ViewAllBookings } from "../../pages/Vendor/Bookings/ViewAllBookings";
 import { AddNewPackage } from "../../pages/Vendor/Packages/AddNewPackage";
 import { ViewAllPackages } from "../../pages/Vendor/Packages/ViewAllPackages";
+import { VendorProfile } from "../../pages/Vendor/Profile/VendorProfile";
 import AdminRoute from "../AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { PublicRoute } from "../PublicRoute/PublicRoute";
@@ -124,6 +125,14 @@ export const router = createBrowserRouter([
         element: (
           <VendorRoute>
             <ViewAllBookings />
+          </VendorRoute>
+        ),
+      },
+      {
+        path: "vendor-profile",
+        element: (
+          <VendorRoute>
+            <VendorProfile />
           </VendorRoute>
         ),
       },
