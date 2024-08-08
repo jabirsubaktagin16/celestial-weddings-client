@@ -25,11 +25,15 @@ export const AddNewPackage = () => {
     }
   };
 
-  const handleDiscountCheck = () => {
+  /* const handleDiscountCheck = () => {
     setDiscountChecked(!discountChecked);
     if (!discountChecked) {
       setDiscountValue("");
     }
+  }; */
+
+  const handleDiscountChange = (e) => {
+    setDiscountValue(e.target.value);
   };
 
   const onSubmit = async (data) => {
@@ -39,7 +43,7 @@ export const AddNewPackage = () => {
       servicesOffered: services,
       vendorId: currentUser?.vendorCompany?._id,
       discountStatus: discountChecked,
-      discountPercentage: data.discountPercentage,
+      discountPercentage: discountChecked ? data.discountPercentage : 0,
     };
 
     console.log(packageInfo);
@@ -101,7 +105,7 @@ export const AddNewPackage = () => {
                           id="AcceptConditions"
                           className="peer sr-only [&:checked_+_span_svg[data-checked-icon]]:block [&:checked_+_span_svg[data-unchecked-icon]]:hidden"
                           checked={discountChecked}
-                          onChange={handleDiscountCheck}
+                          onChange={() => setDiscountChecked(!discountChecked)}
                         />
 
                         <span className="absolute inset-y-0 start-0 z-10 m-1 inline-flex size-6 items-center justify-center rounded-full bg-white text-gray-400 transition-all peer-checked:start-6 peer-checked:text-accent">
@@ -145,9 +149,8 @@ export const AddNewPackage = () => {
                         className="input input-sm input-bordered input-primary rounded-none"
                         id="discountPercentage"
                         type="number"
-                        placeholder="Enter Discount Percentage"
-                        value={discountValue}
                         max={100}
+                        placeholder="Enter Discount Percentage"
                         {...register("discountPercentage")}
                       />
                     </div>

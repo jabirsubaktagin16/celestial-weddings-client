@@ -48,7 +48,7 @@ export const SignUp = () => {
       <div
         className="hero min-h-screen"
         style={{
-          backgroundImage: "url(./signup-banner.jpg)",
+          backgroundImage: "url(./signup-banner.jpeg)",
         }}
       >
         <div className="hero-overlay bg-white bg-opacity-60"></div>

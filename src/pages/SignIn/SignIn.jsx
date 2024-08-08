@@ -21,6 +21,7 @@ export const SignIn = () => {
     const email = form.email.value;
     const password = form.password.value;
     signIn(email, password).then((result) => {
+      console.log(result);
       const user = result.user;
       toast.success("User Login Successfull");
       navigate(from, { replace: true });
@@ -33,7 +34,7 @@ export const SignIn = () => {
       <div
         className="hero min-h-screen"
         style={{
-          backgroundImage: "url(./signin-banner.jpg)",
+          backgroundImage: "url(./signin-banner.jpeg)",
         }}
       >
         <div className="hero-overlay bg-white bg-opacity-60"></div>
