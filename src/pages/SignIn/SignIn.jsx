@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { InputComponent } from "../../components/InputComponent/InputComponent";
 import { PageTitle } from "../../components/Shared/PageTitle";
@@ -23,7 +22,6 @@ export const SignIn = () => {
     signIn(email, password).then((result) => {
       console.log(result);
       const user = result.user;
-      toast.success("User Login Successfull");
       navigate(from, { replace: true });
     });
   };

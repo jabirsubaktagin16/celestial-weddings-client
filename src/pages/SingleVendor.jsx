@@ -1,8 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { PageTitle } from "../components/Shared/PageTitle";

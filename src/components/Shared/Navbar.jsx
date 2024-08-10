@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import { TiUser } from "react-icons/ti";
+import { VscSignOut } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import userIcon from "../../assets/user.png";
@@ -34,7 +36,7 @@ export const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 uppercase"
+            className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 w-52 uppercase"
           >
             <li>
               <Link to="/">Home</Link>
@@ -83,17 +85,22 @@ export const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#ecf8f7] text-text rounded-none w-52 z-10"
             >
               <li>
-                <Link to="/dashboard/my-profile" className="justify-between">
-                  Profile
+                <Link
+                  to={"/dashboard/my-profile"}
+                  className="flex items-center gap-2 rounded-none px-4 py-2 text-gray-500 hover:bg-primary hover:text-white"
+                >
+                  <TiUser />
+                  <span className="text-sm font-medium"> Account </span>
                 </Link>
               </li>
               <li>
                 <button
-                  role="button"
-                  className="btn btn-primary rounded-none text-white"
                   onClick={handleLogOut}
+                  className="flex items-center gap-2 rounded-none px-4 py-2 text-gray-500 hover:bg-primary hover:text-white"
                 >
-                  Sign Out
+                  <VscSignOut />
+
+                  <span className="text-sm font-medium"> Sign Out </span>
                 </button>
               </li>
             </ul>

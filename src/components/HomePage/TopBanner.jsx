@@ -1,26 +1,58 @@
-import topBannerImg from "../../assets/Wedding-cuate.png";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { TopBannerFile } from "../TopBannerFile";
 
 export const TopBanner = () => {
+  const pagination = {
+    clickable: true,
+  };
   return (
-    <div className="hero min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <img src={topBannerImg} className="max-w-xl" />
-        <div>
-          <h1 className="text-text text-6xl font-bold">
-            Make your wedding memorable!
-          </h1>
-          <p className="py-6 text-lg text-text text-gray-500 lg:text-xl xl:text-xl">
-            Make your dream wedding a reality with our comprehensive services.
-            From stunning floral arrangements and catering to professional
-            photography and beautiful venues, we handle every detail. Let our
-            expert planners and talented stylists create an unforgettable
-            celebration for your special day.
-          </p>
-          <button className="btn btn-primary border-none text-white rounded-none w-36">
-            Get Started
-          </button>
-        </div>
-      </div>
-    </div>
+    <Swiper
+      centeredSlides={true}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
+      pagination={pagination}
+      modules={[Pagination, Autoplay]}
+      className="mySwiper"
+    >
+      <SwiperSlide>
+        <TopBannerFile
+          fileLocation={"muslim-wedding.png"}
+          heading={"A Day to Remember"}
+          passage={
+            "Experience the magic of your wedding day, where every detail is crafted to perfection, making memories that will last a lifetime"
+          }
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TopBannerFile
+          fileLocation={"hindu-wedding.png"}
+          heading={"Cultural Elegance"}
+          passage={
+            "Celebrate your heritage with a wedding that honors timeless traditions, blending rich cultural elements with modern flair"
+          }
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TopBannerFile
+          fileLocation={"christian-wedding.png"}
+          heading={"Love in Every Detail"}
+          passage={
+            "From the vows to the venue, every aspect of your wedding is a reflection of your unique love story, beautifully told"
+          }
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TopBannerFile
+          fileLocation={"bohemian-wedding.png"}
+          heading={"Your Dream, Our Mission"}
+          passage={
+            "We turn your wedding dreams into reality, creating an unforgettable day that exceeds your expectations in every way"
+          }
+        />
+      </SwiperSlide>
+    </Swiper>
   );
 };

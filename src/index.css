@@ -53,3 +53,8 @@ small {
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(194, 76, 86, 0.44);
 }
+
+.swiper-pagination-bullet-active {
+  background-color: #c24c56 !important;
+  border: 1px solid #ffffff;
+}
