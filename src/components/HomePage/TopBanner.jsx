@@ -1,4 +1,5 @@
-import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css/effect-fade";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { TopBannerFile } from "../TopBannerFile";
 
@@ -14,8 +15,15 @@ export const TopBanner = () => {
         disableOnInteraction: false,
       }}
       pagination={pagination}
-      modules={[Pagination, Autoplay]}
+      effect={"fade"}
+      modules={[Pagination, Autoplay, EffectFade]}
       className="mySwiper"
+      style={{
+        "--swiper-pagination-color": "#c24c56",
+        "--swiper-pagination-bullet-inactive-color": "#999999",
+        "--swiper-pagination-bullet-inactive-opacity": "1",
+        "--swiper-pagination-bullet-size": "12px",
+      }}
     >
       <SwiperSlide>
         <TopBannerFile
