@@ -14,6 +14,7 @@ export const TopBanner = () => {
         delay: 2500,
         disableOnInteraction: false,
       }}
+      loop={true}
       pagination={pagination}
       effect={"fade"}
       modules={[Pagination, Autoplay, EffectFade]}

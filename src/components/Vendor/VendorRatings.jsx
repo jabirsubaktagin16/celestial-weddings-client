@@ -1,6 +1,7 @@
 import React from "react";
+import { ReviewModal } from "./ReviewModal/ReviewModal";
 
-export const VendorRatings = ({ vendor, ratings }) => {
+export const VendorRatings = ({ vendor, ratings, refetch }) => {
   return (
     <div className="mx-auto max-w-screen-lg px-10 py-16">
       <div className="flex w-full flex-col">
@@ -44,7 +45,9 @@ export const VendorRatings = ({ vendor, ratings }) => {
                   className="h-full bg-yellow-400"
                   style={{
                     width: `${
-                      (ratings?.ratings[5] / ratings?.totalReviews) * 100
+                      ratings?.totalReviews === 0
+                        ? 0
+                        : (ratings?.ratings[5] / ratings?.totalReviews) * 100
                     }%`,
                   }}
                 ></div>
@@ -68,7 +71,9 @@ export const VendorRatings = ({ vendor, ratings }) => {
                   className="h-full bg-yellow-400"
                   style={{
                     width: `${
-                      (ratings?.ratings[4] / ratings?.totalReviews) * 100
+                      ratings?.totalReviews === 0
+                        ? 0
+                        : (ratings?.ratings[4] / ratings?.totalReviews) * 100
                     }%`,
                   }}
                 ></div>
@@ -92,7 +97,9 @@ export const VendorRatings = ({ vendor, ratings }) => {
                   className="h-full bg-yellow-400"
                   style={{
                     width: `${
-                      (ratings?.ratings[3] / ratings?.totalReviews) * 100
+                      ratings?.totalReviews === 0
+                        ? 0
+                        : (ratings?.ratings[3] / ratings?.totalReviews) * 100
                     }%`,
                   }}
                 ></div>
@@ -116,7 +123,9 @@ export const VendorRatings = ({ vendor, ratings }) => {
                   className="h-full bg-yellow-400"
                   style={{
                     width: `${
-                      (ratings?.ratings[2] / ratings?.totalReviews) * 100
+                      ratings?.totalReviews === 0
+                        ? 0
+                        : (ratings?.ratings[2] / ratings?.totalReviews) * 100
                     }%`,
                   }}
                 ></div>
@@ -140,7 +149,9 @@ export const VendorRatings = ({ vendor, ratings }) => {
                   className="h-full bg-yellow-400"
                   style={{
                     width: `${
-                      (ratings?.ratings[1] / ratings?.totalReviews) * 100
+                      ratings?.totalReviews === 0
+                        ? 0
+                        : (ratings?.ratings[1] / ratings?.totalReviews) * 100
                     }%`,
                   }}
                 ></div>
@@ -149,9 +160,13 @@ export const VendorRatings = ({ vendor, ratings }) => {
             </li>
           </ul>
         </div>
-        <button className="w-36 bg-primary py-3 text-white font-medium">
+        <label
+          htmlFor="review-modal"
+          className="btn w-36 btn-primary py-3 text-white font-medium"
+        >
           Write a review
-        </button>
+        </label>
+        <ReviewModal vendor={vendor} refetch={refetch} />
       </div>
     </div>
   );

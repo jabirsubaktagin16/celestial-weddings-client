@@ -73,12 +73,17 @@ export const SingleVendor = () => {
             clients
           </p>
         </div>
-        <VendorRatings vendor={vendor} ratings={ratings} />
+        <VendorRatings
+          vendor={vendor}
+          ratings={ratings}
+          refetch={ratingsRefetch}
+        />
         <div className="container p-6 mx-auto mb-10 xl:px-0">
           <Swiper
             slidesPerView={1}
             spaceBetween={30}
             centeredSlides={true}
+            loop={true}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
