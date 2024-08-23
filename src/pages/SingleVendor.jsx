@@ -9,12 +9,14 @@ import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
 import { VendorRatings } from "../components/Vendor/VendorRatings";
 import usePackages from "../hooks/usePackages";
+import useRatings from "../hooks/useRatings";
 import useVendorDetails from "../hooks/useVendorDetails";
 
 export const SingleVendor = () => {
   const { id } = useParams();
 
   const [vendor, loading, refetch] = useVendorDetails(id);
+  const [ratings, ratingsLoading, ratingsRefetch] = useRatings(id);
   const [packageList, packageLoading, packageRefetch] = usePackages(id);
 
   return (
@@ -71,7 +73,7 @@ export const SingleVendor = () => {
             clients
           </p>
         </div>
-        <VendorRatings vendor={vendor} />
+        <VendorRatings vendor={vendor} ratings={ratings} />
         <div className="container p-6 mx-auto mb-10 xl:px-0">
           <Swiper
             slidesPerView={1}
