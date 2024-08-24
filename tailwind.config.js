@@ -13,6 +13,8 @@ export default {
           primary: "#c24c56",
           secondary: "#eae7c2",
           accent: "#a73942",
+          "base-100": "#f8eced",
+          "base-200": "#d88d93",
         },
       },
       "cupcake",

@@ -74,7 +74,7 @@ export const AddNewPackage = () => {
                       <span className="label-text">Package Name</span>
                     </label>
                     <input
-                      className="input input-sm input-bordered input-primary rounded-none"
+                      className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                       id="packageName"
                       type="text"
                       placeholder="Enter Package name"
@@ -86,7 +86,7 @@ export const AddNewPackage = () => {
                       <span className="label-text">Base Price</span>
                     </label>
                     <input
-                      className="input input-sm input-bordered input-primary rounded-none"
+                      className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                       id="basePrice"
                       type="number"
                       placeholder="Enter Base Price"
@@ -147,7 +147,7 @@ export const AddNewPackage = () => {
                         <span className="label-text">Discount Percentage</span>
                       </label>
                       <input
-                        className="input input-sm input-bordered input-primary rounded-none"
+                        className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                         id="discountPercentage"
                         type="number"
                         max={100}
@@ -166,7 +166,7 @@ export const AddNewPackage = () => {
                       <span className="label-text">Services</span>
                     </label>
                     <textarea
-                      className="textarea textarea-primary rounded-none resize-none"
+                      className="textarea textarea-primary rounded-none resize-none bg-transparent"
                       id="services"
                       value={serviceValue}
                       onChange={(e) => setServiceValue(e.target.value)}

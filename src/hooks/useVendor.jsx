@@ -71,7 +71,7 @@ const packages = (vendorId) => {
 };
 
 const ratings = (id) => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const {
     data: ratingsInfo,
     isPending: loading,
@@ -79,7 +79,7 @@ const ratings = (id) => {
   } = useQuery({
     queryKey: ["reviews", "ratings", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/reviews/ratings/${id}`);
+      const res = await axiosPublic.get(`/reviews/ratings/${id}`);
       return res.data.response;
     },
   });

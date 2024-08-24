@@ -98,7 +98,7 @@ export const VendorProfile = () => {
     <div>
       <PageTitle title={"Vendor Profile"} />
       <div className="px-10 py-5">
-        <div className="card flex-1 rounded-none bg-base-100 shadow-xl">
+        <div className="card flex-1 rounded-none bg-white shadow-xl">
           <div className="card-body flex flex-col">
             <h5 className="text-center">Vendor Profile</h5>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -112,7 +112,7 @@ export const VendorProfile = () => {
                   name="vendorName"
                   id="vendorName"
                   placeholder="Enter Vendor Name"
-                  className="input input-sm input-bordered input-primary rounded-none"
+                  className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                   {...register("vendorName", { required: true })}
                 />
               </div>
@@ -126,7 +126,7 @@ export const VendorProfile = () => {
                   id="vendorCategory"
                   defaultValue={vendor?.category}
                   disabled
-                  className="input input-sm input-bordered input-primary rounded-none"
+                  className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                 />
               </div>
               <div className="form-control">
@@ -135,7 +135,7 @@ export const VendorProfile = () => {
                 </label>
                 <input
                   type="file"
-                  className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none"
+                  className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none bg-transparent"
                 />
               </div>
               <div className="form-control">
@@ -148,7 +148,7 @@ export const VendorProfile = () => {
                   id="contactEmail"
                   defaultValue={vendor?.email}
                   placeholder="Enter Contact E-Mail"
-                  className="input input-sm input-bordered input-primary rounded-none"
+                  className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                   {...register("contactEmail", { required: true })}
                 />
               </div>
@@ -162,7 +162,7 @@ export const VendorProfile = () => {
                   id="contactPhone"
                   defaultValue={vendor?.phoneNumber}
                   placeholder="Enter Contact Phone Number"
-                  className="input input-sm input-bordered input-primary rounded-none"
+                  className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                   {...register("contactPhone", { required: true })}
                 />
               </div>
@@ -176,7 +176,7 @@ export const VendorProfile = () => {
                   id="contactAddress"
                   defaultValue={vendor?.address}
                   placeholder="Enter Vendor Address"
-                  className="input input-sm input-bordered input-primary rounded-none"
+                  className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                   {...register("contactAddress", { required: true })}
                 />
               </div>
@@ -186,7 +186,7 @@ export const VendorProfile = () => {
                 </label>
                 <textarea
                   name="vendorDescription"
-                  className="textarea textarea-primary rounded-none resize-none"
+                  className="textarea textarea-primary rounded-none resize-none bg-transparent"
                   placeholder="Enter Description of the Vendor"
                   rows="10"
                   defaultValue={vendor?.description}
