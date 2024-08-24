@@ -1,9 +1,37 @@
 import { Rating } from "@smastrom/react-rating";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { ImCross } from "react-icons/im";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useUser from "../../../hooks/useUser";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 export const ReviewModal = ({ vendor, refetch }) => {
+  const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
+  const { register, handleSubmit, reset } = useForm();
+  const [userInfo, userLoading, userRefetch] = useUser.userDetails(user?.email);
+  const axiosSecure = useAxiosSecure();
+
+  const onSubmit = async (data) => {
+    const reviewInfo = {
+      vendorId: vendor?._id,
+      userId: userInfo?._id,
+      rating: rating,
+      reviewDescription: data.description,
+    };
+
+    const reviewRes = await axiosSecure.post("/reviews", reviewInfo);
+
+    if (reviewRes.data.response._id) {
+      reset();
+      setRating(0);
+      refetch();
+      toast.success(`Review has been added successfully`);
+    }
+  };
+
   return (
     <>
       <input type="checkbox" id="review-modal" className="modal-toggle" />
@@ -20,7 +48,10 @@ export const ReviewModal = ({ vendor, refetch }) => {
           <h3 className="text-lg font-bold text-center">
             Write a review on {vendor?.name}
           </h3>
-          <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mt-8 grid grid-cols-6 gap-6"
+          >
             <div className="col-span-6">
               <label
                 htmlFor="Email"
@@ -53,6 +84,7 @@ export const ReviewModal = ({ vendor, refetch }) => {
                 className="textarea textarea-primary resize-none mt-1 w-full rounded-none text-sm text-gray-700"
                 placeholder="Write Down Your Review"
                 rows={5}
+                {...register("description", { required: true })}
               ></textarea>
             </div>
 
