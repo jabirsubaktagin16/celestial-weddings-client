@@ -47,7 +47,6 @@ export const AddNewPackage = () => {
       discountPercentage: discountChecked ? data.discountPercentage : 0,
     };
 
-    console.log(packageInfo);
     const packageRes = await axiosSecure.post("/packages", packageInfo);
 
     if (packageRes.data.response._id) {

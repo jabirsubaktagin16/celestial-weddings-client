@@ -1,7 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const DashboardListComponent = ({ elements, title }) => {
+  let location = useLocation();
+  let getCurrentLocation = location.pathname.split("/");
+
+  const checkActivePath = (st) =>
+    `block rounded-none px-4 py-2 text-sm font-medium ${
+      getCurrentLocation[2] === st
+        ? "block rounded-none px-4 py-2 text-sm font-medium text-base-100 bg-base-200 "
+        : "text-gray-500 hover:bg-base-200 hover:text-base-100"
+    }`;
   return (
     <li>
       <details className="group [&_summary::-webkit-details-marker]:hidden">
@@ -27,10 +36,7 @@ export const DashboardListComponent = ({ elements, title }) => {
         <ul className="mt-2 space-y-1 px-4">
           {elements.map((el) => (
             <li key={el?.id}>
-              <Link
-                to={el?.path}
-                className="block rounded-none px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
+              <Link to={el?.path} className={checkActivePath(el?.path)}>
                 {el?.title}
               </Link>
             </li>

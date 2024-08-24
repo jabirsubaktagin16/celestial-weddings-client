@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import services from "../../../../public/services.json";
+import { PageTitle } from "../../../components/Shared/PageTitle";
 import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { createUniqueFileName } from "../../../utils/createUniqueFileName";
@@ -78,109 +79,112 @@ export const AddVendor = () => {
   };
 
   return (
-    <div className="px-10 py-5">
-      <div className="card flex-1 rounded-none bg-base-100 shadow-xl">
-        <div className="card-body flex flex-col">
-          <h5 className="text-center">Vendor Information</h5>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                name="vendorName"
-                id="vendorName"
-                placeholder="Enter Vendor Name"
-                className="input input-sm input-bordered input-primary rounded-none"
-                {...register("vendorName", { required: true })}
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Category</span>
-              </label>
-              <select
-                className="select select-sm select-primary w-full rounded-none"
-                {...register("vendorCategory", { required: true })}
-              >
-                <option disabled selected defaultValue="">
-                  Select Category from the List
-                </option>
-                {services.map((service) => (
-                  <option value={service.shortForm}>{service.title}</option>
-                ))}
-              </select>
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Cover</span>
-              </label>
-              <input
-                type="file"
-                className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none"
-                onChange={handleFileChange}
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Contact E-Mail</span>
-              </label>
-              <input
-                type="email"
-                name="contactEmail"
-                id="contactEmail"
-                placeholder="Enter Contact E-Mail"
-                className="input input-sm input-bordered input-primary rounded-none"
-                {...register("contactEmail", { required: true })}
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Contact Number</span>
-              </label>
-              <input
-                type="text"
-                name="contactPhone"
-                id="contactPhone"
-                placeholder="Enter Contact Phone Number"
-                className="input input-sm input-bordered input-primary rounded-none"
-                {...register("contactPhone", { required: true })}
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Address</span>
-              </label>
-              <input
-                type="text"
-                name="contactAddress"
-                id="contactAddress"
-                placeholder="Enter Vendor Address"
-                className="input input-sm input-bordered input-primary rounded-none"
-                {...register("contactAddress", { required: true })}
-              />
-            </div>
-            <div className="form-control flex-grow">
-              <label className="label">
-                <span className="label-text">Description</span>
-              </label>
-              <textarea
-                name="vendorDescription"
-                className="textarea textarea-primary rounded-none resize-none"
-                placeholder="Enter Description of the Vendor"
-                rows="10"
-                {...register("vendorDescription", { required: true })}
-              ></textarea>
-            </div>
-            <div className="card-actions justify-end mt-2">
-              <button type="submit" className="btn btn-primary rounded-none">
-                Submit
-              </button>
-            </div>
-          </form>
+    <>
+      <PageTitle title={"Add New Vendor"} />
+      <div className="px-10 py-5">
+        <div className="card flex-1 rounded-none bg-base-100 shadow-xl">
+          <div className="card-body flex flex-col">
+            <h5 className="text-center">Vendor Information</h5>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="vendorName"
+                  id="vendorName"
+                  placeholder="Enter Vendor Name"
+                  className="input input-sm input-bordered input-primary rounded-none"
+                  {...register("vendorName", { required: true })}
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Category</span>
+                </label>
+                <select
+                  className="select select-sm select-primary w-full rounded-none"
+                  {...register("vendorCategory", { required: true })}
+                >
+                  <option disabled selected defaultValue="">
+                    Select Category from the List
+                  </option>
+                  {services.map((service) => (
+                    <option value={service.shortForm}>{service.title}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Cover</span>
+                </label>
+                <input
+                  type="file"
+                  className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none"
+                  onChange={handleFileChange}
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Contact E-Mail</span>
+                </label>
+                <input
+                  type="email"
+                  name="contactEmail"
+                  id="contactEmail"
+                  placeholder="Enter Contact E-Mail"
+                  className="input input-sm input-bordered input-primary rounded-none"
+                  {...register("contactEmail", { required: true })}
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Contact Number</span>
+                </label>
+                <input
+                  type="text"
+                  name="contactPhone"
+                  id="contactPhone"
+                  placeholder="Enter Contact Phone Number"
+                  className="input input-sm input-bordered input-primary rounded-none"
+                  {...register("contactPhone", { required: true })}
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Address</span>
+                </label>
+                <input
+                  type="text"
+                  name="contactAddress"
+                  id="contactAddress"
+                  placeholder="Enter Vendor Address"
+                  className="input input-sm input-bordered input-primary rounded-none"
+                  {...register("contactAddress", { required: true })}
+                />
+              </div>
+              <div className="form-control flex-grow">
+                <label className="label">
+                  <span className="label-text">Description</span>
+                </label>
+                <textarea
+                  name="vendorDescription"
+                  className="textarea textarea-primary rounded-none resize-none"
+                  placeholder="Enter Description of the Vendor"
+                  rows="10"
+                  {...register("vendorDescription", { required: true })}
+                ></textarea>
+              </div>
+              <div className="card-actions justify-end mt-2">
+                <button type="submit" className="btn btn-primary rounded-none">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -61,7 +61,7 @@ export const SignUp = () => {
               et a id nisi.
             </p>
           </div>
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-none">
+          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-white rounded-none">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">

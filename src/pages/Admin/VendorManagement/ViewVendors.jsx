@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { PageTitle } from "../../../components/Shared/PageTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useVendor from "../../../hooks/useVendor";
 
@@ -46,74 +47,77 @@ export const ViewVendors = () => {
   };
 
   return (
-    <div className="p-4">
-      <h5 className="text-center">List of Vendors</h5>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>E-Mail</th>
-              <th>Phone Number</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            {renderTablePage(currentPage).map((singleVendor) => (
+    <>
+      <PageTitle title={"View All Vendors"} />
+      <div className="p-4">
+        <h5 className="text-center">List of Vendors</h5>
+        <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead>
               <tr>
-                <td>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src={singleVendor?.cover} />
-                    </div>
-                  </div>
-                </td>
-                <td>{singleVendor?.name}</td>
-                <td>{singleVendor?.email}</td>
-                <td>{singleVendor?.phoneNumber}</td>
-                <th className="text-center">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2">
-                    View
-                  </button>
-                  <button className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2">
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDeleteItem(singleVendor)}
-                    className="bg-red-700 text-white px-4 py-2 rounded-none"
-                  >
-                    Delete
-                  </button>
-                </th>
+                <th></th>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>Phone Number</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="flex mx-auto justify-center items-center mt-4">
-        <div className="join border border-accent">
-          <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="join-item btn"
-          >
-            «
-          </button>
-          <button className="join-item btn">
-            Page {currentPage} of {totalPages}
-          </button>
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="join-item btn"
-          >
-            »
-          </button>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {renderTablePage(currentPage).map((singleVendor) => (
+                <tr>
+                  <td>
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img src={singleVendor?.cover} />
+                      </div>
+                    </div>
+                  </td>
+                  <td>{singleVendor?.name}</td>
+                  <td>{singleVendor?.email}</td>
+                  <td>{singleVendor?.phoneNumber}</td>
+                  <th className="text-center">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2">
+                      View
+                    </button>
+                    <button className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2">
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteItem(singleVendor)}
+                      className="bg-red-700 text-white px-4 py-2 rounded-none"
+                    >
+                      Delete
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="flex mx-auto justify-center items-center mt-4">
+          <div className="join border border-accent">
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="join-item btn"
+            >
+              «
+            </button>
+            <button className="join-item btn">
+              Page {currentPage} of {totalPages}
+            </button>
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="join-item btn"
+            >
+              »
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
