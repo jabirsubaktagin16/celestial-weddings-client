@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
-import usePackages from "../../../hooks/usePackages";
-import useUserList from "../../../hooks/useUserList";
+
+import useUser from "../../../hooks/useUser";
+import useVendor from "../../../hooks/useVendor";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 export const ViewAllPackages = () => {
   const { user } = useContext(AuthContext);
-  const [users, , userRefetch] = useUserList();
+  const [users, , userRefetch] = useUser.userList();
   const currentUser = users.find((u) => u?.email === user.email);
-  const [packageList, loading, refetch] = usePackages(
+  const [packageList, loading, refetch] = useVendor.packages(
     currentUser?.vendorCompany?._id
   );
 

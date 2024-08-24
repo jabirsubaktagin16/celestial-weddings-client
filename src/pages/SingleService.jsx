@@ -5,12 +5,12 @@ import services from "../../public/services.json";
 import { Loading } from "../components/Shared/Loading";
 import { PageTitle } from "../components/Shared/PageTitle";
 import { VendorCard } from "../components/VendorCard";
-import useVendorList from "../hooks/useVendorList";
+import useVendor from "../hooks/useVendor";
 
 export const SingleService = () => {
   const { shortForm } = useParams();
   const [service, setService] = useState(null);
-  const [vendor, loading, refetch] = useVendorList();
+  const [vendor, loading, refetch] = useVendor.vendorList();
   const currentServices = vendor.filter((v) => v.category === shortForm);
 
   useEffect(() => {

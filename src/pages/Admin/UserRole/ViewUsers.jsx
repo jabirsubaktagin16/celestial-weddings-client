@@ -3,16 +3,17 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useUserList from "../../../hooks/useUserList";
-import useVendorList from "../../../hooks/useVendorList";
+
+import useUser from "../../../hooks/useUser";
+import useVendor from "../../../hooks/useVendor";
 
 const UserSwal = withReactContent(Swal);
 
 export const ViewUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const [users, , userRefetch] = useUserList();
+  const [users, , userRefetch] = useUser.userList();
   const [selectedUser, setSelectedUser] = useState(null);
-  const [vendor, , refetch] = useVendorList();
+  const [vendor, , refetch] = useVendor.vendorList();
 
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;

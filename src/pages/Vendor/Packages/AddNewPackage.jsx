@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useUserList from "../../../hooks/useUserList";
+
+import useUser from "../../../hooks/useUser";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 export const AddNewPackage = () => {
@@ -12,7 +13,7 @@ export const AddNewPackage = () => {
   const [services, setServices] = useState([]);
   const [serviceValue, setServiceValue] = useState("");
   const { register, handleSubmit, reset } = useForm();
-  const [users, loading, userRefetch] = useUserList();
+  const [users, loading, userRefetch] = useUser.userList();
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useVendorList from "../../../hooks/useVendorList";
+import useVendor from "../../../hooks/useVendor";
 
 export const ViewVendors = () => {
-  const [vendor, , refetch] = useVendorList();
+  const [vendor, , refetch] = useVendor.vendorList();
   const axiosSecure = useAxiosSecure();
 
   const [currentPage, setCurrentPage] = useState(1);

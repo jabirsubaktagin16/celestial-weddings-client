@@ -11,8 +11,9 @@ import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useUserDetails from "../../../hooks/useUserDetails";
-import useVendorDetails from "../../../hooks/useVendorDetails";
+
+import useVendor from "../../../hooks/useVendor";
+
 import { AuthContext } from "../../../providers/AuthProvider";
 import { createUniqueFileName } from "../../../utils/createUniqueFileName";
 
@@ -25,8 +26,10 @@ export const VendorProfile = () => {
   const axiosSecure = useAxiosSecure();
 
   const { user } = useContext(AuthContext);
-  const [userInfo, loading, userRefetch] = useUserDetails(user?.email);
-  const [vendor, vendorLoading, refetch] = useVendorDetails(
+  const [userInfo, loading, userRefetch] = useVendor.vendorUserDetails(
+    user?.email
+  );
+  const [vendor, vendorLoading, refetch] = useVendor.vendorDetails(
     userInfo ? userInfo?.vendorCompany : ""
   );
 

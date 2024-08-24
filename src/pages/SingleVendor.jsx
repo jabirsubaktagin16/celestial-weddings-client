@@ -8,16 +8,15 @@ import { ContactUs } from "../components/Vendor/ContactUs";
 import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
 import { VendorRatings } from "../components/Vendor/VendorRatings";
-import usePackages from "../hooks/usePackages";
-import useRatings from "../hooks/useRatings";
-import useVendorDetails from "../hooks/useVendorDetails";
+
+import useVendor from "../hooks/useVendor";
 
 export const SingleVendor = () => {
   const { id } = useParams();
 
-  const [vendor, loading, refetch] = useVendorDetails(id);
-  const [ratings, ratingsLoading, ratingsRefetch] = useRatings(id);
-  const [packageList, packageLoading, packageRefetch] = usePackages(id);
+  const [vendor, loading, refetch] = useVendor.vendorDetails(id);
+  const [ratings, ratingsLoading, ratingsRefetch] = useVendor.ratings(id);
+  const [packageList, packageLoading, packageRefetch] = useVendor.packages(id);
 
   return (
     <>

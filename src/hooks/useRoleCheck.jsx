@@ -16,4 +16,20 @@ const useAdmin = () => {
   return [isAdmin, isAdminLoading];
 };
 
-export default useAdmin;
+const useVendor = () => {
+  const { user, loading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const { data: isVendor, isPending: isVendorLoading } = useQuery({
+    queryKey: [user?.email, "isVendor"],
+    enabled: !loading,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/vendor/${user.email}`);
+      return res.data?.vendor;
+    },
+  });
+  return [isVendor, isVendorLoading];
+};
+
+const useRoleCheck = { useAdmin, useVendor };
+
+export default useRoleCheck;

@@ -15,13 +15,13 @@ import logo from "../assets/logo.png";
 import { DashboardListComponent } from "../components/DashboardListComponent/DashboardListComponent";
 import { DashboardListHeader } from "../components/DashboardListComponent/DashboardListHeader";
 import { Loading } from "../components/Shared/Loading";
-import useAdmin from "../hooks/useAdmin";
-import useVendor from "../hooks/useVendor";
+
+import useRoleCheck from "../hooks/useRoleCheck";
 import { AuthContext } from "../providers/AuthProvider";
 
 export const DashboardLayout = () => {
-  const [isAdmin, isAdminLoading] = useAdmin();
-  const [isVendor, isVendorLoading] = useVendor();
+  const [isAdmin, isAdminLoading] = useRoleCheck.useAdmin();
+  const [isVendor, isVendorLoading] = useRoleCheck.useVendor();
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
