@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Parallax } from "react-parallax";
 import { useParams } from "react-router-dom";
 import services from "../../public/services.json";
 import { Loading } from "../components/Shared/Loading";
@@ -23,20 +22,20 @@ export const SingleService = () => {
   return (
     <>
       <PageTitle title={service?.title ? service.title : ""} />
-      <div>
-        <Parallax
-          bgImage={service?.imageUrl}
-          bgImageAlt="Services Banner"
-          strength={300}
+      <section>
+        <div
+          className="hero h-[250px] md:h-[350px]"
+          style={{
+            backgroundImage: `url(${service?.imageUrl})`,
+          }}
         >
-          <div className="hero h-[250px] bg-cover bg-no-repeat mb-8 md:h-[400px]">
-            <div className="hero-content text-center">
-              <div className="max-w-100">
-                <h1 className="mb-5 text-6xl text-white">{service?.title}</h1>
-              </div>
+          <div className="hero-overlay bg-black bg-opacity-60"></div>
+          <div className="hero-content text-white text-center">
+            <div className="max-w-md">
+              <h1 className="mb-5 text-6xl font-bold">{service?.title}</h1>
             </div>
           </div>
-        </Parallax>
+        </div>
         {currentServices && currentServices.length === 0 && (
           <div className="flex items-center justify-center">
             <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl">
@@ -58,7 +57,7 @@ export const SingleService = () => {
             )
           </div>
         )}
-      </div>
+      </section>
     </>
   );
 };

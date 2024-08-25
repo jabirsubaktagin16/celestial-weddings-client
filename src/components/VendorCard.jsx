@@ -29,14 +29,6 @@ export const VendorCard = ({ singleVendor }) => {
         </Link>
         <p className="text-gray-500 text-sm">{singleVendor?.description}</p>
       </div>
-      <div className="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
-        <span
-          href="#"
-          className="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center"
-        >
-          <span className="ml-1">6 mins ago</span>
-        </span>
-      </div>
     </div>
   );
 };

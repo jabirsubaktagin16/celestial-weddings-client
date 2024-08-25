@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 import { ReviewModal } from "./ReviewModal/ReviewModal";
 
 export const VendorRatings = ({ vendor, ratings, refetch }) => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="mx-auto max-w-screen-lg px-10 py-16">
       <div className="flex w-full flex-col">
@@ -160,13 +162,17 @@ export const VendorRatings = ({ vendor, ratings, refetch }) => {
             </li>
           </ul>
         </div>
-        <label
-          htmlFor="review-modal"
-          className="btn w-36 btn-primary py-3 text-white font-medium"
-        >
-          Write a review
-        </label>
-        <ReviewModal vendor={vendor} refetch={refetch} />
+        {user && (
+          <>
+            <label
+              htmlFor="review-modal"
+              className="btn w-36 btn-primary py-3 text-white font-medium"
+            >
+              Write a review
+            </label>
+            <ReviewModal vendor={vendor} refetch={refetch} />
+          </>
+        )}
       </div>
     </div>
   );

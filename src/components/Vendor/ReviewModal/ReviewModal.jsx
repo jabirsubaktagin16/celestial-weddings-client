@@ -11,7 +11,9 @@ export const ReviewModal = ({ vendor, refetch }) => {
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const { register, handleSubmit, reset } = useForm();
-  const [userInfo, userLoading, userRefetch] = useUser.userDetails(user?.email);
+  const [userInfo, userLoading, userRefetch] = useUser.userDetails(
+    user?.email || ""
+  );
   const axiosSecure = useAxiosSecure();
 
   const onSubmit = async (data) => {
@@ -90,9 +92,10 @@ export const ReviewModal = ({ vendor, refetch }) => {
 
             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
               <input
+                disabled={userInfo?.role === "admin"}
                 type="submit"
                 role="button"
-                className="inline-block w-full shrink-0 rounded-none bg-primary border border-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-primary focus:outline-none focus:ring active:text-primary"
+                className="btn btn-primary rounded-none w-full"
               />
             </div>
           </form>
