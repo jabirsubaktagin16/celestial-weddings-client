@@ -9,6 +9,7 @@ import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
 import { VendorRatings } from "../components/Vendor/VendorRatings";
 
+import { PackageCardSkeleton } from "../components/Shared/PackageCardSkeleton";
 import useVendor from "../hooks/useVendor";
 
 export const SingleVendor = () => {
@@ -47,15 +48,28 @@ export const SingleVendor = () => {
             Explore our carefully curated packages designed to make your wedding
             unforgettable
           </p>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {packageList &&
-              packageList.map((singlePackage) => (
+          {packageLoading && (
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              <PackageCardSkeleton />
+              <PackageCardSkeleton />
+              <PackageCardSkeleton />
+            </div>
+          )}
+          {!packageLoading && packageList && packageList.length === 0 && (
+            <p className="text-center text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl">
+              No Package Found
+            </p>
+          )}
+          {!packageLoading && packageList && packageList.length > 0 && (
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {packageList.map((singlePackage) => (
                 <PackageCard
                   key={singlePackage?._id}
                   availablePackage={singlePackage}
                 />
               ))}
-          </div>
+            </div>
+          )}
         </div>
       </div>
 

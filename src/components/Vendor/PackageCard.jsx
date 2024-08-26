@@ -35,7 +35,7 @@ export const PackageCard = ({ availablePackage }) => {
             ))}
         </div>
         <div className="p-6 border-t border-gray-300 bg-white text-center">
-          <button className="bg-primary text-white px-4 py-2 rounded">
+          <button className="bg-primary text-white px-4 py-2 rounded-none">
             Book Now
           </button>
         </div>

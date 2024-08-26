@@ -25,7 +25,7 @@ const SocialLogin = () => {
     <div className="flex justify-center gap-2 flex-col mb-4 lg:flex-row">
       <button
         onClick={() => handleGoogleSignIn()}
-        className="btn gap-2 bg-transparent border-2 border-primary rounded-none hover:text-opacity-80 text-primary"
+        className="btn gap-2 bg-transparent border-2 border-primary rounded-none hover:bg-primary hover:text-white text-primary"
       >
         <FaGoogle />
         Sign In with Google

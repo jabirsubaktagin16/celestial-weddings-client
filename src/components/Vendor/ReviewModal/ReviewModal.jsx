@@ -38,7 +38,7 @@ export const ReviewModal = ({ vendor, refetch }) => {
     <>
       <input type="checkbox" id="review-modal" className="modal-toggle" />
       <div className="modal" role="dialog">
-        <div className="modal-box rounded-none">
+        <div className="modal-box rounded-none bg-white">
           <div className="modal-action">
             <label
               htmlFor="review-modal"
@@ -83,7 +83,7 @@ export const ReviewModal = ({ vendor, refetch }) => {
 
               <textarea
                 id="description"
-                className="textarea textarea-primary resize-none mt-1 w-full rounded-none text-sm text-gray-700"
+                className="bg-transparent textarea textarea-primary resize-none mt-1 w-full rounded-none text-sm text-gray-700"
                 placeholder="Write Down Your Review"
                 rows={5}
                 {...register("description", { required: true })}

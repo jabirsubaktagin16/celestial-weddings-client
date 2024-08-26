@@ -166,7 +166,7 @@ export const VendorRatings = ({ vendor, ratings, refetch }) => {
           <>
             <label
               htmlFor="review-modal"
-              className="btn w-36 btn-primary py-3 text-white font-medium"
+              className="btn w-36 btn-primary py-3 text-white font-medium rounded-none"
             >
               Write a review
             </label>
