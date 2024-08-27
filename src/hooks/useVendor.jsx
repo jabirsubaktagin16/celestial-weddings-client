@@ -87,12 +87,30 @@ const ratings = (id) => {
   return [ratingsInfo, loading, ratingsRefetch];
 };
 
+const reviews = (vendorId) => {
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: reviewList = [],
+    isPending: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ["reviews", vendorId],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/reviews/${vendorId}`);
+      return res.data.response;
+    },
+  });
+
+  return [reviewList, loading, refetch];
+};
+
 const useVendor = {
   vendorDetails,
   vendorList,
   vendorUserDetails,
   packages,
   ratings,
+  reviews,
 };
 
 export default useVendor;

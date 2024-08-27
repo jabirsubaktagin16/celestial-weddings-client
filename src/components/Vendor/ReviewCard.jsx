@@ -1,13 +1,10 @@
 import React from "react";
 
-export const ReviewCard = () => {
+export const ReviewCard = ({ review }) => {
   return (
     <div className="lg:col-span-2 xl:col-auto">
       <div className="flex flex-col justify-between w-full h-full px-6 py-6 bg-secondary md:px-14 rounded-2xl md:py-14 dark:bg-trueGray-800">
-        <p className="text-2xl leading-normal ">
-          Share a testimonial that hits some of your benefits from one of your
-          popular customers.
-        </p>
+        <p className="text-2xl leading-normal ">{review?.reviewDescription}</p>
 
         <div className="flex items-center mt-8 space-x-3">
           <div className="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">

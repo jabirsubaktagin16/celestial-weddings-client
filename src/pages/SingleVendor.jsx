@@ -18,6 +18,7 @@ export const SingleVendor = () => {
   const [vendor, loading, refetch] = useVendor.vendorDetails(id);
   const [ratings, ratingsLoading, ratingsRefetch] = useVendor.ratings(id);
   const [packageList, packageLoading, packageRefetch] = useVendor.packages(id);
+  const [reviewList, reviewLoading, reviewRefetch] = useVendor.reviews(id);
 
   return (
     <>
@@ -91,66 +92,46 @@ export const SingleVendor = () => {
           ratings={ratings}
           refetch={ratingsRefetch}
         />
-        <div className="container p-6 mx-auto mb-10 xl:px-0">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={30}
-            centeredSlides={true}
-            loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 40,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 50,
-              },
-            }}
-            modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper"
-          >
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ReviewCard />
-            </SwiperSlide>
-          </Swiper>
-        </div>
+        {reviewList && reviewList.length > 0 && (
+          <div className="container p-6 mx-auto mb-10 xl:px-0">
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={30}
+              centeredSlides={true}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              breakpoints={{
+                640: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 50,
+                },
+              }}
+              modules={[Autoplay, Pagination, Navigation]}
+              className="mySwiper"
+            >
+              {reviewList.map((r) => (
+                <SwiperSlide key={r?._id}>
+                  <ReviewCard review={r} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        )}
       </div>
       <div className="py-5">
         <div className="container flex flex-col items-center justify-center w-full p-6 mx-auto text-center xl:px-0">
