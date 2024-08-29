@@ -7,19 +7,21 @@ import {
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import services from "../../../../public/services.json";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
 import useVendor from "../../../hooks/useVendor";
 
+import { useEffect } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { createUniqueFileName } from "../../../utils/createUniqueFileName";
 
 export const VendorProfile = () => {
   const [cover, setCover] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const [category, setCategory] = useState(null);
   const { initialApp, fireBaseStorageURL } = app;
   const storage = getStorage(initialApp, fireBaseStorageURL);
   const { register, handleSubmit, reset } = useForm();
@@ -32,6 +34,13 @@ export const VendorProfile = () => {
   const [vendor, vendorLoading, refetch] = useVendor.vendorDetails(
     userInfo ? userInfo?.vendorCompany : ""
   );
+
+  useEffect(() => {
+    const categoryData = services.find(
+      (item) => item.shortForm === vendor?.category
+    );
+    setCategory(categoryData);
+  }, []);
 
   async function helperForUploadingImageToFirebase(file) {
     const getFileName = createUniqueFileName(file);
@@ -124,7 +133,7 @@ export const VendorProfile = () => {
                   type="text"
                   name="vendorCategory"
                   id="vendorCategory"
-                  defaultValue={vendor?.category}
+                  defaultValue={category?.title}
                   disabled
                   className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                 />

@@ -9,7 +9,9 @@ import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
 import { VendorRatings } from "../components/Vendor/VendorRatings";
 
+import { useState } from "react";
 import { PackageCardSkeleton } from "../components/Shared/PackageCardSkeleton";
+import { BookingModal } from "../components/Vendor/BookingModal/BookingModal";
 import useVendor from "../hooks/useVendor";
 
 export const SingleVendor = () => {
@@ -19,6 +21,7 @@ export const SingleVendor = () => {
   const [ratings, ratingsLoading, ratingsRefetch] = useVendor.ratings(id);
   const [packageList, packageLoading, packageRefetch] = useVendor.packages(id);
   const [reviewList, reviewLoading, reviewRefetch] = useVendor.reviews(id);
+  const [_package, setPackage] = useState(null);
 
   return (
     <>
@@ -67,8 +70,10 @@ export const SingleVendor = () => {
                 <PackageCard
                   key={singlePackage?._id}
                   availablePackage={singlePackage}
+                  setPackage={setPackage}
                 />
               ))}
+              <BookingModal _package={_package} setPackage={setPackage} />
             </div>
           )}
         </div>
