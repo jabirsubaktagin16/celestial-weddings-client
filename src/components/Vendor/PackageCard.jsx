@@ -36,16 +36,21 @@ export const PackageCard = ({ availablePackage, setPackage, user }) => {
               ))}
           </div>
           <div className="p-6 border-t border-gray-300 bg-white text-center">
-            <label
-              htmlFor="booking-modal"
-              className={`btn btn-primary text-white px-4 py-2 rounded-none ${
-                !user ? "bg-opacity-65 cursor-not-allowed" : ""
-              }`}
-              onClick={user ? () => setPackage(availablePackage) : undefined}
-              disabled={!user} // Disable the button if the user is not authenticated
+            <div
+              className={!user && "tooltip tooltip-secondary"}
+              data-tip="Please Sign in to Book the Package"
             >
-              Book Now
-            </label>
+              <label
+                htmlFor="booking-modal"
+                className={`btn btn-primary text-white px-4 py-2 rounded-none ${
+                  !user ? "bg-opacity-65 cursor-not-allowed" : ""
+                }`}
+                onClick={user ? () => setPackage(availablePackage) : undefined}
+                disabled={!user} // Disable the button if the user is not authenticated
+              >
+                Book Now
+              </label>
+            </div>
           </div>
         </div>
       </div>

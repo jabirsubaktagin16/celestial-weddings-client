@@ -90,7 +90,12 @@ export const ReviewModal = ({ vendor, refetch }) => {
               ></textarea>
             </div>
 
-            <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+            <div
+              className={`${
+                userInfo?.role === "admin" && "tooltip tooltip-secondary"
+              } col-span-6 sm:flex sm:items-center sm:gap-4`}
+              data-tip="You are not allowed to post review"
+            >
               <input
                 disabled={userInfo?.role === "admin"}
                 type="submit"

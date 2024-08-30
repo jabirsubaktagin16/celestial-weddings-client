@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import services from "../../../../public/services.json";
+import { VendorInputComponent } from "../../../components/InputComponent/VendorInputComponent";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -81,108 +82,121 @@ export const AddVendor = () => {
   return (
     <>
       <PageTitle title={"Add New Vendor"} />
-      <div className="px-10 py-5">
-        <div className="card flex-1 rounded-none bg-base-100 shadow-xl">
-          <div className="card-body flex flex-col">
-            <h5 className="text-center">Vendor Information</h5>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
+      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-lg">
+          <h1 className="text-center text-2xl font-bold text-primary sm:text-3xl">
+            Vendor Information
+          </h1>
+
+          <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+            To add a new vendor, provide essential details such as name, email,
+            contact information, and a small description. Ensure accuracy for
+            smooth processing.
+          </p>
+
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+          >
+            <VendorInputComponent
+              labelTitle={"Vendor Name"}
+              name={"vendorName"}
+              placeholder={"Enter Vendor Name"}
+              register={register}
+            />
+            <div>
+              <label
+                htmlFor="HeadlineAct"
+                className="block text-sm font-medium text-gray-900"
+              ></label>
+
+              <select
+                name="vendorCategory"
+                id="vendorCategory"
+                className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm p-4 pe-12"
+                {...register("vendorCategory", { required: true })}
+              >
+                <option disabled selected defaultValue="">
+                  Select Category from the List
+                </option>
+                {services.map((service) => (
+                  <option value={service.shortForm}>{service.title}</option>
+                ))}
+              </select>
+            </div>
+            <VendorInputComponent
+              labelTitle={"Contact E-Mail"}
+              name={"contactEmail"}
+              placeholder={"Enter Contact E-Mail"}
+              register={register}
+            />
+            <VendorInputComponent
+              labelTitle={"Contact Number"}
+              name={"contactPhone"}
+              placeholder={"Enter Contact Number"}
+              register={register}
+            />
+            <VendorInputComponent
+              labelTitle={"Contact Address"}
+              name={"contactAddress"}
+              placeholder={"Enter Contact Address"}
+              register={register}
+            />
+            <div>
+              <textarea
+                id="vendorDescription"
+                className="mt-2 p-4 resize-none w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
+                rows="4"
+                placeholder="Enter Description of the Vendor Here..."
+                {...register("vendorDescription", { required: true })}
+              ></textarea>
+            </div>
+
+            <div class="flex items-center justify-center w-full">
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-gray-100"
+              >
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg
+                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500 ">
+                    <span class="font-semibold">Click to upload</span> or drag
+                    and drop
+                  </p>
+                  <p class="text-xs text-gray-500 ">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
                 <input
-                  type="text"
-                  name="vendorName"
-                  id="vendorName"
-                  placeholder="Enter Vendor Name"
-                  className="input input-sm input-bordered input-primary rounded-none"
-                  {...register("vendorName", { required: true })}
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Category</span>
-                </label>
-                <select
-                  className="select select-sm select-primary w-full rounded-none"
-                  {...register("vendorCategory", { required: true })}
-                >
-                  <option disabled selected defaultValue="">
-                    Select Category from the List
-                  </option>
-                  {services.map((service) => (
-                    <option value={service.shortForm}>{service.title}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Cover</span>
-                </label>
-                <input
-                  type="file"
-                  className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none"
+                  id="dropzone-file"
                   onChange={handleFileChange}
+                  type="file"
+                  class="hidden"
                 />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Contact E-Mail</span>
-                </label>
-                <input
-                  type="email"
-                  name="contactEmail"
-                  id="contactEmail"
-                  placeholder="Enter Contact E-Mail"
-                  className="input input-sm input-bordered input-primary rounded-none"
-                  {...register("contactEmail", { required: true })}
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Contact Number</span>
-                </label>
-                <input
-                  type="text"
-                  name="contactPhone"
-                  id="contactPhone"
-                  placeholder="Enter Contact Phone Number"
-                  className="input input-sm input-bordered input-primary rounded-none"
-                  {...register("contactPhone", { required: true })}
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Address</span>
-                </label>
-                <input
-                  type="text"
-                  name="contactAddress"
-                  id="contactAddress"
-                  placeholder="Enter Vendor Address"
-                  className="input input-sm input-bordered input-primary rounded-none"
-                  {...register("contactAddress", { required: true })}
-                />
-              </div>
-              <div className="form-control flex-grow">
-                <label className="label">
-                  <span className="label-text">Description</span>
-                </label>
-                <textarea
-                  name="vendorDescription"
-                  className="textarea textarea-primary rounded-none resize-none"
-                  placeholder="Enter Description of the Vendor"
-                  rows="10"
-                  {...register("vendorDescription", { required: true })}
-                ></textarea>
-              </div>
-              <div className="card-actions justify-end mt-2">
-                <button type="submit" className="btn btn-primary rounded-none">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </>
