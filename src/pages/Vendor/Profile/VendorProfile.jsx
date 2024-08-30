@@ -83,7 +83,6 @@ export const VendorProfile = () => {
   const onSubmit = async (data) => {
     const vendorInfo = {
       name: data.vendorName,
-      category: data.vendorCategory,
       email: data.contactEmail,
       phoneNumber: data.contactPhone,
       address: data.contactAddress,

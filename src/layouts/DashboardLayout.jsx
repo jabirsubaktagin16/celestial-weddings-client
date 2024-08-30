@@ -14,7 +14,7 @@ export const DashboardLayout = () => {
   const [isAdmin, isAdminLoading] = useRoleCheck.useAdmin();
   const [isVendor, isVendorLoading] = useRoleCheck.useVendor();
   const { user, logOut } = useContext(AuthContext);
-  const [userInfo, userLoading, userRefetch] = useUser.userDetails(user.email);
+  const [userInfo, userLoading, userRefetch] = useUser.userDetails(user?.email);
   const navigate = useNavigate();
   let location = useLocation();
   let getCurrentLocation = location.pathname.split("/");

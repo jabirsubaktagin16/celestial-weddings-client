@@ -104,6 +104,23 @@ const reviews = (vendorId) => {
   return [reviewList, loading, refetch];
 };
 
+const bookings = (vendorId) => {
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: bookingList = [],
+    isPending: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ["bookings", "vendor", vendorId],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/bookings/vendor/${vendorId}`);
+      return res.data.response;
+    },
+  });
+
+  return [bookingList, loading, refetch];
+};
+
 const useVendor = {
   vendorDetails,
   vendorList,
@@ -111,6 +128,7 @@ const useVendor = {
   packages,
   ratings,
   reviews,
+  bookings,
 };
 
 export default useVendor;

@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import React from "react";
 import { ReviewModal } from "./ReviewModal/ReviewModal";
 
-export const VendorRatings = ({ vendor, ratings, refetch }) => {
-  const { user } = useContext(AuthContext);
+export const VendorRatings = ({ vendor, ratings, refetch, user }) => {
   return (
     <div className="mx-auto max-w-screen-lg px-10 py-16">
       <div className="flex w-full flex-col">

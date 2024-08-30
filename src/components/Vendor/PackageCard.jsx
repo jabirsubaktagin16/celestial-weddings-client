@@ -1,6 +1,6 @@
 import React from "react";
 
-export const PackageCard = ({ availablePackage, setPackage }) => {
+export const PackageCard = ({ availablePackage, setPackage, user }) => {
   return (
     <>
       <div className="w-80 h-full p-3 transition-transform duration-500 hover:scale-105">
@@ -38,8 +38,11 @@ export const PackageCard = ({ availablePackage, setPackage }) => {
           <div className="p-6 border-t border-gray-300 bg-white text-center">
             <label
               htmlFor="booking-modal"
-              className="btn btn-primary text-white px-4 py-2 rounded-none"
-              onClick={() => setPackage(availablePackage)}
+              className={`btn btn-primary text-white px-4 py-2 rounded-none ${
+                !user ? "bg-opacity-65 cursor-not-allowed" : ""
+              }`}
+              onClick={user ? () => setPackage(availablePackage) : undefined}
+              disabled={!user} // Disable the button if the user is not authenticated
             >
               Book Now
             </label>

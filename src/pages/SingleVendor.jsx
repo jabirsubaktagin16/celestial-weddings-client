@@ -9,14 +9,15 @@ import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
 import { VendorRatings } from "../components/Vendor/VendorRatings";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PackageCardSkeleton } from "../components/Shared/PackageCardSkeleton";
 import { BookingModal } from "../components/Vendor/BookingModal/BookingModal";
 import useVendor from "../hooks/useVendor";
+import { AuthContext } from "../providers/AuthProvider";
 
 export const SingleVendor = () => {
   const { id } = useParams();
-
+  const { user } = useContext(AuthContext);
   const [vendor, loading, refetch] = useVendor.vendorDetails(id);
   const [ratings, ratingsLoading, ratingsRefetch] = useVendor.ratings(id);
   const [packageList, packageLoading, packageRefetch] = useVendor.packages(id);
@@ -71,6 +72,7 @@ export const SingleVendor = () => {
                   key={singlePackage?._id}
                   availablePackage={singlePackage}
                   setPackage={setPackage}
+                  user={user}
                 />
               ))}
               <BookingModal _package={_package} setPackage={setPackage} />
@@ -96,6 +98,7 @@ export const SingleVendor = () => {
           vendor={vendor}
           ratings={ratings}
           refetch={ratingsRefetch}
+          user={user}
         />
         {reviewList && reviewList.length > 0 && (
           <div className="container p-6 mx-auto mb-10 xl:px-0">
