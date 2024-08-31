@@ -5,6 +5,7 @@ export const VendorInputComponent = ({
   name,
   type = "text",
   placeholder,
+  value,
   register,
   ...rest
 }) => {
@@ -20,6 +21,7 @@ export const VendorInputComponent = ({
           type={type}
           className="w-full rounded-lg border-primary p-4 pe-12 text-sm shadow-sm"
           placeholder={placeholder}
+          value={value}
           {...register(`${name}`, { required: true })}
           {...rest}
         />

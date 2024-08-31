@@ -9,6 +9,23 @@ import { AuthContext } from "../../providers/AuthProvider";
 export const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
+  const navbarListComponents = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/services">Services</Link>
+      </li>
+      <li>
+        <Link to="/about-us">About Us</Link>
+      </li>
+      <li>
+        <Link to={"/gallery"}>Gallery</Link>
+      </li>
+    </>
+  );
+
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -38,18 +55,7 @@ export const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 w-52 uppercase"
           >
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/services">Services</Link>
-            </li>
-            <li>
-              <Link to="/about-us">About Us</Link>
-            </li>
-            <li>
-              <a>Blog</a>
-            </li>
+            {navbarListComponents}
           </ul>
         </div>
         <Link to="/">
@@ -58,18 +64,7 @@ export const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 uppercase">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/services">Services</Link>
-          </li>
-          <li>
-            <Link to="/about-us">About Us</Link>
-          </li>
-          <li>
-            <a>Blog</a>
-          </li>
+          {navbarListComponents}
         </ul>
       </div>
       <div className="navbar-end">

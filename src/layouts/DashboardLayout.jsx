@@ -114,9 +114,14 @@ export const DashboardLayout = () => {
                       Assign User Roles
                     </Link>
                   </li>
+
                   <DashboardListComponent
                     elements={pathList.vendorManagementList}
                     title={"Vendor Management"}
+                  />
+                  <DashboardListComponent
+                    elements={pathList.galleryManagementList}
+                    title={"Gallery Management"}
                   />
                 </>
               )}

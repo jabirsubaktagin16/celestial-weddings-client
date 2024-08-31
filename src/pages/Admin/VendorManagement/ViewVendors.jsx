@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { PageTitle } from "../../../components/Shared/PageTitle";
+import { VendorDetailsModal } from "../../../components/Vendor/VendorDetailsModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useVendor from "../../../hooks/useVendor";
 
 export const ViewVendors = () => {
   const [vendor, , refetch] = useVendor.vendorList();
   const axiosSecure = useAxiosSecure();
+  const [loadVendor, setLoadVendor] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
@@ -49,8 +51,12 @@ export const ViewVendors = () => {
   return (
     <>
       <PageTitle title={"View All Vendors"} />
-      <div className="p-4">
-        <h5 className="text-center">List of Vendors</h5>
+      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-lg">
+          <h1 className="text-center text-2xl font-bold text-primary sm:text-3xl mb-3">
+            View Vendors List
+          </h1>
+        </div>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
@@ -66,7 +72,7 @@ export const ViewVendors = () => {
             <tbody>
               {/* row 1 */}
               {renderTablePage(currentPage).map((singleVendor) => (
-                <tr>
+                <tr key={singleVendor?._id}>
                   <td>
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
@@ -78,12 +84,14 @@ export const ViewVendors = () => {
                   <td>{singleVendor?.email}</td>
                   <td>{singleVendor?.phoneNumber}</td>
                   <th className="text-center">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2">
+                    <label
+                      role="button"
+                      htmlFor="vendor-details-modal"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2"
+                      onClick={() => setLoadVendor(singleVendor)}
+                    >
                       View
-                    </button>
-                    <button className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2">
-                      Edit
-                    </button>
+                    </label>
                     <button
                       onClick={() => handleDeleteItem(singleVendor)}
                       className="bg-red-700 text-white px-4 py-2 rounded-none"
@@ -118,6 +126,7 @@ export const ViewVendors = () => {
           </div>
         </div>
       </div>
+      <VendorDetailsModal vendor={loadVendor} setVendor={setLoadVendor} />
     </>
   );
 };

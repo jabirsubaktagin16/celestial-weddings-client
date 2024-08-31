@@ -9,10 +9,20 @@ const blogPathList = [
 ];
 
 const vendorManagementList = [
-  { id: 1, path: "add-vendor", title: "Add New Vendor" },
-  { id: 2, path: "view-vendors", title: "View Vendor List" },
+  { id: 1, path: "vendor/add", title: "Add New Vendor" },
+  { id: 2, path: "vendor/list", title: "View Vendor List" },
 ];
 
-const pathList = { packagePathList, blogPathList, vendorManagementList };
+const galleryManagementList = [
+  { id: 1, path: "gallery/add", title: "Add New Image" },
+  { id: 2, path: "gallery/list", title: "View Gallery Image List" },
+];
+
+const pathList = {
+  packagePathList,
+  blogPathList,
+  vendorManagementList,
+  galleryManagementList,
+};
 
 export default pathList;

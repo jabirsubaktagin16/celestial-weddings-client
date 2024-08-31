@@ -6,6 +6,7 @@ import { AboutUs } from "../../pages/AboutUs";
 import { ViewUsers } from "../../pages/Admin/UserRole/ViewUsers";
 import { AddVendor } from "../../pages/Admin/VendorManagement/AddVendor";
 import { ViewVendors } from "../../pages/Admin/VendorManagement/ViewVendors";
+import { Gallery } from "../../pages/Gallery";
 import { Home } from "../../pages/Home";
 import { Profile } from "../../pages/Profile/Profile";
 import { Services } from "../../pages/Services";
@@ -36,10 +37,13 @@ export const router = createBrowserRouter([
         path: "services",
         element: <Services />,
       },
-
       {
         path: "about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "gallery",
+        element: <Gallery />,
       },
       {
         path: "services/:shortForm",
@@ -89,15 +93,16 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "add-vendor",
+        path: "vendor/add",
         element: (
           <AdminRoute>
             <AddVendor />
           </AdminRoute>
         ),
       },
+
       {
-        path: "view-vendors",
+        path: "vendor/list",
         element: (
           <AdminRoute>
             <ViewVendors />

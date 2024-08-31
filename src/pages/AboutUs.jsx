@@ -8,7 +8,7 @@ export const AboutUs = () => {
       <PageTitle title={"About Us"} />
       <Parallax
         bgImage="./about-us-banner.jpg"
-        bgImageAlt="Services Banner"
+        bgImageAlt="About Us Banner"
         strength={300}
       >
         <div className="hero h-[250px] bg-cover bg-no-repeat mb-8 md:h-[400px]">
