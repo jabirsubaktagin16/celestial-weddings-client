@@ -3,6 +3,8 @@ import { NotFound } from "../../components/Shared/NotFound";
 import { DashboardLayout } from "../../layouts/DashboardLayout";
 import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
+import { AddImage } from "../../pages/Admin/GalleryManagement/AddImage";
+import { ViewImageList } from "../../pages/Admin/GalleryManagement/ViewImageList";
 import { ViewUsers } from "../../pages/Admin/UserRole/ViewUsers";
 import { AddVendor } from "../../pages/Admin/VendorManagement/AddVendor";
 import { ViewVendors } from "../../pages/Admin/VendorManagement/ViewVendors";
@@ -106,6 +108,23 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ViewVendors />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "gallery/add",
+        element: (
+          <AdminRoute>
+            <AddImage />
+          </AdminRoute>
+        ),
+      },
+
+      {
+        path: "gallery/list",
+        element: (
+          <AdminRoute>
+            <ViewImageList />
           </AdminRoute>
         ),
       },

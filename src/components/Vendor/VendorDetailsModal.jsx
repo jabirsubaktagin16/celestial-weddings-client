@@ -4,8 +4,15 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { IoIosMail } from "react-icons/io";
 import { MdOutlineHouse } from "react-icons/md";
+import services from "../../../public/services.json";
+
+const getCategoryFullForm = (shortForm) => {
+  const service = services.find((service) => service.shortForm === shortForm);
+  return service ? service.title : "Unknown Category";
+};
 
 export const VendorDetailsModal = ({ vendor, setVendor }) => {
+  const categoryFullForm = getCategoryFullForm(vendor?.category);
   return (
     <>
       <input
@@ -39,7 +46,7 @@ export const VendorDetailsModal = ({ vendor, setVendor }) => {
               </dl>
               <div>
                 <dt className="sr-only">Category</dt>
-                <dd className="text-sm text-gray-500">Test</dd>
+                <dd className="text-sm text-gray-500">{categoryFullForm}</dd>
               </div>
 
               <div className="mt-6 flex flex-wrap items-start gap-8 text-xs">
