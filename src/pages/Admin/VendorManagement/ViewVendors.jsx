@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import Swal from "sweetalert2";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import { VendorDetailsModal } from "../../../components/Vendor/VendorDetailsModal";
@@ -6,7 +7,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useVendor from "../../../hooks/useVendor";
 
 export const ViewVendors = () => {
-  const [vendor, , refetch] = useVendor.vendorList();
+  const [vendor, vendorLoading, refetch] = useVendor.vendorList();
   const axiosSecure = useAxiosSecure();
   const [loadVendor, setLoadVendor] = useState(null);
 
@@ -57,74 +58,86 @@ export const ViewVendors = () => {
             View Vendors List
           </h1>
         </div>
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>E-Mail</th>
-                <th>Phone Number</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {renderTablePage(currentPage).map((singleVendor) => (
-                <tr key={singleVendor?._id}>
-                  <td>
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img src={singleVendor?.cover} />
-                      </div>
-                    </div>
-                  </td>
-                  <td>{singleVendor?.name}</td>
-                  <td>{singleVendor?.email}</td>
-                  <td>{singleVendor?.phoneNumber}</td>
-                  <th className="text-center">
-                    <label
-                      role="button"
-                      htmlFor="vendor-details-modal"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2"
-                      onClick={() => setLoadVendor(singleVendor)}
-                    >
-                      View
-                    </label>
-                    <button
-                      onClick={() => handleDeleteItem(singleVendor)}
-                      className="bg-red-700 text-white px-4 py-2 rounded-none"
-                    >
-                      Delete
-                    </button>
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="flex mx-auto justify-center items-center mt-4">
-          <div className="join border border-accent">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="join-item btn"
-            >
-              «
-            </button>
-            <button className="join-item btn">
-              Page {currentPage} of {totalPages}
-            </button>
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="join-item btn"
-            >
-              »
-            </button>
-          </div>
-        </div>
+        {vendorLoading && (
+          <Skeleton
+            style={{
+              width: "100%",
+              height: "5rem",
+            }}
+          />
+        )}
+        {!vendorLoading && (
+          <>
+            <div className="overflow-x-auto">
+              <table className="table">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>E-Mail</th>
+                    <th>Phone Number</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* row 1 */}
+                  {renderTablePage(currentPage).map((singleVendor) => (
+                    <tr key={singleVendor?._id}>
+                      <td>
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img src={singleVendor?.cover} />
+                          </div>
+                        </div>
+                      </td>
+                      <td>{singleVendor?.name}</td>
+                      <td>{singleVendor?.email}</td>
+                      <td>{singleVendor?.phoneNumber}</td>
+                      <th className="text-center">
+                        <label
+                          role="button"
+                          htmlFor="vendor-details-modal"
+                          className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2"
+                          onClick={() => setLoadVendor(singleVendor)}
+                        >
+                          View
+                        </label>
+                        <button
+                          onClick={() => handleDeleteItem(singleVendor)}
+                          className="bg-red-700 text-white px-4 py-2 rounded-none"
+                        >
+                          Delete
+                        </button>
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="flex mx-auto justify-center items-center mt-4">
+              <div className="join border border-accent">
+                <button
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="join-item btn"
+                >
+                  «
+                </button>
+                <button className="join-item btn">
+                  Page {currentPage} of {totalPages}
+                </button>
+                <button
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="join-item btn"
+                >
+                  »
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <VendorDetailsModal vendor={loadVendor} setVendor={setLoadVendor} />
     </>

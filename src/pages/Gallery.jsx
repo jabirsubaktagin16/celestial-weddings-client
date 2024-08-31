@@ -1,9 +1,20 @@
 import React from "react";
 
 import { Parallax } from "react-parallax";
+import { Loading } from "../components/Shared/Loading";
 import { PageTitle } from "../components/Shared/PageTitle";
+import useGallery from "../hooks/useGallery";
 
 export const Gallery = () => {
+  const [gallery, loading, galleryRefetch] = useGallery();
+  if (loading) return <Loading />;
+
+  // Divide images into chunks of 3 for each column
+  const chunkedImages = [];
+  for (let i = 0; i < gallery.length; i += 3) {
+    chunkedImages.push(gallery.slice(i, i + 3));
+  }
+
   return (
     <>
       <PageTitle title={"Gallery"} />
@@ -33,98 +44,21 @@ export const Gallery = () => {
 
         <div className="mx-auto mt-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="grid gap-4">
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
-                  alt=""
-                />
+            {/* Map through each column */}
+            {chunkedImages.map((imageChunk, columnIndex) => (
+              <div className="grid gap-4" key={columnIndex}>
+                {/* Map through each image in the chunk */}
+                {imageChunk.map((image, index) => (
+                  <div key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-none"
+                      src={image?.imageURL} // Assuming image URL is stored in the database
+                      alt={image?.description || "Gallery Image"}
+                    />
+                  </div>
+                ))}
               </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="grid gap-4">
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="grid gap-4">
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="grid gap-4">
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
