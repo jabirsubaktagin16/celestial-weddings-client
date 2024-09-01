@@ -14,14 +14,12 @@ import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useVendor from "../../../hooks/useVendor";
 
-import { useEffect } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { createUniqueFileName } from "../../../utils/createUniqueFileName";
 
 export const VendorProfile = () => {
   const [cover, setCover] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-  const [category, setCategory] = useState(null);
   const { initialApp, fireBaseStorageURL } = app;
   const storage = getStorage(initialApp, fireBaseStorageURL);
   const { register, handleSubmit, reset } = useForm();
@@ -35,12 +33,10 @@ export const VendorProfile = () => {
     userInfo ? userInfo?.vendorCompany : ""
   );
 
-  useEffect(() => {
-    const categoryData = services.find(
-      (item) => item.shortForm === vendor?.category
-    );
-    setCategory(categoryData);
-  }, []);
+  const getCategoryFullForm = (shortForm) => {
+    const service = services.find((service) => service.shortForm === shortForm);
+    return service ? service.title : "Unknown Category";
+  };
 
   async function helperForUploadingImageToFirebase(file) {
     const getFileName = createUniqueFileName(file);
@@ -102,6 +98,8 @@ export const VendorProfile = () => {
 
   if (loading || vendorLoading) return <Loading />;
 
+  const categoryFullForm = getCategoryFullForm(vendor?.category);
+
   return (
     <div>
       <PageTitle title={"Vendor Profile"} />
@@ -132,7 +130,7 @@ export const VendorProfile = () => {
                   type="text"
                   name="vendorCategory"
                   id="vendorCategory"
-                  defaultValue={category?.title}
+                  defaultValue={categoryFullForm}
                   disabled
                   className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                 />
