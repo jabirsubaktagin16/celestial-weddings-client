@@ -7,7 +7,6 @@ import {
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import services from "../../../../public/services.json";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import app from "../../../firebase/firebase.config";
@@ -16,6 +15,7 @@ import useVendor from "../../../hooks/useVendor";
 
 import { AuthContext } from "../../../providers/AuthProvider";
 import { createUniqueFileName } from "../../../utils/createUniqueFileName";
+import { utilFunctions } from "../../../utils/utilFunctions";
 
 export const VendorProfile = () => {
   const [cover, setCover] = useState("");
@@ -33,10 +33,7 @@ export const VendorProfile = () => {
     userInfo ? userInfo?.vendorCompany : ""
   );
 
-  const getCategoryFullForm = (shortForm) => {
-    const service = services.find((service) => service.shortForm === shortForm);
-    return service ? service.title : "Unknown Category";
-  };
+  const { getCategoryFullForm } = utilFunctions();
 
   async function helperForUploadingImageToFirebase(file) {
     const getFileName = createUniqueFileName(file);

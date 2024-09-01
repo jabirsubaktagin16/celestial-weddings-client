@@ -4,14 +4,11 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { IoIosMail } from "react-icons/io";
 import { MdOutlineHouse } from "react-icons/md";
-import services from "../../../public/services.json";
-
-const getCategoryFullForm = (shortForm) => {
-  const service = services.find((service) => service.shortForm === shortForm);
-  return service ? service.title : "Unknown Category";
-};
+import { utilFunctions } from "../../utils/utilFunctions";
 
 export const VendorDetailsModal = ({ vendor, setVendor }) => {
+  const { getCategoryFullForm } = utilFunctions();
+
   const categoryFullForm = getCategoryFullForm(vendor?.category);
   return (
     <>

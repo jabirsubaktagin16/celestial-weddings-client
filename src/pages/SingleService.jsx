@@ -5,12 +5,17 @@ import { Loading } from "../components/Shared/Loading";
 import { PageTitle } from "../components/Shared/PageTitle";
 import { VendorCard } from "../components/VendorCard";
 import useVendor from "../hooks/useVendor";
+import { utilFunctions } from "../utils/utilFunctions";
 
 export const SingleService = () => {
   const { shortForm } = useParams();
   const [service, setService] = useState(null);
   const [vendor, loading, refetch] = useVendor.vendorList();
   const currentServices = vendor.filter((v) => v.category === shortForm);
+
+  const { getCategoryFullForm } = utilFunctions();
+
+  const categoryFullForm = getCategoryFullForm(shortForm);
 
   useEffect(() => {
     const serviceData = services.find((item) => item.shortForm === shortForm);
@@ -21,7 +26,7 @@ export const SingleService = () => {
 
   return (
     <>
-      <PageTitle title={service?.title ? service.title : ""} />
+      <PageTitle title={categoryFullForm} />
       <section>
         <div
           className="hero h-[250px] md:h-[350px]"
@@ -32,7 +37,7 @@ export const SingleService = () => {
           <div className="hero-overlay bg-black bg-opacity-60"></div>
           <div className="hero-content text-white text-center">
             <div className="max-w-md">
-              <h1 className="mb-5 text-6xl font-bold">{service?.title}</h1>
+              <h1 className="mb-5 text-6xl font-bold">{categoryFullForm}</h1>
             </div>
           </div>
         </div>
