@@ -18,7 +18,7 @@ export const ViewVendors = () => {
     rowsPerPage,
     totalPages,
     renderTablePage,
-  } = paginationFunction(vendor)
+  } = paginationFunction(vendor);
 
   const handleDeleteItem = (item) => {
     Swal.fire({

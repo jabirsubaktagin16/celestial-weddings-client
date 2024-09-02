@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import { BookingDetailsModal } from "../../../components/Vendor/BookingModal/BookingDetailsModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -76,6 +77,8 @@ export const ViewAllBookings = () => {
     });
   };
 
+  if (userLoading || bookingLoading) return <Loading />;
+
   return (
     <>
       <PageTitle title={"View All Bookings"} />
@@ -93,7 +96,7 @@ export const ViewAllBookings = () => {
             </tr>
           </thead>
           <tbody>
-            {bookingList && bookingList.length === 0 && (
+            {bookingList && bookingList?.length === 0 && (
               <tr>
                 <td className="py-2 px-4 border-b text-center" colSpan={4}>
                   No Data Available

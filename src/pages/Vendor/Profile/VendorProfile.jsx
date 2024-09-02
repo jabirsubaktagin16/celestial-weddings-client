@@ -43,9 +43,8 @@ export const VendorProfile = () => {
       `/vendors/update/${vendor?._id}`,
       vendorInfo
     );
-    console.log(vendorRes);
+
     if (vendorRes.data.response.modifiedCount > 0) {
-      reset();
       toast.success(`Vendor Information for ${data.vendorName} Updated`);
     }
   };

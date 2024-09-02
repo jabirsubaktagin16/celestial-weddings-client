@@ -2,7 +2,10 @@ import React, { useContext } from "react";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
 import useVendor from "../../../hooks/useVendor";
 import { AuthContext } from "../../../providers/AuthProvider";
@@ -13,8 +16,31 @@ export const ViewAllPackages = () => {
   const [packageList, loading, refetch] = useVendor.packages(
     userInfo?.vendorCompany
   );
+  const axiosSecure = useAxiosSecure();
 
   if (userLoading || loading) return <Loading />;
+
+  const handleDeleteItem = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/packages/delete/${item._id}`);
+        // console.log(res.data);
+        if (res.data?.response?.deletedCount > 0) {
+          // refetch to update the ui
+          refetch();
+          toast.success("Package Deleted Successfully");
+        }
+      }
+    });
+  };
 
   return (
     <>
@@ -68,7 +94,10 @@ export const ViewAllPackages = () => {
                     >
                       Edit
                     </Link>
-                    <button className="bg-red-700 text-white px-4 py-2 rounded-none">
+                    <button
+                      onClick={() => handleDeleteItem(singlePackage)}
+                      className="bg-red-700 text-white px-4 py-2 rounded-none"
+                    >
                       Delete
                     </button>
                   </td>

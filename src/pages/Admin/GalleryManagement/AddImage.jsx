@@ -1,17 +1,13 @@
-import { getStorage } from "firebase/storage";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { PageTitle } from "../../../components/Shared/PageTitle";
-import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { utilFunctions } from "../../../utils/utilFunctions";
 
 export const AddImage = () => {
   const [image, setImage] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-  const { initialApp, fireBaseStorageURL } = app;
-  const storage = getStorage(initialApp, fireBaseStorageURL);
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
   const { createUniqueFileName, handleFileChange } = utilFunctions();

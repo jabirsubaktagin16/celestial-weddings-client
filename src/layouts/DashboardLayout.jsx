@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { Loading } from "../components/Shared/Loading";
-
-import { useLocation } from "react-router-dom";
+import avatar from "../assets/user_avatar.png";
 import { DashboardListComponent } from "../components/DashboardListComponent/DashboardListComponent";
+import { Loading } from "../components/Shared/Loading";
 import useRoleCheck from "../hooks/useRoleCheck";
 import useUser from "../hooks/useUser";
 import { AuthContext } from "../providers/AuthProvider";
@@ -198,19 +197,12 @@ export const DashboardLayout = () => {
               href="#"
               className="flex items-center gap-2 bg-base-200 p-4 text-white"
             >
-              <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <svg
-                  className="absolute w-12 h-12 text-gray-400 -left-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
+              <div className="relative w-10 h-10 overflow-hidden rounded-full ring-primary ring-offset-base-100  ring ring-offset-2">
+                <img
+                  alt=""
+                  src={avatar}
+                  className="size-10 rounded-full object-cover"
+                />
               </div>
 
               <div>

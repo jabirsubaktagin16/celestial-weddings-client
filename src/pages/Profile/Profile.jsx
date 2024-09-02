@@ -1,22 +1,54 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { IoIosCamera } from "react-icons/io";
 import avatar from "../../assets/user_avatar.png";
 import { ProfileInputComponent } from "../../components/InputComponent/ProfileInputComponent";
 import { Loading } from "../../components/Shared/Loading";
 import { PageTitle } from "../../components/Shared/PageTitle";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUser from "../../hooks/useUser";
 import { AuthContext } from "../../providers/AuthProvider";
+import { utilFunctions } from "../../utils/utilFunctions";
 
 export const Profile = () => {
   const { user } = useContext(AuthContext);
   const [userInfo, userLoading, userRefetch] = useUser.userDetails(user.email);
+  const [image, setImage] = useState(userInfo?.image || avatar);
+  const [isUploading, setIsUploading] = useState(false);
+  const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
+
+  const { handleFileChange } = utilFunctions();
 
   if (userLoading) return <Loading />;
 
+  const formSubmit = async (data) => {
+    const userInfo = {
+      name: data.name,
+      image: image ? image : "",
+      phoneNumber: data.phoneNumber,
+      address: data.address,
+      occupation: data.occupation,
+    };
+
+    console.log(userInfo);
+
+    const userRes = await axiosSecure.patch(
+      `/users/update/${user.email}`,
+      userInfo
+    );
+
+    console.log(userRes);
+
+    if (userRes.data?.response.modifiedCount > 0) {
+      userRefetch();
+      toast.success(`Profile updated successfully`);
+    }
+  };
+
   return (
-    <div>
+    <>
       <PageTitle title={"My Profile"} />
       <section className="py-10 my-auto ">
         <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
@@ -26,31 +58,45 @@ export const Profile = () => {
                 My Profile
               </h1>
 
-              <form className="grid grid-cols-6 gap-6">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="grid grid-cols-6 gap-6"
+              >
                 <div className="col-span-6 w-full rounded-sm items-center">
-                  <div className="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full relative">
-                    <img
-                      src={user.image ? user.image : avatar}
-                      alt="User Avatar"
-                      className="w-[141px] h-[141px] rounded-full object-cover"
-                    />
-
-                    <div className="absolute bg-white/90 rounded-full w-6 h-6 text-center bottom-0 right-0 flex justify-center items-center">
-                      <input
-                        type="file"
-                        name="profile"
-                        id="upload_profile"
-                        hidden
+                  {isUploading && <p>Image Loading</p>}
+                  {!isUploading && (
+                    <div className="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full relative  ring-primary ring-offset-base-100  ring ring-offset-2">
+                      <img
+                        src={image}
+                        alt="User Avatar"
+                        className="w-[141px] h-[141px] rounded-full object-cover"
                       />
 
-                      <label
-                        className="cursor-pointer"
-                        htmlFor="upload_profile"
-                      >
-                        <IoIosCamera className="text-accent" />
-                      </label>
+                      <div className="absolute bg-white/90 rounded-full w-6 h-6 text-center bottom-0 right-0 flex justify-center items-center">
+                        <input
+                          onChange={(e) =>
+                            handleFileChange(
+                              "profile",
+                              e,
+                              setImage,
+                              setIsUploading
+                            )
+                          }
+                          type="file"
+                          name="profile"
+                          id="upload_profile"
+                          hidden
+                        />
+
+                        <label
+                          className="cursor-pointer"
+                          htmlFor="upload_profile"
+                        >
+                          <IoIosCamera className="text-accent" />
+                        </label>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 <ProfileInputComponent
@@ -80,29 +126,28 @@ export const Profile = () => {
                 <ProfileInputComponent
                   id={"address"}
                   labelTitle={"Address"}
-                  value={userInfo?.address}
+                  value={userInfo?.address || ""}
                   placeholder={"Enter your Address"}
                   register={register}
                 />
                 <ProfileInputComponent
                   id={"occupation"}
                   labelTitle={"Occupation"}
-                  value={userInfo?.occupation}
+                  value={userInfo?.occupation || ""}
                   placeholder={"Enter your Occupation"}
                   register={register}
                 />
-                <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                  <input
-                    type="submit"
-                    role="button"
-                    className="btn btn-primary rounded-none w-full"
-                  />
-                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary rounded-none w-full"
+                >
+                  Update
+                </button>
               </form>
             </div>
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };

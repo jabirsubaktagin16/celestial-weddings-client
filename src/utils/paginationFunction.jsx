@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const paginationFunction = ({ list }) => {
+export const paginationFunction = (list) => {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
   const totalPages = Math.ceil(list.length / rowsPerPage);
