@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import services from "../../public/services.json";
+import { utilFunctions } from "../utils/utilFunctions";
 
 export const VendorCard = ({ singleVendor }) => {
-  const categoryTitle = services.find(
-    (v) => v.shortForm === singleVendor?.category
-  );
+  const { getCategoryFullForm } = utilFunctions();
+
+  const categoryTitle = getCategoryFullForm(singleVendor?.category);
+
   return (
     <div className="rounded overflow-hidden shadow-lg flex flex-col">
       <a href="#"></a>
@@ -16,7 +17,7 @@ export const VendorCard = ({ singleVendor }) => {
         </a>
         <a href="#!">
           <div className="text-xs absolute top-0 right-0 bg-primary px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-primary transition duration-500 ease-in-out">
-            {categoryTitle.title}
+            {categoryTitle}
           </div>
         </a>
       </div>

@@ -1,64 +1,18 @@
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import services from "../../../../public/services.json";
 import { VendorInputComponent } from "../../../components/InputComponent/VendorInputComponent";
 import { PageTitle } from "../../../components/Shared/PageTitle";
-import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { createUniqueFileName } from "../../../utils/createUniqueFileName";
+import { utilFunctions } from "../../../utils/utilFunctions";
 
 export const AddVendor = () => {
   const [cover, setCover] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-  const { initialApp, fireBaseStorageURL } = app;
-  const storage = getStorage(initialApp, fireBaseStorageURL);
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
-
-  async function helperForUploadingImageToFirebase(file) {
-    const getFileName = createUniqueFileName(file);
-    const storageReference = ref(storage, `vendorCover/${getFileName}`);
-    const uploadImage = uploadBytesResumable(storageReference, file);
-
-    return new Promise((resolve, reject) => {
-      uploadImage.on(
-        "state_changed",
-        (snapshot) => {},
-        (error) => {
-          console.log(error);
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadImage.snapshot.ref)
-            .then((downloadUrl) => resolve(downloadUrl))
-            .catch((error) => reject(error));
-        }
-      );
-    });
-  }
-
-  async function handleFileChange(event) {
-    setIsUploading(true);
-    const extractImageUrl = await helperForUploadingImageToFirebase(
-      event.target.files[0]
-    );
-
-    if (extractImageUrl !== "") {
-      setCover(extractImageUrl);
-      setIsUploading(false);
-      /* setFormData({
-        ...formData,
-        imageUrl: extractImageUrl,
-      }); */
-    }
-  }
+  const { handleFileChange } = utilFunctions();
 
   const onSubmit = async (data) => {
     const vendorInfo = {
@@ -183,7 +137,9 @@ export const AddVendor = () => {
                 </div>
                 <input
                   id="dropzone-file"
-                  onChange={handleFileChange}
+                  onChange={(e) =>
+                    handleFileChange("vendorCover", e, setCover, setIsUploading)
+                  }
                   type="file"
                   className="hidden"
                 />

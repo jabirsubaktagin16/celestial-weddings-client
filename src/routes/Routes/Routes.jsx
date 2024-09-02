@@ -18,6 +18,7 @@ import { SingleService } from "../../pages/SingleService";
 import { SingleVendor } from "../../pages/SingleVendor";
 import { ViewAllBookings } from "../../pages/Vendor/Bookings/ViewAllBookings";
 import { AddNewPackage } from "../../pages/Vendor/Packages/AddNewPackage";
+import { UpdatePackage } from "../../pages/Vendor/Packages/UpdatePackage";
 import { ViewAllPackages } from "../../pages/Vendor/Packages/ViewAllPackages";
 import { VendorProfile } from "../../pages/Vendor/Profile/VendorProfile";
 import AdminRoute from "../AdminRoute";
@@ -129,7 +130,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "add-new-package",
+        path: "package/add",
         element: (
           <VendorRoute>
             <AddNewPackage />
@@ -137,7 +138,15 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "view-all-packages",
+        path: "package/update/:id",
+        element: (
+          <VendorRoute>
+            <UpdatePackage />
+          </VendorRoute>
+        ),
+      },
+      {
+        path: "package/view",
         element: (
           <VendorRoute>
             <ViewAllPackages />

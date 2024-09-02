@@ -8,6 +8,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
 import useVendor from "../../../hooks/useVendor";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { paginationFunction } from "../../../utils/paginationFunction";
 
 const UserSwal = withReactContent(Swal);
 
@@ -18,15 +19,13 @@ export const ViewUsers = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [vendor, vendorLoading, refetch] = useVendor.vendorList();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10;
-  const totalPages = Math.ceil(users.length / rowsPerPage);
-
-  const renderTablePage = (page) => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    return users.slice(start, end);
-  };
+  const {
+    currentPage,
+    setCurrentPage,
+    rowsPerPage,
+    totalPages,
+    renderTablePage,
+  } = paginationFunction(users);
 
   if (userLoading || vendorLoading) return <Loading />;
 

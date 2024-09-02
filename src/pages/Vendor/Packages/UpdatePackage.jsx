@@ -1,23 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { RxCross2 } from "react-icons/rx";
+import { useParams } from "react-router-dom";
+import { PackageInputComponent } from "../../../components/InputComponent/PackageInputComponent";
+import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
-import { PackageInputComponent } from "../../../components/InputComponent/PackageInputComponent";
 import useUser from "../../../hooks/useUser";
+import useVendor from "../../../hooks/useVendor";
 import { AuthContext } from "../../../providers/AuthProvider";
 
-export const AddNewPackage = () => {
-  const [discountChecked, setDiscountChecked] = useState(false);
+export const UpdatePackage = () => {
+  const { id } = useParams();
+  const [_package, packageLoading, packageRefetch] =
+    useVendor.packageDetails(id);
+  const [discountChecked, setDiscountChecked] = useState(
+    _package?.discountChecked
+  );
   const [discountValue, setDiscountValue] = useState("");
   const [services, setServices] = useState([]);
   const [serviceValue, setServiceValue] = useState("");
   const { register, handleSubmit, reset } = useForm();
 
   const { user } = useContext(AuthContext);
-  const [userInfo, userLoading, userRefetch] = useUser.userDetails(user?.email);
+  const [userInfo, userLoading] = useUser.userDetails(user?.email);
   const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    setServices(_package?.servicesOffered);
+  }, [_package]);
 
   const addService = () => {
     if (serviceValue.trim() !== "") {
@@ -25,13 +37,6 @@ export const AddNewPackage = () => {
       setServiceValue("");
     }
   };
-
-  /* const handleDiscountCheck = () => {
-    setDiscountChecked(!discountChecked);
-    if (!discountChecked) {
-      setDiscountValue("");
-    }
-  }; */
 
   const handleDiscountChange = (e) => {
     setDiscountValue(e.target.value);
@@ -47,18 +52,21 @@ export const AddNewPackage = () => {
       discountPercentage: discountChecked ? data.discountPercentage : 0,
     };
 
-    const packageRes = await axiosSecure.post("/packages", packageInfo);
+    const packageRes = await axiosSecure.patch(
+      `/packages/update/${id}`,
+      packageInfo
+    );
 
     if (packageRes.data.response._id) {
-      reset();
-      setServices([]);
-      toast.success(`New Package ${data.packageName} Added`);
+      toast.success(`Package ${data.packageName} Updated successfully`);
     }
   };
 
+  if (packageLoading) return <Loading />;
+
   return (
     <>
-      <PageTitle title={"Add New Package"} />
+      <PageTitle title={"Update Package"} />
       <div className="px-4 py-8 ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="bg-white shadow-md mx-auto p-4">
@@ -68,24 +76,22 @@ export const AddNewPackage = () => {
                   <h5 className="text-center font-bold my-2">
                     Package Basic Information
                   </h5>
+
                   <PackageInputComponent
                     labelTitle={"Package Name"}
                     name={"packageName"}
                     placeholder={"Enter Package name"}
                     register={register}
+                    defaultValue={_package?.name}
                   />
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Base Price</span>
-                    </label>
-                    <input
-                      className="input input-sm input-bordered input-primary rounded-none bg-transparent"
-                      id="basePrice"
-                      type="number"
-                      placeholder="Enter Base Price"
-                      {...register("basePrice", { required: true })}
-                    />
-                  </div>
+                  <PackageInputComponent
+                    labelTitle={"Base Price"}
+                    name={"basePrice"}
+                    type={"number"}
+                    placeholder={"Enter Base Price"}
+                    register={register}
+                    defaultValue={_package?.price}
+                  />
                   <div className="form-control">
                     <label className="cursor-pointer label">
                       <span className="label-text">Discount</span>
@@ -129,6 +135,7 @@ export const AddNewPackage = () => {
                       type={"number"}
                       placeholder={"Enter Discount Percentage"}
                       register={register}
+                      defaultValue={_package?.discountPercentage}
                       max={100}
                     />
                   )}
@@ -167,7 +174,7 @@ export const AddNewPackage = () => {
                     Offered Services
                   </h5>
                   <div className="overflow-x-auto">
-                    {services.length > 0 && (
+                    {services?.length > 0 && (
                       <table className="table">
                         {/* head */}
                         <thead>

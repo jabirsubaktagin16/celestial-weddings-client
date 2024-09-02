@@ -2,19 +2,19 @@ import React, { useContext } from "react";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 
+import { Link } from "react-router-dom";
 import useUser from "../../../hooks/useUser";
 import useVendor from "../../../hooks/useVendor";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 export const ViewAllPackages = () => {
   const { user } = useContext(AuthContext);
-  const [users, , userRefetch] = useUser.userList();
-  const currentUser = users.find((u) => u?.email === user.email);
+  const [userInfo, userLoading, userRefetch] = useUser.userDetails(user?.email);
   const [packageList, loading, refetch] = useVendor.packages(
-    currentUser?.vendorCompany?._id
+    userInfo?.vendorCompany
   );
 
-  if (loading) return <Loading />;
+  if (userLoading || loading) return <Loading />;
 
   return (
     <>
@@ -62,9 +62,12 @@ export const ViewAllPackages = () => {
                     <button className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2">
                       View
                     </button>
-                    <button className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2">
+                    <Link
+                      to={`/dashboard/package/update/${singlePackage?._id}`}
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2"
+                    >
                       Edit
-                    </button>
+                    </Link>
                     <button className="bg-red-700 text-white px-4 py-2 rounded-none">
                       Delete
                     </button>

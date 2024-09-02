@@ -1,24 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import Swal from "sweetalert2";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useGallery from "../../../hooks/useGallery";
+import { paginationFunction } from "../../../utils/paginationFunction";
 
 export const ViewImageList = () => {
   const [gallery, loading, galleryRefetch] = useGallery();
   const axiosSecure = useAxiosSecure();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10;
-  const totalPages = Math.ceil(gallery.length / rowsPerPage);
-
-  const renderTablePage = (page) => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    return gallery.slice(start, end);
-  };
+  const {
+    currentPage,
+    setCurrentPage,
+    rowsPerPage,
+    totalPages,
+    renderTablePage,
+  } = paginationFunction(gallery);
 
   const handleDeleteItem = (item) => {
     Swal.fire({

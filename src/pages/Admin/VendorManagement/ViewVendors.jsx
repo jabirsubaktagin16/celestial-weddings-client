@@ -5,21 +5,20 @@ import { PageTitle } from "../../../components/Shared/PageTitle";
 import { VendorDetailsModal } from "../../../components/Vendor/VendorDetailsModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useVendor from "../../../hooks/useVendor";
+import { paginationFunction } from "../../../utils/paginationFunction";
 
 export const ViewVendors = () => {
   const [vendor, vendorLoading, refetch] = useVendor.vendorList();
   const axiosSecure = useAxiosSecure();
   const [loadVendor, setLoadVendor] = useState(null);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10;
-  const totalPages = Math.ceil(vendor.length / rowsPerPage);
-
-  const renderTablePage = (page) => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    return vendor.slice(start, end);
-  };
+  const {
+    currentPage,
+    setCurrentPage,
+    rowsPerPage,
+    totalPages,
+    renderTablePage,
+  } = paginationFunction(vendor)
 
   const handleDeleteItem = (item) => {
     Swal.fire({

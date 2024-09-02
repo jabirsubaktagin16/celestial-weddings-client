@@ -1,16 +1,11 @@
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getStorage } from "firebase/storage";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { createUniqueFileName } from "../../../utils/createUniqueFileName";
+import { utilFunctions } from "../../../utils/utilFunctions";
 
 export const AddImage = () => {
   const [image, setImage] = useState("");
@@ -19,49 +14,11 @@ export const AddImage = () => {
   const storage = getStorage(initialApp, fireBaseStorageURL);
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
-
-  async function helperForUploadingImageToFirebase(file) {
-    const getFileName = createUniqueFileName(file);
-    const storageReference = ref(storage, `gallery/${getFileName}`);
-    const uploadImage = uploadBytesResumable(storageReference, file);
-
-    return new Promise((resolve, reject) => {
-      uploadImage.on(
-        "state_changed",
-        (snapshot) => {},
-        (error) => {
-          console.log(error);
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadImage.snapshot.ref)
-            .then((downloadUrl) => resolve(downloadUrl))
-            .catch((error) => reject(error));
-        }
-      );
-    });
-  }
-
-  async function handleFileChange(event) {
-    setIsUploading(true);
-    const extractImageUrl = await helperForUploadingImageToFirebase(
-      event.target.files[0]
-    );
-
-    if (extractImageUrl !== "") {
-      setImage(extractImageUrl);
-      setIsUploading(false);
-      /* setFormData({
-        ...formData,
-        imageUrl: extractImageUrl,
-      }); */
-    }
-  }
+  const { createUniqueFileName, handleFileChange } = utilFunctions();
 
   const onSubmit = async (data) => {
     const imageInfo = {
       imageURL: image,
-
       description: data.imageDescription,
     };
 
@@ -135,7 +92,9 @@ export const AddImage = () => {
                   </div>
                   <input
                     id="dropzone-file"
-                    onChange={handleFileChange}
+                    onChange={(e) =>
+                      handleFileChange("gallery", e, setImage, setIsUploading)
+                    }
                     type="file"
                     className="hidden"
                   />
@@ -151,7 +110,7 @@ export const AddImage = () => {
                 />
                 <button
                   onClick={handleModifyImage}
-                  className="mt-4 px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                  className="mt-4 px-4 py-2 text-white bg-blue-500 rounded-none hover:bg-blue-600"
                 >
                   Modify Image
                 </button>

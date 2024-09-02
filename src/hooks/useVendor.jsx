@@ -70,6 +70,23 @@ const packages = (vendorId) => {
   return [packageList, loading, refetch];
 };
 
+const packageDetails = (packageId) => {
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: _package,
+    isPending: packageLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["packages", "details", packageId],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/packages/details/${packageId}`);
+      return res.data.response;
+    },
+  });
+
+  return [_package, packageLoading, refetch];
+};
+
 const ratings = (id) => {
   const axiosPublic = useAxiosPublic();
   const {
@@ -129,6 +146,7 @@ const useVendor = {
   ratings,
   reviews,
   bookings,
+  packageDetails,
 };
 
 export default useVendor;

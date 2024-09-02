@@ -1,6 +1,6 @@
 const packagePathList = [
-  { id: 1, path: "view-all-packages", title: "View All Packages" },
-  { id: 2, path: "add-new-package", title: "Add New Package" },
+  { id: 1, path: "package/view", title: "View All Packages" },
+  { id: 2, path: "package/add", title: "Add New Package" },
 ];
 
 const blogPathList = [

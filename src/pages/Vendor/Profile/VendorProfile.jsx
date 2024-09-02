@@ -1,9 +1,4 @@
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getStorage } from "firebase/storage";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -14,7 +9,6 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useVendor from "../../../hooks/useVendor";
 
 import { AuthContext } from "../../../providers/AuthProvider";
-import { createUniqueFileName } from "../../../utils/createUniqueFileName";
 import { utilFunctions } from "../../../utils/utilFunctions";
 
 export const VendorProfile = () => {
@@ -33,45 +27,8 @@ export const VendorProfile = () => {
     userInfo ? userInfo?.vendorCompany : ""
   );
 
-  const { getCategoryFullForm } = utilFunctions();
-
-  async function helperForUploadingImageToFirebase(file) {
-    const getFileName = createUniqueFileName(file);
-    const storageReference = ref(storage, `vendorCover/${getFileName}`);
-    const uploadImage = uploadBytesResumable(storageReference, file);
-
-    return new Promise((resolve, reject) => {
-      uploadImage.on(
-        "state_changed",
-        (snapshot) => {},
-        (error) => {
-          console.log(error);
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadImage.snapshot.ref)
-            .then((downloadUrl) => resolve(downloadUrl))
-            .catch((error) => reject(error));
-        }
-      );
-    });
-  }
-
-  async function handleFileChange(event) {
-    setIsUploading(true);
-    const extractImageUrl = await helperForUploadingImageToFirebase(
-      event.target.files[0]
-    );
-
-    if (extractImageUrl !== "") {
-      setCover(extractImageUrl);
-      setIsUploading(false);
-      /* setFormData({
-        ...formData,
-        imageUrl: extractImageUrl,
-      }); */
-    }
-  }
+  const { getCategoryFullForm, createUniqueFileName, handleFileChange } =
+    utilFunctions();
 
   const onSubmit = async (data) => {
     const vendorInfo = {
@@ -138,6 +95,9 @@ export const VendorProfile = () => {
                 </label>
                 <input
                   type="file"
+                  onChange={(e) =>
+                    handleFileChange("vendorCover", e, setCover, setIsUploading)
+                  }
                   className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none bg-transparent"
                 />
               </div>
