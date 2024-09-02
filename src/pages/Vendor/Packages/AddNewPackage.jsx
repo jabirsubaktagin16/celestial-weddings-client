@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
+import { RxCross2 } from "react-icons/rx";
 import { PackageInputComponent } from "../../../components/InputComponent/PackageInputComponent";
 import useUser from "../../../hooks/useUser";
 import { AuthContext } from "../../../providers/AuthProvider";

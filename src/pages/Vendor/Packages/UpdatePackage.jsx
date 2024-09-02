@@ -15,9 +15,7 @@ export const UpdatePackage = () => {
   const { id } = useParams();
   const [_package, packageLoading, packageRefetch] =
     useVendor.packageDetails(id);
-  const [discountChecked, setDiscountChecked] = useState(
-    _package?.discountChecked
-  );
+  const [discountChecked, setDiscountChecked] = useState(false);
   const [discountValue, setDiscountValue] = useState("");
   const [services, setServices] = useState([]);
   const [serviceValue, setServiceValue] = useState("");
@@ -29,6 +27,7 @@ export const UpdatePackage = () => {
 
   useEffect(() => {
     setServices(_package?.servicesOffered);
+    setDiscountChecked(_package?.discountStatus);
   }, [_package]);
 
   const addService = () => {
@@ -47,7 +46,6 @@ export const UpdatePackage = () => {
       name: data.packageName,
       price: data.basePrice,
       servicesOffered: services,
-      vendorId: userInfo?.vendorCompany,
       discountStatus: discountChecked,
       discountPercentage: discountChecked ? data.discountPercentage : 0,
     };
@@ -57,7 +55,7 @@ export const UpdatePackage = () => {
       packageInfo
     );
 
-    if (packageRes.data.response._id) {
+    if (packageRes.data.response.modifiedCount > 0) {
       toast.success(`Package ${data.packageName} Updated successfully`);
     }
   };
