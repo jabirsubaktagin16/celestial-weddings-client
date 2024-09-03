@@ -8,11 +8,12 @@ import app from "../../../firebase/firebase.config";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useVendor from "../../../hooks/useVendor";
 
+import { useEffect } from "react";
+import { ImageUpload } from "../../../components/InputComponent/ImageUpload";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { utilFunctions } from "../../../utils/utilFunctions";
 
 export const VendorProfile = () => {
-  const [cover, setCover] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const { initialApp, fireBaseStorageURL } = app;
   const storage = getStorage(initialApp, fireBaseStorageURL);
@@ -26,6 +27,11 @@ export const VendorProfile = () => {
   const [vendor, vendorLoading, refetch] = useVendor.vendorDetails(
     userInfo ? userInfo?.vendorCompany : ""
   );
+  const [cover, setCover] = useState("");
+
+  useEffect(() => {
+    setCover(vendor?.cover);
+  }, [vendor]);
 
   const { getCategoryFullForm, createUniqueFileName, handleFileChange } =
     utilFunctions();
@@ -33,6 +39,8 @@ export const VendorProfile = () => {
   const onSubmit = async (data) => {
     const vendorInfo = {
       name: data.vendorName,
+      vendorId: userInfo?.vendorCompany,
+      cover: cover,
       email: data.contactEmail,
       phoneNumber: data.contactPhone,
       address: data.contactAddress,
@@ -61,6 +69,14 @@ export const VendorProfile = () => {
           <div className="card-body flex flex-col">
             <h5 className="text-center">Vendor Profile</h5>
             <form onSubmit={handleSubmit(onSubmit)}>
+              <ImageUpload
+                isUploading={isUploading}
+                image={cover}
+                handleFileChange={handleFileChange}
+                folderName={"vendorCover"}
+                setImage={setCover}
+                setIsUploading={setIsUploading}
+              />
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -84,22 +100,11 @@ export const VendorProfile = () => {
                   name="vendorCategory"
                   id="vendorCategory"
                   defaultValue={categoryFullForm}
-                  disabled
+                  readOnly
                   className="input input-sm input-bordered input-primary rounded-none bg-transparent"
                 />
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Cover</span>
-                </label>
-                <input
-                  type="file"
-                  onChange={(e) =>
-                    handleFileChange("vendorCover", e, setCover, setIsUploading)
-                  }
-                  className="file-input file-input-sm file-input-bordered file-input-primary w-full rounded-none bg-transparent"
-                />
-              </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Contact E-Mail</span>
@@ -150,7 +155,7 @@ export const VendorProfile = () => {
                   name="vendorDescription"
                   className="textarea textarea-primary rounded-none resize-none bg-transparent"
                   placeholder="Enter Description of the Vendor"
-                  rows="10"
+                  rows="5"
                   defaultValue={vendor?.description}
                   {...register("vendorDescription", { required: true })}
                 ></textarea>

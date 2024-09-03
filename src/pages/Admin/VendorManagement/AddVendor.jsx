@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import services from "../../../../public/services.json";
+import { ImageUpload } from "../../../components/InputComponent/ImageUpload";
 import { VendorInputComponent } from "../../../components/InputComponent/VendorInputComponent";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { utilFunctions } from "../../../utils/utilFunctions";
 
 export const AddVendor = () => {
-  const [cover, setCover] = useState("");
+  const [cover, setCover] = useState("https://via.placeholder.com/1500x500");
   const [isUploading, setIsUploading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
@@ -29,6 +30,7 @@ export const AddVendor = () => {
 
     if (vendorRes.data.response._id) {
       reset();
+      setCover("https://via.placeholder.com/1500x500");
       toast.success(`New Vendor ${data.vendorName} Added`);
     }
   };
@@ -37,7 +39,7 @@ export const AddVendor = () => {
     <>
       <PageTitle title={"Add New Vendor"} />
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-5xl">
           <h1 className="text-center text-2xl font-bold text-primary sm:text-3xl">
             Vendor Information
           </h1>
@@ -105,47 +107,14 @@ export const AddVendor = () => {
                 {...register("vendorDescription", { required: true })}
               ></textarea>
             </div>
-
-            <div className="flex items-center justify-center w-full">
-              <label
-                for="dropzone-file"
-                className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-gray-100"
-              >
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg
-                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 16"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                    />
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500 ">
-                    <span className="font-semibold">Click to upload</span> or
-                    drag and drop
-                  </p>
-                  <p className="text-xs text-gray-500 ">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
-                </div>
-                <input
-                  id="dropzone-file"
-                  onChange={(e) =>
-                    handleFileChange("vendorCover", e, setCover, setIsUploading)
-                  }
-                  type="file"
-                  className="hidden"
-                />
-              </label>
-            </div>
-
+            <ImageUpload
+              isUploading={isUploading}
+              image={cover}
+              handleFileChange={handleFileChange}
+              folderName={"vendorCover"}
+              setImage={setCover}
+              setIsUploading={setIsUploading}
+            />
             <button
               type="submit"
               className="block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
