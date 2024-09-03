@@ -25,8 +25,9 @@ export const Profile = () => {
 
   const formSubmit = async (data) => {
     const userInfo = {
-      name: data.name,
+      name: data.myName,
       image: image ? image : "",
+      email: data.myEmail,
       phoneNumber: data.phoneNumber,
       address: data.address,
       occupation: data.occupation,
@@ -59,7 +60,7 @@ export const Profile = () => {
               </h1>
 
               <form
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(formSubmit)}
                 className="grid grid-cols-6 gap-6"
               >
                 <div className="col-span-6 w-full rounded-sm items-center">
@@ -98,25 +99,25 @@ export const Profile = () => {
                     </div>
                   )}
                 </div>
-
                 <ProfileInputComponent
-                  id={"name"}
+                  name={"myName"}
                   labelTitle={"Name"}
                   value={userInfo?.name}
                   placeholder={"Enter your Name"}
                   register={register}
                 />
-                <ProfileInputComponent
-                  id={"email"}
+                {/* <ProfileInputComponent
+                  // type={"email"}
+                  name={"myEmail"}
                   doubleColumn={true}
                   labelTitle={"E-Mail"}
-                  value={userInfo?.email}
+                  value={user?.email}
+                  disabled={true}
                   placeholder={"Enter your E-Mail"}
                   register={register}
-                  disabled
-                />
+                /> */}
                 <ProfileInputComponent
-                  id={"phoneNumber"}
+                  name={"phoneNumber"}
                   doubleColumn={true}
                   labelTitle={"Contact Number"}
                   value={userInfo?.phoneNumber || ""}
@@ -124,19 +125,20 @@ export const Profile = () => {
                   register={register}
                 />
                 <ProfileInputComponent
-                  id={"address"}
+                  name={"address"}
                   labelTitle={"Address"}
                   value={userInfo?.address || ""}
                   placeholder={"Enter your Address"}
                   register={register}
                 />
                 <ProfileInputComponent
-                  id={"occupation"}
+                  name={"occupation"}
                   labelTitle={"Occupation"}
                   value={userInfo?.occupation || ""}
                   placeholder={"Enter your Occupation"}
                   register={register}
                 />
+
                 <button
                   type="submit"
                   className="btn btn-primary rounded-none w-full"
