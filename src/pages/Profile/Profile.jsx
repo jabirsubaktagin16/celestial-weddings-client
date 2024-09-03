@@ -27,7 +27,6 @@ export const Profile = () => {
     const userInfo = {
       name: data.myName,
       image: image ? image : "",
-      email: data.myEmail,
       phoneNumber: data.phoneNumber,
       address: data.address,
       occupation: data.occupation,
@@ -106,16 +105,15 @@ export const Profile = () => {
                   placeholder={"Enter your Name"}
                   register={register}
                 />
-                {/* <ProfileInputComponent
-                  // type={"email"}
-                  name={"myEmail"}
+                <ProfileInputComponent
                   doubleColumn={true}
-                  labelTitle={"E-Mail"}
-                  value={user?.email}
-                  disabled={true}
-                  placeholder={"Enter your E-Mail"}
+                  name={"email"}
+                  labelTitle={"E-Mail Address"}
+                  value={userInfo?.email}
+                  placeholder={"Enter your E-Mail Address"}
                   register={register}
-                /> */}
+                  readOnly
+                />
                 <ProfileInputComponent
                   name={"phoneNumber"}
                   doubleColumn={true}
@@ -131,6 +129,7 @@ export const Profile = () => {
                   placeholder={"Enter your Address"}
                   register={register}
                 />
+
                 <ProfileInputComponent
                   name={"occupation"}
                   labelTitle={"Occupation"}

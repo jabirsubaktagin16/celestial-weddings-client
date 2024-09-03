@@ -26,7 +26,7 @@ export const DashboardLayout = () => {
       .catch((error) => console.log(error));
   };
 
-  if (isAdminLoading || isVendorLoading) return <Loading />;
+  if (isAdminLoading || isVendorLoading || userLoading) return <Loading />;
 
   const checkActivePath = (st) =>
     `block rounded-none px-4 py-2 text-sm font-medium ${
@@ -200,7 +200,7 @@ export const DashboardLayout = () => {
               <div className="relative w-10 h-10 overflow-hidden rounded-full ring-primary ring-offset-base-100  ring ring-offset-2">
                 <img
                   alt=""
-                  src={avatar}
+                  src={userInfo?.image || avatar}
                   className="size-10 rounded-full object-cover"
                 />
               </div>

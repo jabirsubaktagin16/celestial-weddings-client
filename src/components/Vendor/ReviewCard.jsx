@@ -1,4 +1,5 @@
 import React from "react";
+import avatar from "../../assets/user_avatar.png";
 
 export const ReviewCard = ({ review }) => {
   return (
@@ -9,14 +10,16 @@ export const ReviewCard = ({ review }) => {
         <div className="flex items-center mt-8 space-x-3">
           <div className="avatar">
             <div className="ring-primary ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              <img src={review?.userId?.image || avatar} />
             </div>
           </div>
           <div>
             <div className="text-lg font-medium text-primary">
               {review?.userId?.name}
             </div>
-            <div className="text-gray-600 ">VP Sales at Google</div>
+            <div className="text-gray-600 ">
+              {review?.userId?.occupation || "From one of our Customers"}
+            </div>
           </div>
         </div>
       </div>
