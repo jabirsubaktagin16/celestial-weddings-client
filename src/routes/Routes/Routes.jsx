@@ -16,6 +16,8 @@ import { SignIn } from "../../pages/SignIn/SignIn";
 import { SignUp } from "../../pages/SignUp.jsx/SignUp";
 import { SingleService } from "../../pages/SingleService";
 import { SingleVendor } from "../../pages/SingleVendor";
+import { MyReviews } from "../../pages/User/MyReviews/MyReviews";
+import { PreviousOrders } from "../../pages/User/PreviousOrders/PreviousOrders";
 import { ViewAllBookings } from "../../pages/Vendor/Bookings/ViewAllBookings";
 import { AddNewPackage } from "../../pages/Vendor/Packages/AddNewPackage";
 import { UpdatePackage } from "../../pages/Vendor/Packages/UpdatePackage";
@@ -84,6 +86,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "previous-orders",
+        element: (
+          <PrivateRoute>
+            <PreviousOrders />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-reviews",
+        element: (
+          <PrivateRoute>
+            <MyReviews />
           </PrivateRoute>
         ),
       },

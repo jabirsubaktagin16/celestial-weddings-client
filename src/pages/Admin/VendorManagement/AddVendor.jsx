@@ -69,7 +69,7 @@ export const AddVendor = () => {
               <select
                 name="vendorCategory"
                 id="vendorCategory"
-                className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm p-4 pe-12"
+                className="mt-1.5 w-full rounded-none border border-primary bg-transparent text-gray-700 sm:text-sm p-4 pe-12"
                 {...register("vendorCategory", { required: true })}
               >
                 <option disabled selected defaultValue="">
@@ -101,7 +101,7 @@ export const AddVendor = () => {
             <div>
               <textarea
                 id="vendorDescription"
-                className="mt-2 p-4 resize-none w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
+                className="textarea textarea-primary mt-2 p-4 resize-none w-full rounded-none bg-transparent align-top shadow-sm sm:text-sm"
                 rows="4"
                 placeholder="Enter Description of the Vendor Here..."
                 {...register("vendorDescription", { required: true })}
@@ -117,7 +117,7 @@ export const AddVendor = () => {
             />
             <button
               type="submit"
-              className="block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
+              className="block w-full bg-primary px-5 py-3 text-sm font-medium text-white rounded-none"
             >
               Submit
             </button>

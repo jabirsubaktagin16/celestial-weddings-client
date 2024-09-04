@@ -23,14 +23,9 @@ export const AddImage = () => {
 
     if (imageRes.data.response._id) {
       reset();
-      setImage("");
+      setImage("https://via.placeholder.com/1500x500");
       toast.success(`New Image Added`);
     }
-  };
-
-  const handleModifyImage = () => {
-    //   setFile(null);
-    setImage("https://via.placeholder.com/1500x500");
   };
 
   return (

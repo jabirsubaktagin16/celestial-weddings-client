@@ -92,13 +92,13 @@ export const ViewAllBookings = () => {
               <th className="py-2 px-4 bg-accent text-white">Package Name</th>
               <th className="py-2 px-4 bg-accent text-white">Venue Name</th>
               <th className="py-2 px-4 bg-accent text-white">Status</th>
-              <th className="py-2 px-4 bg-accent text-white">Actions</th>
+              <th className="py-2 px-4 bg-accent text-white"></th>
             </tr>
           </thead>
           <tbody>
             {bookingList && bookingList?.length === 0 && (
               <tr>
-                <td className="py-2 px-4 border-b text-center" colSpan={4}>
+                <td className="py-2 px-4 border-b text-center" colSpan={5}>
                   No Data Available
                 </td>
               </tr>

@@ -39,21 +39,24 @@ export const AddNewPackage = () => {
   };
 
   const onSubmit = async (data) => {
-    const packageInfo = {
-      name: data.packageName,
-      price: data.basePrice,
-      servicesOffered: services,
-      vendorId: userInfo?.vendorCompany,
-      discountStatus: discountChecked,
-      discountPercentage: discountChecked ? data.discountPercentage : 0,
-    };
+    if (services.length === 0) toast.error("Please add at least one service");
+    else {
+      const packageInfo = {
+        name: data.packageName,
+        price: data.basePrice,
+        servicesOffered: services,
+        vendorId: userInfo?.vendorCompany,
+        discountStatus: discountChecked,
+        discountPercentage: discountChecked ? data.discountPercentage : 0,
+      };
 
-    const packageRes = await axiosSecure.post("/packages", packageInfo);
+      const packageRes = await axiosSecure.post("/packages", packageInfo);
 
-    if (packageRes.data.response._id) {
-      reset();
-      setServices([]);
-      toast.success(`New Package ${data.packageName} Added`);
+      if (packageRes.data.response._id) {
+        reset();
+        setServices([]);
+        toast.success(`New Package ${data.packageName} Added`);
+      }
     }
   };
 

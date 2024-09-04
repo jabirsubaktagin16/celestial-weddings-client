@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
 
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -9,6 +10,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
 import useVendor from "../../../hooks/useVendor";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { PackageDetailsModal } from "./PackageDetailsModal";
 
 export const ViewAllPackages = () => {
   const { user } = useContext(AuthContext);
@@ -16,6 +18,7 @@ export const ViewAllPackages = () => {
   const [packageList, loading, refetch] = useVendor.packages(
     userInfo?.vendorCompany
   );
+  const [_package, setPackage] = useState(null);
   const axiosSecure = useAxiosSecure();
 
   if (userLoading || loading) return <Loading />;
@@ -63,7 +66,15 @@ export const ViewAllPackages = () => {
             </tr>
           </thead>
           <tbody>
+            {packageList && packageList?.length === 0 && (
+              <tr>
+                <td className="py-2 px-4 border-b text-center" colSpan={5}>
+                  No Data Available
+                </td>
+              </tr>
+            )}
             {packageList &&
+              packageList?.length > 0 &&
               packageList.map((singlePackage) => (
                 <tr key={singlePackage?._id}>
                   <td className="py-2 px-4 border-b text-center">
@@ -85,9 +96,14 @@ export const ViewAllPackages = () => {
                   </td>
 
                   <td className="py-2 px-4 border-b text-center">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2">
+                    <label
+                      htmlFor="package-details-modal"
+                      role="button"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-none mr-2"
+                      onClick={() => setPackage(singlePackage)}
+                    >
                       View
-                    </button>
+                    </label>
                     <Link
                       to={`/dashboard/package/update/${singlePackage?._id}`}
                       className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2"
@@ -106,6 +122,7 @@ export const ViewAllPackages = () => {
           </tbody>
         </table>
       </div>
+      <PackageDetailsModal _package={_package} />
     </>
   );
 };
