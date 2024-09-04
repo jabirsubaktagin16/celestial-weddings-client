@@ -3,115 +3,115 @@
     "title": "Decorators",
     "shortForm": "decorator",
     "description": "Transform your venue with beautiful and personalized decor",
-    "imageUrl": "/src/assets/services/decorator.jpg"
+    "imageUrl": "./src/assets/services/decorator.jpg"
   },
   {
     "title": "Venue",
     "shortForm": "venue",
     "description": "Elegant and versatile venues for your dream wedding",
-    "imageUrl": "/src/assets/services/weddingVenue.jpg"
+    "imageUrl": "./src/assets/services/weddingVenue.jpg"
   },
   {
     "title": "Planner",
     "shortForm": "planner",
     "description": "Stress-free wedding planning for a perfect celebration",
-    "imageUrl": "/src/assets/services/planner.jpg"
+    "imageUrl": "./src/assets/services/planner.jpg"
   },
 
   {
     "title": "Catering",
     "shortForm": "catering",
     "description": "Delicious, customized menus to delight your guests",
-    "imageUrl": "/src/assets/services/catering.jpg"
+    "imageUrl": "./src/assets/services/catering.jpg"
   },
   {
     "title": "Florist",
     "shortForm": "florist",
     "description": "Expertly crafted floral arrangements to make your wedding bloom",
-    "imageUrl": "/src/assets/services/florist.jpg"
+    "imageUrl": "./src/assets/services/florist.jpg"
   },
   {
     "title": "Photographer",
     "shortForm": "photographer",
     "description": "Capture every magical moment with professional wedding photography",
-    "imageUrl": "/src/assets/services/photographer.jpg"
+    "imageUrl": "./src/assets/services/photographer.jpg"
   },
   {
     "title": "Henna Artist",
     "shortForm": "henna-artist",
     "description": "Intricate and beautiful henna designs to adorn you on your special day",
-    "imageUrl": "/src/assets/services/henna-artist.jpg"
+    "imageUrl": "./src/assets/services/henna-artist.jpg"
   },
   {
     "title": "Videographer",
     "shortForm": "videographer",
     "description": "Relive your special day with stunning wedding videography",
-    "imageUrl": "/src/assets/services/videographer.jpg"
+    "imageUrl": "./src/assets/services/videographer.jpg"
   },
   {
     "title": "Invitation Designer",
     "shortForm": "invitation_designer",
     "description": "Beautifully designed invitations to set the tone for your wedding",
-    "imageUrl": "/src/assets/services/invitation_designer.jpg"
+    "imageUrl": "./src/assets/services/invitation_designer.jpg"
   },
   {
     "title": "Bridal Shop",
     "shortForm": "bridal_shop",
     "description": "Find the perfect wedding dress at our bridal shop",
-    "imageUrl": "/src/assets/services/bridal_shop.jpg"
+    "imageUrl": "./src/assets/services/bridal_shop.jpg"
   },
   {
     "title": "Groom Attire",
     "shortForm": "groom_attire",
     "description": "Stylish and sophisticated attire for the groom",
-    "imageUrl": "/src/assets/services/groom_attire.jpg"
+    "imageUrl": "./src/assets/services/groom_attire.jpg"
   },
   {
     "title": "Jeweler",
     "shortForm": "jeweler",
     "description": "Exquisite wedding rings and jewelry to celebrate your love",
-    "imageUrl": "/src/assets/services/jeweler.jpg"
+    "imageUrl": "./src/assets/services/jeweler.jpg"
   },
   {
     "title": "Cake Baker",
     "shortForm": "cake_baker",
     "description": "Custom wedding cakes that are as delicious as they are beautiful",
-    "imageUrl": "/src/assets/services/cake_baker.jpg"
+    "imageUrl": "./src/assets/services/cake_baker.jpg"
   },
   {
     "title": "Hair Stylist",
     "shortForm": "hair_stylist",
     "description": "Stunning wedding hairstyles for the bride and bridal party",
-    "imageUrl": "/src/assets/services/hair_stylist.jpg"
+    "imageUrl": "./src/assets/services/hair_stylist.jpg"
   },
   {
     "title": "Makeup Artist",
     "shortForm": "makeup_artist",
     "description": "Flawless wedding makeup to enhance your natural beauty",
-    "imageUrl": "/src/assets/services/makeup_artist.jpg"
+    "imageUrl": "./src/assets/services/makeup_artist.jpg"
   },
   {
     "title": "Lighting Specialist",
     "shortForm": "lighting_specialist",
     "description": "Create the perfect ambiance with professional lighting services",
-    "imageUrl": "/src/assets/services/lighting_specialist.jpg"
+    "imageUrl": "./src/assets/services/lighting_specialist.jpg"
   },
   {
     "title": "Rentals",
     "shortForm": "rentals",
     "description": "Everything you need for your wedding, available for rent",
-    "imageUrl": "/src/assets/services/rentals.jpg"
+    "imageUrl": "./src/assets/services/rentals.jpg"
   },
   {
     "title": "Transportation",
     "shortForm": "transportation",
     "description": "Luxurious transportation to ensure you arrive in style",
-    "imageUrl": "/src/assets/services/transportation.jpg"
+    "imageUrl": "./src/assets/services/transportation.jpg"
   },
   {
     "title": "Entertainment",
     "shortForm": "entertainment",
     "description": "Unique entertainment options to delight and surprise your guests",
-    "imageUrl": "/src/assets/services/entertainment.jpg"
+    "imageUrl": "./src/assets/services/entertainment.jpg"
   }
 ]
