@@ -22,7 +22,7 @@ export const VendorInputComponent = ({
           className="w-full rounded-none bg-transparent input input-primary p-4 pe-12 text-sm shadow-sm"
           placeholder={placeholder}
           value={value}
-          {...register(`${name}`, { required: true })}
+          {...register(name, { required: true })}
           {...rest}
         />
       </div>

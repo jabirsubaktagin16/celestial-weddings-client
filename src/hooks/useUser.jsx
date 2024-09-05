@@ -36,6 +36,23 @@ const userDetails = (email) => {
   return [userInfo, loading, userRefetch];
 };
 
-const useUser = { userList, userDetails };
+const reviewList = (userId) => {
+  const axiosSecure = useAxiosSecure();
+  const {
+    data: reviews = [],
+    isPending: loading,
+    refetch: reviewRefetch,
+  } = useQuery({
+    queryKey: ["reviews", "user", userId],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/reviews/user/${userId}`);
+      return res.data.response;
+    },
+  });
+
+  return [reviews, loading, reviewRefetch];
+};
+
+const useUser = { userList, userDetails, reviewList };
 
 export default useUser;

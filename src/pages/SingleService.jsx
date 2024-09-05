@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import services from "../../public/services.json";
-import { Loading } from "../components/Shared/Loading";
 import { PageTitle } from "../components/Shared/PageTitle";
 import { VendorCard } from "../components/VendorCard";
 import useVendor from "../hooks/useVendor";
@@ -21,8 +20,6 @@ export const SingleService = () => {
     const serviceData = services.find((item) => item.shortForm === shortForm);
     setService(serviceData);
   }, []);
-
-  if (loading) return <Loading />;
 
   return (
     <>
@@ -50,16 +47,15 @@ export const SingleService = () => {
         )}
         {currentServices && currentServices.length > 0 && (
           <div className="flex min-h-screen items-center justify-center">
-            (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mx-10 md:mx-20">
               {currentServices.map((singleVendor) => (
                 <VendorCard
                   key={singleVendor._id}
                   singleVendor={singleVendor}
+                  loading={loading}
                 />
               ))}
             </div>
-            )
           </div>
         )}
       </section>

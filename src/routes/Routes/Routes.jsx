@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { NotFound } from "../../components/Shared/NotFound";
+import { ScrollToTop } from "../../components/Shared/ScrollToTop";
 import { DashboardLayout } from "../../layouts/DashboardLayout";
 import { Main } from "../../layouts/Main";
 import { AboutUs } from "../../pages/AboutUs";
@@ -31,7 +32,12 @@ import VendorRoute from "../VendorRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: (
+      <>
+        <ScrollToTop />
+        <Main />
+      </>
+    ),
     errorElement: <NotFound />,
     children: [
       {
