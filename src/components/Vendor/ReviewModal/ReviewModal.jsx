@@ -1,5 +1,5 @@
 import { Rating } from "@smastrom/react-rating";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ImCross } from "react-icons/im";
@@ -7,14 +7,20 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
 import { AuthContext } from "../../../providers/AuthProvider";
 
-export const ReviewModal = ({ vendor, refetch }) => {
+export const ReviewModal = ({ vendor, refetch, review }) => {
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
+  const [reviewDescription, setReviewDescription] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [userInfo, userLoading, userRefetch] = useUser.userDetails(
     user?.email || ""
   );
   const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    setRating(review?.rating);
+    setReviewDescription(review?.reviewDescription);
+  }, [review]);
 
   const onSubmit = async (data) => {
     const reviewInfo = {
@@ -24,13 +30,30 @@ export const ReviewModal = ({ vendor, refetch }) => {
       reviewDescription: data.description,
     };
 
-    const reviewRes = await axiosSecure.post("/reviews", reviewInfo);
+    if (!review) {
+      const reviewRes = await axiosSecure.post("/reviews", reviewInfo);
 
-    if (reviewRes.data.response._id) {
-      reset();
-      setRating(0);
-      refetch();
-      toast.success(`Review has been added successfully`);
+      if (reviewRes.data.response._id) {
+        reset();
+        setRating(0);
+        refetch();
+        toast.success(`Review has been added successfully`);
+
+        document.getElementById("review-modal").checked = false;
+      }
+    } else {
+      const reviewRes = await axiosSecure.patch(
+        `/reviews/update/${review?._id}`,
+        reviewInfo
+      );
+
+      if (reviewRes.data?.response.modifiedCount > 0) {
+        refetch();
+        reset();
+        toast.success(`Review has been updated successfully`);
+
+        document.getElementById("review-modal").checked = false;
+      }
     }
   };
 
@@ -82,6 +105,7 @@ export const ReviewModal = ({ vendor, refetch }) => {
               </label>
 
               <textarea
+                defaultValue={reviewDescription}
                 id="description"
                 className="bg-transparent textarea textarea-primary resize-none mt-1 w-full rounded-none text-sm text-gray-700"
                 placeholder="Write Down Your Review"

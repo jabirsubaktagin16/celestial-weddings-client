@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import errorFile from "../../../assets/error-file.png";
 import { MyReviewCard } from "../../../components/MyReviewCard";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
+import { ReviewModal } from "../../../components/Vendor/ReviewModal/ReviewModal";
 import useUser from "../../../hooks/useUser";
 import { AuthContext } from "../../../providers/AuthProvider";
 
@@ -10,15 +11,14 @@ export const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [userInfo, userLoading, userRefetch] = useUser.userDetails(user?.email);
   const [reviews, loading, reviewRefetch] = useUser.reviewList(userInfo?._id);
+  const [vendor, setVendor] = useState(null);
+  const [review, setReview] = useState(null);
 
   if (userLoading || loading) return <Loading />;
-
-  console.log(reviews.length);
 
   return (
     <>
       <PageTitle title={"My Reviews"} />
-
       <section className="">
         <div className="p-8 md:p-12 lg:px-16 lg:py-24">
           <div className="mx-auto max-w-lg text-center">
@@ -30,7 +30,12 @@ export const MyReviews = () => {
             {reviews &&
               reviews.length > 0 &&
               reviews.map((review) => (
-                <MyReviewCard key={review?._id} review={review} />
+                <MyReviewCard
+                  key={review?._id}
+                  review={review}
+                  setVendor={setVendor}
+                  setReview={setReview}
+                />
               ))}
           </div>
 
@@ -50,6 +55,7 @@ export const MyReviews = () => {
           )}
         </div>
       </section>
+      <ReviewModal vendor={vendor} refetch={reviewRefetch} review={review} />
     </>
   );
 };

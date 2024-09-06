@@ -28,7 +28,7 @@ export const TopBanner = () => {
     >
       <SwiperSlide>
         <TopBannerFile
-          fileLocation={"muslim-wedding.png"}
+          fileLocation={"muslim-wedding.jpg"}
           heading={"A Day to Remember"}
           passage={
             "Experience the magic of your wedding day, where every detail is crafted to perfection, making memories that will last a lifetime"
@@ -37,7 +37,7 @@ export const TopBanner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <TopBannerFile
-          fileLocation={"hindu-wedding.png"}
+          fileLocation={"hindu-wedding.jpg"}
           heading={"Cultural Elegance"}
           passage={
             "Celebrate your heritage with a wedding that honors timeless traditions, blending rich cultural elements with modern flair"
@@ -46,7 +46,7 @@ export const TopBanner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <TopBannerFile
-          fileLocation={"christian-wedding.png"}
+          fileLocation={"christian-wedding.jpg"}
           heading={"Love in Every Detail"}
           passage={
             "From the vows to the venue, every aspect of your wedding is a reflection of your unique love story, beautifully told"
@@ -55,7 +55,7 @@ export const TopBanner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <TopBannerFile
-          fileLocation={"bohemian-wedding.png"}
+          fileLocation={"bohemian-wedding.jpg"}
           heading={"Your Dream, Our Mission"}
           passage={
             "We turn your wedding dreams into reality, creating an unforgettable day that exceeds your expectations in every way"

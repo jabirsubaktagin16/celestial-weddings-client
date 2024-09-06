@@ -3,7 +3,7 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { StarRating } from "./StarRating";
 
-export const MyReviewCard = ({ review }) => {
+export const MyReviewCard = ({ review, setVendor, setReview }) => {
   return (
     <article className="relative rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8 sm:mt-4">
       {/* Button in the top-right corner */}
@@ -16,7 +16,15 @@ export const MyReviewCard = ({ review }) => {
           className="dropdown-content menu bg-base-100 rounded-none w-52 p-2 shadow"
         >
           <li>
-            <a>Edit</a>
+            <label
+              htmlFor="review-modal"
+              onClick={() => {
+                setVendor(review?.vendorId);
+                setReview(review);
+              }}
+            >
+              Edit
+            </label>
           </li>
           <li>
             <a>Delete</a>

@@ -59,7 +59,11 @@ export const Navbar = () => {
           </ul>
         </div>
         <Link to="/">
-          <img src={logo} className="w-1/6" alt="" />
+          <img
+            src={logo}
+            className="w-1/2 sm:w-1/4 md:w-1/6"
+            alt="Project Logo"
+          />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

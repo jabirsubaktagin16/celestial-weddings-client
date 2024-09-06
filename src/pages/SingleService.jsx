@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import { useParams } from "react-router-dom";
 import services from "../../public/services.json";
 import { PageTitle } from "../components/Shared/PageTitle";
@@ -38,21 +39,28 @@ export const SingleService = () => {
             </div>
           </div>
         </div>
-        {currentServices && currentServices.length === 0 && (
+        {loading && (
+          <Skeleton
+            style={{
+              width: "100%",
+              height: "25rem",
+            }}
+          />
+        )}
+        {!loading && currentServices && currentServices.length === 0 && (
           <div className="flex items-center justify-center">
             <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl">
               No Vendor Found
             </p>
           </div>
         )}
-        {currentServices && currentServices.length > 0 && (
+        {!loading && currentServices && currentServices.length > 0 && (
           <div className="flex min-h-screen items-center justify-center">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mx-10 md:mx-20">
               {currentServices.map((singleVendor) => (
                 <VendorCard
                   key={singleVendor._id}
                   singleVendor={singleVendor}
-                  loading={loading}
                 />
               ))}
             </div>
