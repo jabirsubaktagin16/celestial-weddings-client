@@ -1,9 +1,35 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { StarRating } from "./StarRating";
 
-export const MyReviewCard = ({ review, setVendor, setReview }) => {
+export const MyReviewCard = ({ review, setVendor, setReview, refetch }) => {
+  const axiosSecure = useAxiosSecure();
+
+  const handleDeleteItem = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/reviews/delete/${item._id}`);
+        if (res.data?.response?.deletedCount > 0) {
+          // refetch to update the ui
+          refetch();
+          toast.success("Selected Review has been deleted");
+        }
+      }
+    });
+  };
+
   return (
     <article className="relative rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8 sm:mt-4">
       {/* Button in the top-right corner */}
@@ -27,7 +53,7 @@ export const MyReviewCard = ({ review, setVendor, setReview }) => {
             </label>
           </li>
           <li>
-            <a>Delete</a>
+            <button onClick={() => handleDeleteItem(review)}>Delete</button>
           </li>
           <li>
             <Link to={`/vendors/${review?.vendorId?._id}`}>

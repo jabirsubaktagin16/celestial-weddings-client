@@ -35,6 +35,7 @@ export const MyReviews = () => {
                   review={review}
                   setVendor={setVendor}
                   setReview={setReview}
+                  refetch={reviewRefetch}
                 />
               ))}
           </div>
