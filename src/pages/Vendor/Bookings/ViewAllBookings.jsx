@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Loading } from "../../../components/Shared/Loading";
 import { PageTitle } from "../../../components/Shared/PageTitle";
+import { PaginationComponent } from "../../../components/Shared/PaginationComponent";
 import { BookingDetailsModal } from "../../../components/Vendor/BookingModal/BookingDetailsModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
@@ -65,7 +66,7 @@ export const ViewAllBookings = () => {
         };
 
         const bookingRes = await axiosSecure.patch(
-          `/bookings/update/${_event?._id}`,
+          `/bookings/update-vendor/${_event?._id}`,
           bookingStatusInfo
         );
 
@@ -129,38 +130,24 @@ export const ViewAllBookings = () => {
                   >
                     View
                   </label>
-                  <button
-                    onClick={() => openModal(singleBooking)}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2"
-                  >
-                    Edit
-                  </button>
+                  {singleBooking?.bookingStatus !== "Completed" && (
+                    <button
+                      onClick={() => openModal(singleBooking)}
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-none mr-2"
+                    >
+                      Edit
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className="flex justify-center items-center mx-auto mt-4">
-          <div className="join border border-accent">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="join-item btn"
-            >
-              «
-            </button>
-            <button className="join-item btn">
-              Page {currentPage} of {totalPages}
-            </button>
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="join-item btn"
-            >
-              »
-            </button>
-          </div>
-        </div>
+        <PaginationComponent
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+        />
         <BookingDetailsModal _event={_event} setEvent={setEvent} />
       </div>
     </>

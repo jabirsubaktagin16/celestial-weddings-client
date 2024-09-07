@@ -24,6 +24,7 @@ export const ProfileInputComponent = ({
         defaultValue={value}
         disabled={disabled}
         className="input input-primary mt-1 w-full rounded-none border-primary bg-transparent sm:text-sm p-4 pe-12"
+        autoComplete="off"
         {...register(name, { required: true })}
         {...rest}
       />

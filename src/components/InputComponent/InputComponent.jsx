@@ -20,6 +20,7 @@ export const InputComponent = ({
         id={id}
         placeholder={placeholder}
         className="input input-bordered rounded-none"
+        autoComplete="off"
         {...rest}
       />
     </div>

@@ -1,17 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
+import { useContext, useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Loading } from "../components/Shared/Loading";
+import { NotFound } from "../components/Shared/NotFound";
+import { PackageCardSkeleton } from "../components/Shared/PackageCardSkeleton";
 import { PageTitle } from "../components/Shared/PageTitle";
+import { BookingModal } from "../components/Vendor/BookingModal/BookingModal";
 import { ContactUs } from "../components/Vendor/ContactUs";
 import { PackageCard } from "../components/Vendor/PackageCard";
 import { ReviewCard } from "../components/Vendor/ReviewCard";
 import { VendorRatings } from "../components/Vendor/VendorRatings";
-
-import { useContext, useState } from "react";
-import { PackageCardSkeleton } from "../components/Shared/PackageCardSkeleton";
-import { BookingModal } from "../components/Vendor/BookingModal/BookingModal";
 import useVendor from "../hooks/useVendor";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -23,6 +24,10 @@ export const SingleVendor = () => {
   const [packageList, packageLoading, packageRefetch] = useVendor.packages(id);
   const [reviewList, reviewLoading, reviewRefetch] = useVendor.reviews(id);
   const [_package, setPackage] = useState(null);
+
+  if (loading) return <Loading />;
+
+  if (!loading && !vendor) return <NotFound />;
 
   return (
     <>

@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import Swal from "sweetalert2";
 import { PageTitle } from "../../../components/Shared/PageTitle";
+import { PaginationComponent } from "../../../components/Shared/PaginationComponent";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useGallery from "../../../hooks/useGallery";
 import { paginationFunction } from "../../../utils/paginationFunction";
@@ -96,27 +97,11 @@ export const ViewImageList = () => {
                 </tbody>
               </table>
             </div>
-            <div className="flex mx-auto justify-center items-center mt-4">
-              <div className="join border border-accent">
-                <button
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="join-item btn"
-                >
-                  «
-                </button>
-                <button className="join-item btn">
-                  Page {currentPage} of {totalPages}
-                </button>
-                <button
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="join-item btn"
-                >
-                  »
-                </button>
-              </div>
-            </div>
+            <PaginationComponent
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalPages={totalPages}
+            />
           </>
         )}
       </div>

@@ -18,6 +18,7 @@ export const PackageInputComponent = ({
         id={name}
         type={type}
         placeholder={placeholder}
+        autoComplete="off"
         {...register(name, { required: true })}
         {...rest}
       />
