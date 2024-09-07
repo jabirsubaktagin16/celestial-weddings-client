@@ -22,16 +22,13 @@ export const Services = () => {
           </div>
         </div>
       </Parallax>
-      <div className="mt-6 flex justify-center">
-        <p className="text-center w-3/4">
-          Planning a wedding involves coordinating essential services like
-          stunning floral arrangements, delicious catering, and professional
-          photography and videography. Our expert planners, luxurious
-          transportation, and beautiful decor ensure a seamless and stylish
-          celebration, while personalized invitations, custom cakes, and skilled
-          hair and makeup artists enhance your special day. From elegant attire
-          and exquisite jewelry to unique entertainment, every service is
-          crafted to make your wedding unforgettable.
+
+      <div className="mt-6 flex justify-center mx-auto max-w-lg text-center">
+        <p className="text-center text-gray-500 sm:mt-4 sm:block">
+          Wedding planning include integrating key services such as floral
+          arrangements, food, photography, and videography with professional
+          planners, elegant transportation, and décor to guarantee a smooth,
+          attractive celebration.
         </p>
       </div>
       <div className="my-10 flex min-h-screen items-center justify-center">
