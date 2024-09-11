@@ -40,9 +40,11 @@ export const SignIn = () => {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Sign In now!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Welcome back! Sign in to your account to access personalized
+              features, manage your bookings, and explore services tailored to
+              your needs. Simply enter your credentials to continue. If you
+              haven’t registered yet, click on the sign-up link below to create
+              your account.
             </p>
           </div>
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-white rounded-none">
